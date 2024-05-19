@@ -12,25 +12,24 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApartmentDAO extends MyDAO {
+public class RollDAO extends MyDAO {
 
-    public List<Apartment> getApartments() {
-        String sql = "SELECT * FROM Apartments";
-        List<Apartment> apartmentList = new ArrayList<>();
+    public List<Roll> getRolls() {
+        String sql = "SELECT * FROM Rolls";
+        List<Roll> rollList = new ArrayList<>();
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int apartmentID = rs.getInt("apartmentID");
-                int typeID = rs.getInt("typeID");
-                boolean occupied = rs.getBoolean("occupied");
+                int rollID = rs.getInt("rollID");
+                String rollName = rs.getString("roll_name");
 
-                Apartment apartment = new Apartment(apartmentID, typeID, occupied);
-                apartmentList.add(apartment);
+                Roll roll = new Roll(rollID, rollName);
+                rollList.add(roll);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return apartmentList;
+        return rollList;
     }
 }

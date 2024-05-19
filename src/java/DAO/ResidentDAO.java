@@ -13,27 +13,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BillDAO extends MyDAO {
+public class ResidentDAO extends MyDAO {
 
-    public List<Bill> getBills() {
-        String sql = "SELECT * FROM Bills";
-        List<Bill> billList = new ArrayList<>();
+    public List<Resident> getResidents() {
+        String sql = "SELECT * FROM Residents";
+        List<Resident> residentList = new ArrayList<>();
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int billID = rs.getInt("billID");
                 int residentID = rs.getInt("residentID");
-                String status = rs.getString("status");
-                double total = rs.getDouble("total");
-                Date billDate = rs.getDate("billdate");
+                int userID = rs.getInt("userID");
+                int apartmentID = rs.getInt("apartmentID");
+                Date billingDate = rs.getDate("billingdate");
 
-                Bill bill = new Bill(billID, residentID, status, total, billDate);
-                billList.add(bill);
+                Resident resident = new Resident(residentID, userID, apartmentID, billingDate);
+                residentList.add(resident);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return billList;
+        return residentList;
     }
 }
