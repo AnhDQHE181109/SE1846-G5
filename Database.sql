@@ -62,7 +62,6 @@ CREATE TABLE Accounts (
 -- Create ApartmentTypes table
 CREATE TABLE ApartmentTypes (
     typeID INT PRIMARY KEY,
-    a_picture_link VARCHAR(255),
     size VARCHAR(50),
     base_rent DECIMAL(10, 2)
 );
