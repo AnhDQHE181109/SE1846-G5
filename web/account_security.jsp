@@ -83,7 +83,7 @@
 
 <body>
     <div class="container-xl px-4 mt-4">
-
+<div></div>
         <nav class="nav nav-borders">
             <a class="nav-link"
                 href="account_details.jsp"
