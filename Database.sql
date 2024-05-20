@@ -56,6 +56,7 @@ CREATE TABLE Accounts (
     email VARCHAR(100),
     profile_picture_link VARCHAR(255),
     rollID INT,
+	birthdate DATE,
     FOREIGN KEY (rollID) REFERENCES Rolls(rollID)
 );
 
@@ -120,8 +121,18 @@ CREATE TABLE Service_Requests (
     residentID INT,
     workerID INT,
     description TEXT,
+	senddate DATE,
+	recievedate DATE,
+	finsishdate DATE,
     FOREIGN KEY (residentID) REFERENCES Residents(residentID),
     FOREIGN KEY (workerID) REFERENCES Worker(workerID)
 );
-
+CREATE TABLE NotificationAlert (
+    notiID INT IDENTITY(0,1) PRIMARY KEY,
+	userID INT,
+	desciption TEXT,
+	notidate DATE,
+	notistattus BIT,
+	FOREIGN KEY (userID) REFERENCES Accounts(userID)
+);
 INSERT INTO Rolls(rollID, roll_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
