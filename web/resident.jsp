@@ -27,7 +27,6 @@
                 }
             }
             if (username != null) {
-                out.println("<p>Hello, " + username + "</p>");
                 out.println("<a href='LogoutServlet'>Logout</a>");
             } else {
                 response.sendRedirect("login.jsp");
