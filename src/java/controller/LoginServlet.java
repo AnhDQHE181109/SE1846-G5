@@ -91,10 +91,10 @@ public class LoginServlet extends HttpServlet {
                 default:{response.sendRedirect("login.jsp");break;}
             }
             System.out.println(adao.validateUser(username, password, role) == 2);
-        } else if (adao.validateUser(username, password, role) == 2){
-            response.sendRedirect("login.jsp?error_account=true");
         } else if (adao.validateUser(username, password, role) == 3){
-            response.sendRedirect("login.jsp?error_roll=true");
+            response.sendRedirect("login.jsp?error_account=true");
+        } else if (adao.validateUser(username, password, role) == 2){
+            response.sendRedirect("login.jsp?error_role=true");
         }
     }
 

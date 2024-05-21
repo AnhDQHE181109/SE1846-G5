@@ -183,6 +183,12 @@
         <div class="wrapper">
             <form action="LoginServlet" method="post">
                 <h1>Login</h1>
+                <%if("true".equals(request.getParameter("error_account"))){%>
+                <p style='color:red;'>Invalid username or password</p>
+                <%}%>
+                <%if("true".equals(request.getParameter("error_role"))){%>
+                <p style='color:red;'>Wrong role</p>
+                <%}%>
                 <div class="input-box">
                     <input name ="username" type="text" placeholder="ssername" required>
                     <i class='bx bxs-user'></i>
@@ -204,9 +210,6 @@
                 </div>
                 <button type="submit" class="btn">Login</button>
             </form>
-            <%if("true".equals(request.getParameter("error_roll"))){%>
-            <p style='color:red;'>Invalid username or password</p>
-            <%}%>
         </div>
         <script src="js/app.js"></script>
     </body>
