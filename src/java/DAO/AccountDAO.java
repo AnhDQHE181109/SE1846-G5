@@ -39,5 +39,23 @@ public class AccountDAO extends MyDAO {
         }
         return accountList;
     }
-}
 
+    public int validateUser(String username, String password, int role) {
+        String query = "SELECT * FROM Accounts WHERE username = ?";
+        try {
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String storedPasswordHash = rs.getString("password");
+                if (storedPasswordHash.equals(password)){
+                int storedRole = rs.getInt("roleID");
+                if(storedRole != role){return 2;}else{return 1;}
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 3;
+    }
+}

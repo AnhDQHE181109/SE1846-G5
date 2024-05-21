@@ -39,10 +39,10 @@ GO
 
 USE ApartmentDB;
 
--- Create Rolls table first
-CREATE TABLE Rolls (
-    rollID INT PRIMARY KEY,
-    roll_name VARCHAR(10)
+-- Create Roles table first
+CREATE TABLE Roles (
+    roleID INT PRIMARY KEY,
+    role_name VARCHAR(10)
 );
 
 -- Create Accounts table
@@ -55,8 +55,9 @@ CREATE TABLE Accounts (
     phone_number VARCHAR(15),
     email VARCHAR(100),
     profile_picture_link VARCHAR(255),
-    rollID INT,
-    FOREIGN KEY (rollID) REFERENCES Rolls(rollID)
+    birthdate DATE,
+    roleID INT,
+    FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 );
 
 -- Create ApartmentTypes table
@@ -119,9 +120,24 @@ CREATE TABLE Service_Requests (
     requestID INT PRIMARY KEY,
     residentID INT,
     workerID INT,
+	requestdate DATE,
+	assigndate DATE,
+	finishdate DATE,
     description TEXT,
+	senddate DATE,
+	recievedate DATE,
+	finsishdate DATE,
     FOREIGN KEY (residentID) REFERENCES Residents(residentID),
     FOREIGN KEY (workerID) REFERENCES Worker(workerID)
 );
+CREATE TABLE NotificationAlert (
+    notiID INT IDENTITY(0,1) PRIMARY KEY,
+	userID INT,
+	notidate DATE,
+	noti_message TEXT,
+	noti_status BIT,
+	FOREIGN KEY (userID) REFERENCES Accounts(userID)
+);
 
-INSERT INTO Rolls(rollID, roll_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
+INSERT INTO Roles(roleID, role_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
+INSERT INTO Accounts(username, password,roleID)values('resident', 'password', 1),('worker', 'password', 2),('landlord', 'password', 3);
