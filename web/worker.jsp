@@ -12,6 +12,23 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h2>Welcome</h2>
+        <%
+            String username = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("user")) {
+                        username = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+            if (username != null) {
+                out.println("<a href='LogoutServlet'>Logout</a>");
+            } else {
+                response.sendRedirect("login.jsp");
+            }
+        %>
     </body>
 </html>
