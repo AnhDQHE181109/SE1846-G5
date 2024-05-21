@@ -3,15 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/js/app.js</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/src/java/controller/LogoutServlet.java</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/css/main.css</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/login.jsp</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/index.jsp</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/css/base.css</file>
             <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/resident.jsp</file>
             <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/worker.jsp</file>
             <file>file:/C:/Users/GG/Desktop/SE1846-G5/src/java/controller/LoginServlet.java</file>
-            <file>file:/C:/Users/GG/Desktop/SE1846-G5/src/java/controller/LogoutServlet.java</file>
             <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/test.jsp</file>
-            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/index.html</file>
             <file>file:/C:/Users/GG/Desktop/SE1846-G5/src/java/DAO/AccountDAO.java</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/META-INF/context.xml</file>
             <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/landlord.jsp</file>
-            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/login.jsp</file>
+            <file>file:/C:/Users/GG/Desktop/SE1846-G5/web/css/login.css</file>
         </group>
     </open-files>
 </project-private>
