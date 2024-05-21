@@ -12,24 +12,24 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RollDAO extends MyDAO {
+public class RoleDAO extends MyDAO {
 
-    public List<Roll> getRolls() {
-        String sql = "SELECT * FROM Rolls";
-        List<Roll> rollList = new ArrayList<>();
+    public List<Role> getRoles() {
+        String sql = "SELECT * FROM Roles";
+        List<Role> roleList = new ArrayList<>();
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int rollID = rs.getInt("rollID");
-                String rollName = rs.getString("roll_name");
+                int roleID = rs.getInt("roleID");
+                String roleName = rs.getString("role_name");
 
-                Roll roll = new Roll(rollID, rollName);
-                rollList.add(roll);
+                Role role = new Role(roleID, roleName);
+                roleList.add(role);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rollList;
+        return roleList;
     }
 }
