@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,8 +75,7 @@
 
         document.getElementById('bell-icon').addEventListener('click', function() {
             const notificationList = document.getElementById('notification-list');
-            notificationList.classList.toggle('active');
-            if (notificationList.classList.contains('active')) {
+            if (notificationList.style.display === 'none' || notificationList.style.display === '') {
                 notificationList.style.display = 'block';
                 renderNotifications();
             } else {
@@ -83,5 +83,5 @@
             }
         });
     </script>
-    </body>
+</body>
 </html>
