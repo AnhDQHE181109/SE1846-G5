@@ -323,7 +323,7 @@
         <header class="header sticky">
             <ul>
                 <li><a href="#" class="logo">Logo</a></li>
-                <li class="navbar_list"><a href="#">Home</a></li>
+                <li class="navbar_list"><a href="index.jsp">Home</a></li>
                 <li class="navbar_list"><a href="#">Privacy</a></li>
                 <li class="navbar_list"><a href="#">About us</a></li>
             </ul>
