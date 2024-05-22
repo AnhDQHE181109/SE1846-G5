@@ -20,7 +20,6 @@
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
         %>  
-
     </head>
     <style>
         .bell-icon {
