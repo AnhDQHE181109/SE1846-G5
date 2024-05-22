@@ -76,7 +76,7 @@ CREATE TABLE Apartments (
 
 -- Create Residents table
 CREATE TABLE Residents (
-    residentID INT PRIMARY KEY,
+    residentID INT identity(0,1) PRIMARY KEY,
     userID INT,
     apartmentID INT,
     billingdate DATE,
@@ -139,5 +139,24 @@ CREATE TABLE NotificationAlert (
 	FOREIGN KEY (userID) REFERENCES Accounts(userID)
 );
 
+INSERT INTO ApartmentTypes (typeID, size, base_rent)values(1, 'small', 5),(2,'medium', 10),(3, 'big', 15);
+INSERT INTO Apartments(apartmentID, typeID, occupied) values(101, 1, 1),(102, 2, 0);
+
 INSERT INTO Roles(roleID, role_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
-INSERT INTO Accounts(username, password,roleID)values('resident', 'password', 1),('worker', 'password', 2),('landlord', 'password', 3);
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
+values ('resident', 'password', 'Resident', '1', '165325536556', 'mail@example.com', 'img_link', '20240523 10:34:09 AM', 1);
+
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
+values ('resident2', 'password', 'Resident', '2', '16965777756', 'resident2@example.com', 'img_link', '20240527 12:30:09 AM', 1);
+
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
+values ('landlord', 'password', 'Land', 'Lore', '1659797976', 'landlore@example.com', 'img_link', '20240422 7:56:09 AM', 2);
+
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
+values ('worker', 'password', 'Work', 'Er', '1655972401012', 'worker@example.com', 'img_link', '20240422 8:55:09 AM', 3);
+
+insert into Residents(userID, apartmentID, billingdate) values (0, 101, '20240625 10:34:09 AM')
+insert into Residents(userID, apartmentID, billingdate) values (1, 102, '20240626 9:50:09 AM')
+
+insert into NotificationAlert(userID, notidate, noti_message,noti_status) values (0, '20240523 10:34:09 AM', 'ALLAHU AKBAR', 1)
+
