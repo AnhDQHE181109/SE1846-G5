@@ -302,10 +302,9 @@
                     </div>
                     <form action="ViewApartmentDetails" method="get">
                     <div class="choose__list">
-                        <input
-                        <button class="choose__item">100m²-200m²</button>
-                        <button class="choose__item">200m²-500m²</button>
-                        <button class="choose__item">500m²-700m²</button>
+                        <button type="submit" name="typeID" class="choose__item" value="1">100m²-200m²</button>
+                        <button type="submit" name="typeID" class="choose__item" value="2">200m²-500m²</button>
+                        <button type="submit" name="typeID" class="choose__item" value="3">500m²-700m²</button>
                     </div>
                     </form>
                 </div>
