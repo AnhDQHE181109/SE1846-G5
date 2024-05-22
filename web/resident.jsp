@@ -72,6 +72,7 @@
             <%
                 if (notilist != null && !notilist.isEmpty()) {
                     for (NotificationAlert notification : notilist) {
+
             %>
                         <div class="notification-item">
                             <%= notification.toString() %>
