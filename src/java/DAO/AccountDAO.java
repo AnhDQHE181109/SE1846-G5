@@ -15,6 +15,16 @@ import java.util.List;
 
 public class AccountDAO extends MyDAO {
 
+    /*
+    Method used only for debugging
+     */
+    public static void main(String[] args) {
+        AccountDAO accDao = new AccountDAO();
+        Account acc = accDao.getUser("resident");
+        System.out.println(acc);
+        System.out.println(acc.getBirthDate());
+    }
+
     public List<Account> getAccounts() {
         String sql = "SELECT * FROM Accounts";
         List<Account> accountList = new ArrayList<>();
@@ -30,7 +40,7 @@ public class AccountDAO extends MyDAO {
                 String phoneNumber = rs.getString("phone_number");
                 String email = rs.getString("email");
                 String profilePictureLink = rs.getString("profile_picture_link");
-                Date birthdate = rs.getDate("birthdate");
+                java.sql.Date birthdate = rs.getDate("birthdate");
                 int rollID = rs.getInt("rollID");
 
                 Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
@@ -41,10 +51,11 @@ public class AccountDAO extends MyDAO {
         }
         return accountList;
     }
-    public Account getUser(String username){
-     String sql = "SELECT * FROM Account where username = ?";
-     Account account = new Account();
-     try {
+
+    public Account getUser(String username) {
+        String sql = "SELECT * FROM Accounts where username = ?";
+        Account account = null;
+        try {
             ps = con.prepareStatement(sql);
             ps.setString(1, username);
             rs = ps.executeQuery();
@@ -56,7 +67,7 @@ public class AccountDAO extends MyDAO {
                 String phoneNumber = rs.getString("phone_number");
                 String email = rs.getString("email");
                 String profilePictureLink = rs.getString("profile_picture_link");
-                Date birthdate = rs.getDate("birthdate");
+                java.sql.Date birthdate = rs.getDate("birthdate");
                 int roleID = rs.getInt("roleID");
 
                 account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID);
@@ -64,8 +75,9 @@ public class AccountDAO extends MyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-     return account;
+        return account;
     }
+
     public int validateUser(String username, String password, int role) {
         String query = "SELECT * FROM Accounts WHERE username = ?";
         try {
@@ -74,9 +86,13 @@ public class AccountDAO extends MyDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 String storedPasswordHash = rs.getString("password");
-                if (storedPasswordHash.equals(password)){
-                int storedRole = rs.getInt("roleID");
-                if(storedRole != role){return 2;}else{return 1;}
+                if (storedPasswordHash.equals(password)) {
+                    int storedRole = rs.getInt("roleID");
+                    if (storedRole != role) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
                 }
             }
         } catch (Exception e) {

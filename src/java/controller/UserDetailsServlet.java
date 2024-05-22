@@ -62,7 +62,8 @@ public class UserDetailsServlet extends HttpServlet {
         Account account = (Account) request.getSession().getAttribute("account");
         if (account != null) {
             request.setAttribute("account", account);
-
+            System.out.println(account);
+            
             request.getRequestDispatcher("account_details.jsp").forward(request, response);
         } else {
             out.println("<h1>Invalid data!");
