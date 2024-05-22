@@ -190,7 +190,7 @@
                 <p style='color:red;'>Wrong role</p>
                 <%}%>
                 <div class="input-box">
-                    <input name ="username" type="text" placeholder="ssername" required>
+                    <input name ="username" type="text" placeholder="username" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
@@ -200,7 +200,7 @@
                 <div class="input-box">
                     <select name="role">
                         <option value="1">I'm a Resident</option>
-                        <option value="2">I'm a Employee</option>
+                        <option value="2">I'm an Employee</option>
                         <option value="3">I'm the Landlord</option>
                     </select>
                 </div>

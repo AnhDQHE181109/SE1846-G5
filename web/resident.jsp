@@ -19,7 +19,6 @@
         %>
     </head>
     <style>
-        /* Add your CSS styles here */
         .bell-icon {
             cursor: pointer;
             font-size: 24px;

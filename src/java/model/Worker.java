@@ -23,7 +23,8 @@ public class Worker {
         this.job = job;
     }
 
-    // Getters and setters
+    public Worker(){
+    }
 
     public int getWorkerID() {
         return workerID;
