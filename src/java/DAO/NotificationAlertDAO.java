@@ -5,6 +5,7 @@
 package DAO;
 
 import java.util.*;
+import model.*;
 
 /**
  *
@@ -39,7 +40,7 @@ public class NotificationAlertDAO extends MyDAO {
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, notificationAlert.getUserID());
-            ps.setDate(2, notificationAlert.getNotiDate());
+            ps.setDate(2, (java.sql.Date) notificationAlert.getNotiDate());
             ps.setString(3, notificationAlert.getNotiMessage());
             ps.setBoolean(4, notificationAlert.isNotiStatus());
             ps.executeUpdate();
@@ -47,4 +48,4 @@ public class NotificationAlertDAO extends MyDAO {
             e.printStackTrace();
         }
     }
-
+}
