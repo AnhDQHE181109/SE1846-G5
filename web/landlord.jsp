@@ -127,7 +127,7 @@
                         <img src="images/type<%= apartmentType.getTypeID() %>_1.jpg" alt="Apartment Type <%= apartmentType.getTypeID() %>">
                         <h2>Type <%= apartmentType.getTypeID() %> - <%= apartmentType.getSize() %></h2>
                         <p>Base Rent: $<%= apartmentType.getBaseRent() %> per month</p>
-                        <button type="submit" name="typeID" value="1">View</button>
+                        <button type="submit" name="typeID" value="<%= apartmentType.getTypeID() %>">View</button>
                     </div>
                     <% } %>
                 </div>
