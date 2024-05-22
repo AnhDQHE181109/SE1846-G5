@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Long
  */
 public class NotificationAlert {
+
     private int notiID;
     private int userID;
     private Date notiDate;
@@ -64,6 +65,7 @@ public class NotificationAlert {
     public void setNotiStatus(boolean notiStatus) {
         this.notiStatus = notiStatus;
     }
+
     @Override
     public String toString(){
         return this.getNotiDate() + ": " + this.getNotiMessage();

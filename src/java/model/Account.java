@@ -31,8 +31,18 @@ public class Account {
         this.profilePictureLink = profilePictureLink;
         this.rollID = rollID;
     }
-    public Account(){
+
+    public Account(int userID, String username, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, int rollID) {
+        this.userID = userID;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.profilePictureLink = profilePictureLink;
+        this.rollID = rollID;
     }
+
     public int getUserID() {
         return userID;
     }
