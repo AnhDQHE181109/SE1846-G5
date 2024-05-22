@@ -10,6 +10,7 @@ package DAO;
  */
 import model.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AccountDAO extends MyDAO {
@@ -29,9 +30,10 @@ public class AccountDAO extends MyDAO {
                 String phoneNumber = rs.getString("phone_number");
                 String email = rs.getString("email");
                 String profilePictureLink = rs.getString("profile_picture_link");
+                Date birthdate = rs.getDate("birthdate");
                 int rollID = rs.getInt("rollID");
 
-                Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, rollID);
+                Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
                 accountList.add(account);
             }
         } catch (Exception e) {
@@ -54,9 +56,10 @@ public class AccountDAO extends MyDAO {
                 String phoneNumber = rs.getString("phone_number");
                 String email = rs.getString("email");
                 String profilePictureLink = rs.getString("profile_picture_link");
+                Date birthdate = rs.getDate("birthdate");
                 int roleID = rs.getInt("roleID");
 
-                account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, roleID);
+                account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID);
             }
         } catch (Exception e) {
             e.printStackTrace();

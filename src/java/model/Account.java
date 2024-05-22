@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Long
@@ -18,9 +20,10 @@ public class Account {
     private String phoneNumber;
     private String email;
     private String profilePictureLink;
+    private Date birthdatel;
     private int rollID;
 
-    public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, int rollID) {
+    public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -31,8 +34,22 @@ public class Account {
         this.profilePictureLink = profilePictureLink;
         this.rollID = rollID;
     }
-    public Account(){
+
+    public Account(int userID, String username, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
+        this.userID = userID;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.profilePictureLink = profilePictureLink;
+        this.rollID = rollID;
     }
+    
+    public Account() {
+        
+    }
+
     public int getUserID() {
         return userID;
     }
