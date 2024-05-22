@@ -238,9 +238,10 @@
             margin-bottom: 50px;
         }
         .adven__body{
+            margin-top: 80px;
             display: flex;
-            margin-left: 50px;
-            margin-right: 60px
+            margin-left: 80px;
+            margin-right: 70px;
         }
         .adven__content-header{
             text-align: center;
@@ -250,9 +251,10 @@
             margin-bottom: 20px;
         }
         .adven__content-content{
-            font-size: 1.5rem;
-            font-weight: 400;
+            font-size: 2rem;
+            font-weight: 360;
             width: 460px;
+            margin-top: 30px;
         }
         .container__hotline{
             width: 1200px;
@@ -291,7 +293,29 @@
             opacity: 0.5;
             cursor: pointer;
         }
-
+        .container__map{
+            margin-top: 100px;
+            background-color: aliceblue;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 600px;
+        }
+        .map__content{
+            margin: 10px 10px;
+            width: 500px;
+        }
+        .map__content-header{
+            font-size: 2.5rem;
+            color: darkblue;
+        }
+        .map__content-body{
+            margin-top: 60px;
+        }
+        .map__content-body__content{
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
     </style>
     <body>
         <div class="app">
@@ -377,6 +401,22 @@
                         <div class="adven__content-content">Sở hữu vị trí “vàng” tại ngã tư Trần Duy Hưng – Hoàng Minh Giám, tòa nhà Charmvit Tower là một trong những dự án hiếm hoi có được vị trí chiến lược trong quá trình phát triển của khu vực phía Tây Hà Nội: vừa thuận tiện giao thông, vừa được thừa hưởng đủ hạ tầng khu vực đẳng cấp.</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="container__map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14893.138035650458!2d105.9010309!3d21.061296!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a9377e67dd1f%3A0x4e8fa56f041c1cc5!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBGUFQgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1716115835980!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map__content">
+                <div class="map__content-header">
+                    VỊ TRÍ TÒA G5 APARTMENT HANOI
+                </div>
+                <ul class="map__content-body">
+                    <li class="map__content-body__content">Vị trí chiến lược trong quá trình phát triển của khu vực Hòa Lạc Hà Nội</li>
+                    <li class="map__content-body__content">Gần với những tuyến đường huyết mạch: Thạch Thất, Thạch Hòa</li>
+                    <li class="map__content-body__content">Gần đại lộ Thăng Long: Cách 10p đi xe</li>
+                    <li class="map__content-body__content">Cách trung tâm Hà Nội: 40p lái xe</li>
+                    <li class="map__content-body__content">Gần nhiều trường đại học danh giá: Đại học FPT Hà Nội, Đại học quốc gia Hà Nội,...</li>
+                    <li class="map__content-body__content">Mang nhiều tiềm năng phát triển trên đất Hòa Lạc</li>
+                </ul>
             </div>
         </div>
         <footer class="footer">
