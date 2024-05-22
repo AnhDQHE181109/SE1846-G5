@@ -38,5 +38,7 @@
                 response.sendRedirect("login.jsp");
             }
         %>
+    <a href="updateapartmenttype.jsp" class="button">Update Apartment Types</a> 
     </body>
+    
 </html>

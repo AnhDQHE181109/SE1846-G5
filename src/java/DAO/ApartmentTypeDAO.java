@@ -53,5 +53,18 @@ public class ApartmentTypeDAO extends MyDAO {
         }
         return null;
     }
-    
+    public boolean updateApartmentType(ApartmentType apartmentType) {
+        String sql = "UPDATE ApartmentTypes SET size = ?, base_rent = ? WHERE typeID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, apartmentType.getSize());
+            ps.setDouble(2, apartmentType.getBaseRent());
+            ps.setInt(3, apartmentType.getTypeID());
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
