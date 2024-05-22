@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -20,10 +20,10 @@ public class Account {
     private String phoneNumber;
     private String email;
     private String profilePictureLink;
-    private Date birthdatel;
+    private Date birthDate;
     private int rollID;
 
-    public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
+    public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthDate, int rollID) {
         this.userID = userID;
         this.username = username;
         this.password = password;
@@ -32,10 +32,11 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.profilePictureLink = profilePictureLink;
+        this.birthDate = birthDate;
         this.rollID = rollID;
     }
 
-    public Account(int userID, String username, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
+    public Account(int userID, String username, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthDate, int rollID) {
         this.userID = userID;
         this.username = username;
         this.firstname = firstname;
@@ -43,6 +44,7 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.profilePictureLink = profilePictureLink;
+        this.birthDate = birthDate;
         this.rollID = rollID;
     }
     
@@ -121,4 +123,20 @@ public class Account {
     public void setRollID(int rollID) {
         this.rollID = rollID;
     }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }    
+
+    @Override
+    public String toString() {
+        return "Account{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phoneNumber=" + phoneNumber + ", email=" + email + ", profilePictureLink=" + profilePictureLink + ", birthDate=" + birthDate + ", rollID=" + rollID + '}';
+    }
+    
+    
+    
 }

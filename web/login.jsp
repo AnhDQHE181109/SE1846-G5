@@ -13,9 +13,9 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-    response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-    response.setDateHeader("Expires", 0); // Proxies.
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
     %>
     <body>
         <style>
@@ -190,7 +190,7 @@
                 <p style='color:red;'>Wrong role</p>
                 <%}%>
                 <div class="input-box">
-                    <input name ="username" type="text" placeholder="ssername" required>
+                    <input name ="username" type="text" placeholder="username" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
@@ -200,7 +200,7 @@
                 <div class="input-box">
                     <select name="role">
                         <option value="1">I'm a Resident</option>
-                        <option value="2">I'm a Employee</option>
+                        <option value="2">I'm an Employee</option>
                         <option value="3">I'm the Landlord</option>
                     </select>
                 </div>

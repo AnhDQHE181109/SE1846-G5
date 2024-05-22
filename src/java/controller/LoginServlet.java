@@ -80,7 +80,6 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         int role = Integer.parseInt(request.getParameter("role"));
-        System.out.println(username + " " + password);
         AccountDAO adao = new AccountDAO();
         if (adao.validateUser(username, password, role) == 1) {
             Cookie loginCookie = new Cookie("user", username);
@@ -89,12 +88,11 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", adao.getUser(username));
             switch (role){
-                case 1:{response.sendRedirect(request.getContextPath() + "/LoadResidentInfoServlet");;break;}
-                case 2:{response.sendRedirect("worker");break;}
+                case 1:{response.sendRedirect(request.getContextPath() + "/LoadResidentInfoServlet");break;}
+                case 2:{response.sendRedirect(request.getContextPath() + "/LoadWorkerInfoServlet");break;}
                 case 3:{response.sendRedirect("landlord.jsp");break;}
                 default:{response.sendRedirect("login.jsp");break;}
             }
-            System.out.println(adao.validateUser(username, password, role) == 2);
         } else if (adao.validateUser(username, password, role) == 3){
             response.sendRedirect("login.jsp?error_account=true");
         } else if (adao.validateUser(username, password, role) == 2){
