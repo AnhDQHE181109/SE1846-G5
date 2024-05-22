@@ -34,6 +34,7 @@ public class NotificationAlertDAO extends MyDAO {
         }
         return notificationAlertList;
     }
+
     public List<NotificationAlert> getNotificationAlerts(int userID) {
         String sql = "SELECT * FROM NotificationAlert where userID = ?";
         List<NotificationAlert> notificationAlertList = new ArrayList<>();
@@ -69,4 +70,19 @@ public class NotificationAlertDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+
+    public void send(int userID, String message) {
+        String sql = "INSERT INTO NotificationAlert (userID, notiDate, noti_message, noti_status) VALUES (?,?,?,0)";
+        try {
+            Date currentDate = new Date();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.setDate(2, (java.sql.Date) currentDate);
+            ps.setString(3, message);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
