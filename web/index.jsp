@@ -300,11 +300,14 @@
                     <div class="choose__header">
                         Looking for an apartment?
                     </div>
+                    <form action="ViewApartmentDetails" method="get">
                     <div class="choose__list">
+                        <input
                         <button class="choose__item">100m²-200m²</button>
                         <button class="choose__item">200m²-500m²</button>
                         <button class="choose__item">500m²-700m²</button>
                     </div>
+                    </form>
                 </div>
                 <div class="container__hotline">
 
@@ -328,6 +331,32 @@
                         <div class="adven__content-content">Sở hữu vị trí “vàng” tại ngã tư Trần Duy Hưng – Hoàng Minh Giám, tòa nhà Charmvit Tower là một trong những dự án hiếm hoi có được vị trí chiến lược trong quá trình phát triển của khu vực phía Tây Hà Nội: vừa thuận tiện giao thông, vừa được thừa hưởng đủ hạ tầng khu vực đẳng cấp.</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="apartment__details">
+            <div class="column">
+                <form action="ViewApartmentDetails" method="get">
+                    <input type="hidden" name="typeID" value="1">
+                    <button type="submit">
+                        <img src="apartment1.jpg" alt="Apartment 1">
+                    </button>
+                </form>
+            </div>
+            <div class="column">
+                <form action="ViewApartmentDetails" method="get">
+                    <input type="hidden" name="typeID" value="2">
+                    <button type="submit">
+                        <img src="apartment2.jpg" alt="Apartment 2">
+                    </button>
+                </form>
+            </div>
+            <div class="column">
+                <form action="ViewApartmentDetails" method="get">
+                    <input type="hidden" name="typeID" value="3">
+                    <button type="submit">
+                        <img src="apartment3.jpg" alt="Apartment 3">
+                    </button>
+                </form>
             </div>
         </div>
         <footer class="footer">
