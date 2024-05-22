@@ -66,6 +66,6 @@ public class NotificationAlert {
     }
     @Override
     public String toString(){
-        return
+        return this.getNotiDate() + ": " + this.getNotiMessage();
     }
 }

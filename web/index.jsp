@@ -194,7 +194,7 @@
         .container > .container__content > .choose{
             width: 1490;
             height: 660px;
-            background-image: url("../image/modern-apartment-building-designs-dusk.jpeg");
+            background-image: url("<%= request.getContextPath() %>/image/modern-apartment-building-designs-dusk.jpeg");
             background-repeat: no-repeat;
             background-size: cover;
             margin-top: 30px;
