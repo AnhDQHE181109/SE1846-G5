@@ -11,6 +11,8 @@ package DAO;
 import model.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class ApartmentTypeDAO extends MyDAO {
 
@@ -33,4 +35,23 @@ public class ApartmentTypeDAO extends MyDAO {
         }
         return apartmentTypeList;
     }
+
+    public ApartmentType getApartmentTypeByID(int typeID) {
+        String sql = "SELECT * FROM ApartmentTypes WHERE typeID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, typeID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String size = rs.getString("size");
+                double baseRent = rs.getDouble("base_rent");
+
+                return new ApartmentType(typeID, size, baseRent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }
