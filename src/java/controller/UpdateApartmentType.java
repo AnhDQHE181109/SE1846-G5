@@ -77,7 +77,7 @@ public class UpdateApartmentType extends HttpServlet {
         ApartmentTypeDAO apartmentTypeDAO = new ApartmentTypeDAO();
         apartmentTypeDAO.updateApartmentType(apartmentType);
 
-        response.sendRedirect("viewapartmentdetails.jsp?typeID=" + typeID);
+        response.sendRedirect("landlord.jsp?typeID=" + typeID);
     }
 
     /** 
