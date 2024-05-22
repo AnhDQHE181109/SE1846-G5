@@ -35,4 +35,23 @@ public class ResidentDAO extends MyDAO {
         }
         return residentList;
     }
+    public Resident getResident(int userID){
+        String sql = "SELECT * FROM Residents where userID = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int residentID = rs.getInt("residentID");
+                int userID = rs.getInt("userID");
+                int apartmentID = rs.getInt("apartmentID");
+                Date billingDate = rs.getDate("billingdate");
+
+                Resident resident = new Resident(residentID, userID, apartmentID, billingDate);
+                residentList.add(resident);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return residentList;
+    }
 }
