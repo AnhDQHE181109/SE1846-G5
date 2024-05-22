@@ -254,7 +254,43 @@
             font-weight: 400;
             width: 460px;
         }
-
+        .container__hotline{
+            width: 1200px;
+            height: 200px;
+            background-color: aliceblue;
+            margin-left: 140px;
+            margin-top: -100px;
+        }
+        .hotline__header{
+            text-align: center;
+            padding-top: 10px;
+            font-size: 2rem;
+            color: darkblue;
+            font-weight: 700;
+        }
+        .hotline__content{
+            display: flex;
+            justify-content: space-around;
+            padding-top: 50px;
+        }
+        .hotline__input{
+            width: 300px;
+            height: 40px;
+            border: none;
+            padding-left: 10px;
+        }
+        .hotline__button{
+            height: 40px;
+            width: 130px;
+            border: none;
+            background-color: rgb(3, 3, 130);
+            color: #fff;
+            border-radius: 3px;
+        }
+        .hotline__button:hover{
+            opacity: 0.5;
+            cursor: pointer;
+        }
 
     </style>
     <body>
@@ -300,14 +336,27 @@
                     <div class="choose__header">
                         Looking for an apartment?
                     </div>
-                    <div class="choose__list">
-                        <button class="choose__item">100m²-200m²</button>
-                        <button class="choose__item">200m²-500m²</button>
-                        <button class="choose__item">500m²-700m²</button>
-                    </div>
+                    <form action="ViewApartmentDetails" method="get">
+                        <div class="choose__list">
+                            <button type="submit" name="typeID" class="choose__item" value="1">100m²-200m²</button>
+                            <button type="submit" name="typeID" class="choose__item" value="2">200m²-500m²</button>
+                            <button type="submit" name="typeID" class="choose__item" value="3">500m²-700m²</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="container__hotline">
-
+                    <div class="hotline__header">
+                        LIÊN HỆ ĐỂ ĐƯỢC TƯ VẤN THUÊ MẶT BẰNG TỐT NHẤT!
+                    </div>
+                    <div class="hotline__header">
+                        HOTLINE:  0984323596
+                    </div>
+                    <ul class="hotline__content">
+                        <input class="hotline__input" type="text" placeholder="Ho va ten">
+                        <input class="hotline__input" type="text" placeholder="Email">
+                        <input class="hotline__input" type="text" placeholder="So dien thoai">
+                        <button class="hotline__button">Dang ki</button>
+                    </ul>
                 </div>
             </div>
             <div class="container__advantage">
