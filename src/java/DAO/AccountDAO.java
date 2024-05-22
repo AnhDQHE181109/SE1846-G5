@@ -42,7 +42,7 @@ public class AccountDAO extends MyDAO {
         return accountList;
     }
     public Account getUser(String username){
-     String sql = "SELECT * FROM Account where username = ?";
+     String sql = "SELECT * FROM Accounts where username = ?";
      Account account = new Account();
      try {
             ps = con.prepareStatement(sql);
