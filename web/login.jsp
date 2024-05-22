@@ -190,7 +190,7 @@
                 <p style='color:red;'>Wrong role</p>
                 <%}%>
                 <div class="input-box">
-                    <input name ="username" type="text" placeholder="ssername" required>
+                    <input name ="username" type="text" placeholder="username" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
