@@ -30,6 +30,7 @@
         }
     </style>
     <body>
+        <h1>Assigned Services</h1>
         <table border="1">
             <thead>
                 <tr>
@@ -53,9 +54,37 @@
                     <td>Finished on <%= sr.getFinishdate()%></td> <%}else{%>
                     <td> <form action="RequestStatusServlet" method="get">
                             <input type="hidden" name="requestID" value="<%= sr.getRequestID() %>">
-                            <input class ="finish" type="submit" value="Select">
+                            <input class ="finish" type="submit" value="Finish">
                         </form></td>
                         <%}%>
+                </tr>               
+                <%
+                    }
+                }
+                %>
+            </tbody>
+        </table>
+        <h1>Unassigned Services</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Request Date</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    if (ualist != null){
+                    for(ServiceRequest sr : ualist){%>
+                <tr>
+                    <td><%= sr.getRequestdate() %></td>
+                    <td><%= sr.getTitle() %></td>
+                    <td><%= sr.getDescription() %></td>
+                    <td> <form action="RequestStatusServlet" method="post">
+                            <input type="hidden" name="requestID" value="<%= sr.getRequestID() %>">
+                            <input class ="assign" type="submit" value="Self Assign">
+                       </form></td>
                 </tr>               
                 <%
                     }
