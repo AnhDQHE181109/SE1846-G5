@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-    <servlet-name>UserDetailsServlet</servlet-name>
+        <servlet-name>UserDetailsServlet</servlet-name>
         <servlet-class>controller.UserDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadWorkerInfoServlet</servlet-name>
+        <servlet-class>controller.LoadWorkerInfoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserDetailsServlet</servlet-name>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>ServiceRequestServlet</servlet-name>
         <url-pattern>/ServiceRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadWorkerInfoServlet</servlet-name>
+        <url-pattern>/LoadWorkerInfoServlet</url-pattern>
     </servlet-mapping>
 </web-app>
