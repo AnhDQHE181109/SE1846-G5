@@ -15,9 +15,17 @@ import java.sql.ResultSet;
  */
 public class UserDetailsDAO extends MyDAO {
 
+    /*
+    Method used only for debugging
+     */
+    public static void main(String[] args) {
+        UserDetailsDAO udDAO = new UserDetailsDAO();
+        System.out.println(udDAO.getAccountByUsername("resident"));
+    }
+
     public Account getAccountByUsername(String username) {
 
-        String sql = "select userID, username, firstname, lastname, phone_number, email, profile_picture_link, birthdate, rollID\n"
+        String sql = "select userID, username, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID\n"
                 + "from Accounts\n"
                 + "where username = ?";
 
@@ -45,6 +53,98 @@ public class UserDetailsDAO extends MyDAO {
         }
 
         return account;
+    }
+    
+    public Account getAccountByUsernameForComparison(String username) {
+
+        String sql = "select username, firstname, lastname, phone_number, email, birthdate\n"
+                + "from Accounts\n"
+                + "where username = ?";
+
+        Account account = null;
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                account = new Account(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getDate(6));
+            }
+
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return account;
+    }
+
+    public void updateAccountInfo(Account account, String updateUsername) {
+
+        String sql = "update Accounts \n"
+                + "set username = ?, firstname = ?, lastname = ?, phone_number = ?, email = ?, profile_picture_link = ?, birthdate = ?\n"
+                + "where username = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, updateUsername);
+            ps.setString(2, account.getFirstname());
+            ps.setString(3, account.getLastname());
+            ps.setString(4, account.getPhoneNumber());
+            ps.setString(5, account.getEmail());
+            ps.setString(6, account.getProfilePictureLink());
+            ps.setDate(7, account.getBirthDate());
+            ps.setString(8, account.getUsername());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public Boolean isDuplicateUsername(String username) {
+
+        String sql = "select username\n"
+                + "from Accounts\n"
+                + "where username != ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (username.equalsIgnoreCase(rs.getString("username"))) {
+                    return true;
+                }
+            }
+
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
     }
 
 }

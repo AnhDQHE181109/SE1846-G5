@@ -90,7 +90,7 @@
 
         <nav class="nav nav-borders">
             <a class="nav-link active ms-0"
-                href="account_details.jsp"
+                href="userDetails"
                 target="__blank">Profile</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page"
                 target="__blank">Billing</a>
@@ -125,12 +125,12 @@
                     <div class="card mb-4">
                         <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            <form>
+                            <form action="userDetails" method="post" name="inputForm">
     
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputUsername">Username (how your name will appear to
                                         other users on the site)</label>
-                                    <input class="form-control" id="inputUsername" type="text"
+                                    <input class="form-control" id="inputUsername" type="text" name="inputUsername"
                                         placeholder="Enter your username" value="<%=account.getUsername() %>">
                                 </div>
     
@@ -138,20 +138,20 @@
     
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputFirstName">First name</label>
-                                        <input class="form-control" id="inputFirstName" type="text"
+                                        <input class="form-control" id="inputFirstName" type="text" name="inputFirstName"
                                             placeholder="Enter your first name" value="<%=account.getFirstname() %>">
                                     </div>
     
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Last name</label>
-                                        <input class="form-control" id="inputLastName" type="text"
+                                        <input class="form-control" id="inputLastName" type="text" name="inputLastName"
                                             placeholder="Enter your last name" value="<%=account.getLastname() %>">
                                     </div>
                                 </div>
     
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                    <input class="form-control" id="inputEmailAddress" type="email"
+                                    <input class="form-control" id="inputEmailAddress" type="email" name="inputEmailAddress"
                                         placeholder="Enter your email address" value="<%=account.getEmail() %>">
                                 </div>
     
@@ -159,18 +159,18 @@
     
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPhone">Phone number</label>
-                                        <input class="form-control" id="inputPhone" type="tel"
+                                        <input class="form-control" id="inputPhone" type="tel" name="inputPhone"
                                             placeholder="Enter your phone number" value="<%=account.getPhoneNumber() %>">
                                     </div>
     
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday"
+                                        <input class="form-control" id="inputBirthday" type="date" name="inputBirthday"
                                             placeholder="Enter your birthday" value="<%=account.getBirthDate() %>">
                                     </div>
                                 </div>
     
-                                <button class="btn btn-primary" type="button">Save changes</button>
+                                <button class="btn btn-primary" type="submit" name="saveChanges" value="saveChanges">Save changes</button>
                             </form>
                         </div>
                     </div>
