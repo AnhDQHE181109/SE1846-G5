@@ -23,7 +23,8 @@ public class Resident {
         this.billingDate = billingDate;
     }
 
-    // Getters and setters
+    public Resident(){
+    }
 
     public int getResidentID() {
         return residentID;
