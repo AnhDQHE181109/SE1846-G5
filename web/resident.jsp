@@ -15,8 +15,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
-    List<NotificationAlert> notilist = (List<NotificationAlert>) session.getAttribute("notilist");
-        %>
+    List<NotificationAlert> notilist = (List<NotificationAlert>) session.getAttribute("notilist");       
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+        %>  
     </head>
     <style>
         .bell-icon {
@@ -46,7 +49,7 @@
     </style>
     <body>
         <h2>Welcome</h2>
-        
+
         <%
             String username = null;
             Cookie[] cookies = request.getCookies();
@@ -59,43 +62,44 @@
                 }
             }
             if (username != null) {
+            out.println("<p>Hello, " + username + "</p>");
                 out.println("<a href='LogoutServlet'>Logout</a>");
             } else {
                 response.sendRedirect("login.jsp");
             }
         %>
 
- <div>
-        <span class="bell-icon" onclick="toggleNotificationBox()">🔔</span>
-        <div id="notificationBox" class="notification-box">
-            <%
-                if (notilist != null && !notilist.isEmpty()) {
-                    for (NotificationAlert notification : notilist) {
+        <div>
+            <span class="bell-icon" onclick="toggleNotificationBox()">🔔</span>
+            <div id="notificationBox" class="notification-box">
+                <%
+                    if (notilist != null && !notilist.isEmpty()) {
+                        for (NotificationAlert notification : notilist) {
 
-            %>
-                        <div class="notification-item">
-                            <%= notification.toString() %>
-                        </div>
-            <%
+                %>
+                <div class="notification-item">
+                    <%= notification.toString() %>
+                </div>
+                <%
+                        }
+                    } else {
+                %>
+                <div class="notification-item">No notifications</div>
+                <%
                     }
-                } else {
-            %>
-                    <div class="notification-item">No notifications</div>
-            <%
-                }
-            %>
+                %>
+            </div>
         </div>
-    </div>
 
-    <script>
-        function toggleNotificationBox() {
-            var notificationBox = document.getElementById('notificationBox');
-            if (notificationBox.style.display === 'none' || notificationBox.style.display === '') {
-                notificationBox.style.display = 'block';
-            } else {
-                notificationBox.style.display = 'none';
+        <script>
+            function toggleNotificationBox() {
+                var notificationBox = document.getElementById('notificationBox');
+                if (notificationBox.style.display === 'none' || notificationBox.style.display === '') {
+                    notificationBox.style.display = 'block';
+                } else {
+                    notificationBox.style.display = 'none';
+                }
             }
-        }
         </script>
     </body>
 </html>
