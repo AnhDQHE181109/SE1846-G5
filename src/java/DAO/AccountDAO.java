@@ -44,6 +44,7 @@ public class AccountDAO extends MyDAO {
      Account account = new Account();
      try {
             ps = con.prepareStatement(sql);
+            ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int userID = rs.getInt("userID");
@@ -53,9 +54,9 @@ public class AccountDAO extends MyDAO {
                 String phoneNumber = rs.getString("phone_number");
                 String email = rs.getString("email");
                 String profilePictureLink = rs.getString("profile_picture_link");
-                int rollID = rs.getInt("rollID");
+                int roleID = rs.getInt("roleID");
 
-                account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, rollID);
+                account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, roleID);
             }
         } catch (Exception e) {
             e.printStackTrace();

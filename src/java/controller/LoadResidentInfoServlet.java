@@ -5,12 +5,15 @@
 
 package controller;
 
+import DAO.ResidentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -53,6 +56,10 @@ public class LoadResidentInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ResidentDAO rdao = new ResidentDAO();
+        Account account = (Account) session.getAttribute("account");
+        session.setAttribute("resident", rdao.getResident(account.getUserID()));
         response.sendRedirect("resident.jsp");
     } 
 
