@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -57,8 +58,8 @@ public class LoadResidentInfoServlet extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         ResidentDAO rdao = new ResidentDAO();
-        session.getAttribute(user)
-        session.setAttribute("resident", rdao.getResident());
+        Account account = (Account) session.getAttribute("account");
+        session.setAttribute("resident", rdao.getResident(account.getUserID()));
         response.sendRedirect("resident.jsp");
     } 
 
