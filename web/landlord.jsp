@@ -226,6 +226,7 @@
                     <a href="requestservice.jsp" class="sub-item">Request</a>
                     <a href="addworker.jsp" class="sub-item">Add workers</a>
                     <a href="updateapartmenttype.jsp" class="sub-item">Update apart</a>
+                    <a href="scheduleManager" class="sub-item">Schedule mgr</a>
                 </div>
             </div>
             <div class="item"><a href="#"><i class="fas fa-th"></i>Forms</a></div>

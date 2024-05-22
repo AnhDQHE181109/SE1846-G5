@@ -67,7 +67,7 @@ public class LoadLandlordInfoServlet extends HttpServlet {
         Account account = (Account) session.getAttribute("account");
         NotificationAlertDAO notidao = new NotificationAlertDAO();
         session.setAttribute("notilist", notidao.getNotificationAlerts(account.getUserID()));
-        response.sendRedirect("landlord.jsp");
+        response.sendRedirect("landlordDashboard");
     } 
 
     /** 
