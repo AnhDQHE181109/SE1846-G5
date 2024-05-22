@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import="model.*" %>
+<%@ page import="java.util.*" %>
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <html>
@@ -13,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
-    List<Notification> notilist = (List<Notification>) session.getAttribute("notilist");
+    List<NotificationAlert> notilist = (List<NotificationAlert>) session.getAttribute("notilist");
         %>
     </head>
     <style>
@@ -69,8 +71,8 @@
         <div id="notificationBox" class="notification-box">
             <%
                 if (notilist != null && !notilist.isEmpty()) {
-                    for (Notification notification : notilist) {
-                        // Customize the display of each notification item as needed
+                    for (NotificationAlert notification : notilist) {
+
             %>
                         <div class="notification-item">
                             <%= notification.toString() %>
