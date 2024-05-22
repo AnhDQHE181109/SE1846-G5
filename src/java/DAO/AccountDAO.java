@@ -39,7 +39,9 @@ public class AccountDAO extends MyDAO {
         }
         return accountList;
     }
-
+    public Account getUSer(String username){
+    
+    }
     public int validateUser(String username, String password, int role) {
         String query = "SELECT * FROM Accounts WHERE username = ?";
         try {
