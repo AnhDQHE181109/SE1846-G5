@@ -5,6 +5,7 @@
 package controller;
 
 import DAO.AccountDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -88,8 +89,8 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", adao.getUser(username));
             switch (role){
-                case 1:{response.sendRedirect("resident.jsp");break;}
-                case 2:{response.sendRedirect("worker.jsp");break;}
+                case 1:{response.sendRedirect(request.getContextPath() + "/LoadResidentInfoServlet");;break;}
+                case 2:{response.sendRedirect("worker");break;}
                 case 3:{response.sendRedirect("landlord.jsp");break;}
                 default:{response.sendRedirect("login.jsp");break;}
             }
