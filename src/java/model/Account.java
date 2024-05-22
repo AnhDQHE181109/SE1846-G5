@@ -42,6 +42,10 @@ public class Account {
         this.profilePictureLink = profilePictureLink;
         this.rollID = rollID;
     }
+    
+    public Account() {
+        
+    }
 
     public int getUserID() {
         return userID;
