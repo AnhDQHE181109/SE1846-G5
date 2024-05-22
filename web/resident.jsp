@@ -15,8 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <%
-    List<NotificationAlert> notilist = (List<NotificationAlert>) session.getAttribute("notilist");
+    List<NotificationAlert> notilist = (List<NotificationAlert>) session.getAttribute("notilist");       
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
         %>
+        
     </head>
     <style>
         .bell-icon {
@@ -59,6 +63,7 @@
                 }
             }
             if (username != null) {
+            out.println("<p>Hello, " + username + "</p>");
                 out.println("<a href='LogoutServlet'>Logout</a>");
             } else {
                 response.sendRedirect("login.jsp");

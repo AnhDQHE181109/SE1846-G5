@@ -60,6 +60,7 @@ public class LoadWorkerInfoServlet extends HttpServlet {
         HttpSession session = request.getSession();
         WorkerDAO wdao = new WorkerDAO();
         Account account = (Account) session.getAttribute("account");
+        System.out.println(account.getUserID());
         session.setAttribute("worker", wdao.getWorker(account.getUserID()));
         NotificationAlertDAO notidao = new NotificationAlertDAO();
         session.setAttribute("notilist", notidao.getNotificationAlerts(account.getUserID()));
