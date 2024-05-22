@@ -68,7 +68,7 @@
             ApartmentType apartmentType = apartmentTypeDAO.getApartmentTypeByID(typeID);
             if (apartmentType != null) {
         %>
-        <form action="UpdateApartmentServlet" method="post">
+        <form action="UpdateApartmentType" method="post">
             <input type="hidden" name="typeID" value="<%= apartmentType.getTypeID() %>">
             <div class="form-group">
                 <label for="size">Size:</label>
