@@ -47,6 +47,15 @@ public class Account {
         this.birthDate = birthDate;
         this.rollID = rollID;
     }
+
+    public Account(String username, String firstname, String lastname, String phoneNumber, String email, Date birthDate) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
     
     public Account() {
         

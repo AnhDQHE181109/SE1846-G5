@@ -316,6 +316,63 @@
             font-size: 1.5rem;
             margin-top: 20px;
         }
+        .container-column {
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 30px;
+            background-color: aliceblue
+        }
+        .column {
+            flex: 1;
+            margin: 10px;
+        }
+        .column-1, .column-2 {
+            display: flex;
+            flex-direction: column;
+        }
+        .column-1 > div, .column-2 > div {
+            flex: 1;
+            margin: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .column-3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .column-3 > div {
+            flex: 1;
+            margin: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .column-3{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding-top: 100px;
+        }
+        .design__header{
+            font-size: 2rem;
+            text-align: center;
+            color: darkblue;
+        }
+        .design__content{
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+        .design__footer{
+            color: darkblue;
+            font-size: 2rem;
+            width: 350px;
+            height: 600px;
+            text-align: center;
+        }
     </style>
     <body>
         <div class="app">
@@ -419,59 +476,85 @@
                 </ul>
             </div>
         </div>
-        <footer class="footer">
+        <div class="container-column">
+            <div class="column column-1">
+                <div class="column-1-row-1">
+                    <div class="design__header">1. ĐĂNG KÝ</div>
+                    <div class="design__content">Khách hàng có nhu cầu thuê văn phòng Charmvit Tower đăng ký qua Mẫu đăng ký Website charmvit-tower.com hoặc liên hệ với dịch vụ thuê văn phòng</div>
+                </div>
+                <div class="column-2-row-2">
+                    <div class="design__header">2. TƯ VẤN</div>
+                    <div class="design__content">Chuyên viên của chúng tôi sẽ liên hệ trao đổi về nhu cầu thuê văn phòng của Quý khách và tư vấn văn phòng phù hợp nhất với yêu cầu của quý khách thuê.</div>
+                </div>
+            </div>
+            <div class="column column-2">
+                <div class="column-2-row-1">
+                    <div class="design__header">3. XEM PHÒNG</div>
+                    <div class="design__content">Chuyên viên sẽ đưa Quý khách đến tham quan trực tiếp phòng thuê thực tế, đảm bảo khách chọn được văn phòng ưng ý nhất.</div>
+                </div>
+                <div class="column-2-row-2">
+                    <div class="design__header">4. LÀM THỦ TỤC</div>
+                    <div class="design__content">Chuyên viên sẽ hỗ trợ khách thuê đàm phám giá và các thủ tục thuê phòng tại G5 apartment, hỗ trợ làm hợp đồng thuê văn phòng và các giấy tờ liên quan (cần thiết).</div>
+                </div>
+            </div>
+            <div class="column column-3">
+                <div class="design__footer">QUY TRÌNH THUÊ VĂN PHÒNG TẠI G5 apartment</div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
 
-        </footer>
-    </body>
-    <script>
-        let slider = document.querySelector('.slider .list');
-        let items = document.querySelectorAll('.slider .list .item');
-        let next = document.getElementById('next');
-        let prev = document.getElementById('prev');
-        let dots = document.querySelectorAll('.slider .dots li');
+    </footer>
+</body>
+<script>
+    let slider = document.querySelector('.slider .list');
+    let items = document.querySelectorAll('.slider .list .item');
+    let next = document.getElementById('next');
+    let prev = document.getElementById('prev');
+    let dots = document.querySelectorAll('.slider .dots li');
 
-        let lengthItems = items.length - 1;
-        let active = 0;
-        next.onclick = function () {
-            active = active + 1 <= lengthItems ? active + 1 : 0;
-            reloadSlider();
-        }
-        prev.onclick = function () {
-            active = active - 1 >= 0 ? active - 1 : lengthItems;
-            reloadSlider();
-        }
-        let refreshInterval = setInterval(() => {
+    let lengthItems = items.length - 1;
+    let active = 0;
+    next.onclick = function () {
+        active = active + 1 <= lengthItems ? active + 1 : 0;
+        reloadSlider();
+    }
+    prev.onclick = function () {
+        active = active - 1 >= 0 ? active - 1 : lengthItems;
+        reloadSlider();
+    }
+    let refreshInterval = setInterval(() => {
+        next.click()
+    }, 3000);
+    function reloadSlider() {
+        slider.style.left = -items[active].offsetLeft + 'px';
+        // 
+        let last_active_dot = document.querySelector('.slider .dots li.active');
+        last_active_dot.classList.remove('active');
+        dots[active].classList.add('active');
+
+        clearInterval(refreshInterval);
+        refreshInterval = setInterval(() => {
             next.click()
         }, 3000);
-        function reloadSlider() {
-            slider.style.left = -items[active].offsetLeft + 'px';
-            // 
-            let last_active_dot = document.querySelector('.slider .dots li.active');
-            last_active_dot.classList.remove('active');
-            dots[active].classList.add('active');
-
-            clearInterval(refreshInterval);
-            refreshInterval = setInterval(() => {
-                next.click()
-            }, 3000);
 
 
-        }
+    }
 
-        dots.forEach((li, key) => {
-            li.addEventListener('click', () => {
-                active = key;
-                reloadSlider();
-            })
-        })
-        window.onresize = function (event) {
+    dots.forEach((li, key) => {
+        li.addEventListener('click', () => {
+            active = key;
             reloadSlider();
-        };
-
-        window.addEventListener("scroll", function () {
-            var header = document.querySelector("header")
-            header.classList.toggle("sticky", window.scrollY > 0);
         })
+    })
+    window.onresize = function (event) {
+        reloadSlider();
+    };
 
-    </script>
+    window.addEventListener("scroll", function () {
+        var header = document.querySelector("header")
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+
+</script>
 </html>
