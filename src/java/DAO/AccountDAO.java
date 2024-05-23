@@ -119,24 +119,27 @@ public class AccountDAO extends MyDAO {
         return false;
     }
 
-    public void addAccount(Account account) {
+    // Method to add a worker account
+    public boolean addWorkerAccount(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
         String sql = "INSERT INTO Accounts (userID, username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, account.getUserID());
-            ps.setString(2, account.getUsername());
-            ps.setString(3, account.getPassword());
-            ps.setString(4, account.getFirstname());
-            ps.setString(5, account.getLastname());
-            ps.setString(6, account.getPhoneNumber());
-            ps.setString(7, account.getEmail());
-            ps.setString(8, account.getProfilePictureLink());
-            ps.setDate(9, new java.sql.Date(account.getBirthDate().getTime()));
-            ps.setInt(10, account.getRollID());
-            ps.executeUpdate();
+            ps.setInt(1, userID);
+            ps.setString(2, username);
+            ps.setString(3, password);
+            ps.setString(4, firstname);
+            ps.setString(5, lastname);
+            ps.setString(6, phoneNumber);
+            ps.setString(7, email);
+            ps.setString(8, profilePictureLink);
+            ps.setDate(9, (java.sql.Date) birthdate);
+            ps.setInt(10, rollID);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 }
