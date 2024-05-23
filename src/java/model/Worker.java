@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Long
@@ -14,13 +16,23 @@ public class Worker {
     private double baseSalary;
     private double salaryMultiplier;
     private String job;
+    private Date llogin;
 
-    public Worker(int workerID, int userID, double baseSalary, double salaryMultiplier, String job) {
+    public Worker(int workerID, int userID, double baseSalary, double salaryMultiplier, String job, Date llogin) {
         this.workerID = workerID;
         this.userID = userID;
         this.baseSalary = baseSalary;
         this.salaryMultiplier = salaryMultiplier;
         this.job = job;
+        this.llogin = llogin;
+    }
+
+    public void setLlogin(Date llogin) {
+        this.llogin = llogin;
+    }
+
+    public Date getLlogin() {
+        return llogin;
     }
 
     public Worker(){

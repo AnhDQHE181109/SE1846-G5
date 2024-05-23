@@ -10,6 +10,7 @@ package DAO;
  */
 import model.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WorkerDAO extends MyDAO {
@@ -26,8 +27,8 @@ public class WorkerDAO extends MyDAO {
                 double baseSalary = rs.getDouble("base_salary");
                 double salaryMultiplier = rs.getDouble("salary_multi");
                 String job = rs.getString("job");
-
-                Worker worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job);
+                java.sql.Date llogin = rs.getDate("last_login");
+                Worker worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job, llogin);
                 workerList.add(worker);
             }
         } catch (Exception e) {
@@ -35,7 +36,8 @@ public class WorkerDAO extends MyDAO {
         }
         return workerList;
     }
-        public Worker getWorker(int userID) {
+
+    public Worker getWorker(int userID) {
         String sql = "SELECT * FROM Workers where userID = ?";
         Worker worker = new Worker();
         try {
@@ -47,8 +49,8 @@ public class WorkerDAO extends MyDAO {
                 double baseSalary = rs.getDouble("base_salary");
                 double salaryMultiplier = rs.getDouble("salary_multi");
                 String job = rs.getString("job");
-
-                worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job);
+                java.sql.Date llogin = rs.getDate("last_login");
+                worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job, llogin);
             }
         } catch (Exception e) {
             e.printStackTrace();
