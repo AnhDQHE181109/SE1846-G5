@@ -172,3 +172,5 @@ insert into Residents(userID, apartmentID, billingdate) values (1, 102, '2024062
 insert into NotificationAlert(userID, notidate, noti_message,noti_status) values (0, '20240523 10:34:09 AM', 'ALLAHU AKBAR', 1)
 
 INSERT INTO Workers(userID, base_salary, salary_multi, job, last_login) values(3, 100, 1, 'Plumber', '5/23/2024');
+
+INSERT INTO WorkerAttendance(userID, attendance_data) values (3, '0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 2 0 0 3 0 0 0 0 0');
