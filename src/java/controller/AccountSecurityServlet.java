@@ -5,7 +5,6 @@
 package controller;
 
 import DAO.AccountSecurityDAO;
-import DAO.UserDetailsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -103,33 +102,32 @@ public class AccountSecurityServlet extends HttpServlet {
                         if (newPassword.equalsIgnoreCase(confirmPassword)) {
                             accountSecurityOps.updatePassword(account.getUsername(), newPassword);
                             out.print("<script>alert('Successfully changed your password!')</script>");
-                            request.getRequestDispatcher("accountSecurity").include(request, response);
+                            request.setAttribute("account", account);
+                            request.getRequestDispatcher("account_security.jsp").include(request, response);
+                            return;
                         } else {
                             out.print("<script>alert('Please retype your new password!')</script>");
-                            request.getRequestDispatcher("accountSecurity").include(request, response);
+                            request.setAttribute("account", account);
+                            request.getRequestDispatcher("account_security.jsp").include(request, response);
+                            return;
                         }
                     } else {
                         out.print("<script>alert('Your current password is incorrect!')</script>");
-                        request.getRequestDispatcher("accountSecurity").include(request, response);
+                        request.setAttribute("account", account);
+                        request.getRequestDispatcher("account_security.jsp").include(request, response);
+                        return;
                     }
                 } else {
                     out.print("<script>alert('None of the fields can be empty!')</script>");
-                    request.getRequestDispatcher("accountSecurity").include(request, response);
+                    request.setAttribute("account", account);
+                    request.getRequestDispatcher("account_security.jsp").include(request, response);
+                    return;
                 }
             }
+        } else {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Action forbidden");
         }
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-    
-    
 }
