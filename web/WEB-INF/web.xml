@@ -8,6 +8,10 @@
         <servlet-name>LoadWorkerInfoServlet</servlet-name>
         <servlet-class>controller.LoadWorkerInfoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountSecurityServlet</servlet-name>
+        <servlet-class>controller.AccountSecurityServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserDetailsServlet</servlet-name>
         <url-pattern>/userDetails</url-pattern>
@@ -47,5 +51,9 @@
     <servlet-mapping>
         <servlet-name>LoadWorkerInfoServlet</servlet-name>
         <url-pattern>/LoadWorkerInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountSecurityServlet</servlet-name>
+        <url-pattern>/accountSecurity</url-pattern>
     </servlet-mapping>
 </web-app>

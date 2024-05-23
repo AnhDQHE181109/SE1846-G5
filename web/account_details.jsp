@@ -91,13 +91,13 @@
         <nav class="nav nav-borders">
             <a class="nav-link active ms-0"
                 href="userDetails"
-                target="__blank">Profile</a>
+                target="">Profile</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page"
-                target="__blank">Billing</a>
+                target="">Billing</a>
             <a class="nav-link" href="account_security.jsp"
-                target="__blank">Security</a>
+                target="">Security</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"
-                target="__blank">Notifications</a>
+                target="">Notifications</a>
         </nav>
         <hr class="mt-0 mb-4">
         <%
