@@ -14,12 +14,42 @@
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
+    
+    String username = null;
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("user")) {
+                username = cookie.getValue();
+                break;
+               }
+            }
+        }
+    if (username != null) {
+        out.println("<a href='LogoutServlet'>Logout</a>");
+    } else {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    int x = (int) session.getAttribute("x");
+    int dim = (int) session.getAttribute("dim");
+    int count = 1;
+    int c = 0;
+    int[] atarray = (int[]) session.getAttribute("atarray");
+    
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
+            html{
+                box-sizing: border-box;
+                line-height: 1.6rem;
+                font-size: 62.5%;
+                font-family: 'Roboto', sans-serif;
+            }
             .bell-icon {
                 cursor: pointer;
                 font-size: 24px;
@@ -59,7 +89,7 @@
                 border-bottom: none;
             }
             table {
-                width: 100%;
+                width: 80%;
                 border-collapse: collapse;
                 text-align: center;
             }
@@ -71,23 +101,7 @@
     <body>
 
         <h2>Welcome</h2>
-        <%
-            String username = null;
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("user")) {
-                        username = cookie.getValue();
-                        break;
-                    }
-                }
-            }
-            if (username != null) {
-                out.println("<a href='LogoutServlet'>Logout</a>");
-            } else {
-                response.sendRedirect("login.jsp");
-            }           
-        %>
+
         <div>
             <span class="bell-icon" onclick="toggleNotificationBox()">🔔</span>
             <div id="notificationBox" class="notification-box">
@@ -121,20 +135,55 @@
                 <th>Sunday</th>
             </tr>
             <tr class="container">
-                <%for(int i = 0; i < 3; i++){%>
-                <td class="std"> <div class ='square'></div> </td>
-                <%}%>      
-            </tr>
-        </table>
-        <script>
-            function toggleNotificationBox() {
-                var notificationBox = document.getElementById('notificationBox');
-                if (notificationBox.style.display === 'none' || notificationBox.style.display === '') {
-                    notificationBox.style.display = 'block';
-                } else {
-                    notificationBox.style.display = 'none';
-                }
+
+                <%for(int i = 0; i < x; i++){%>
+                <td class="std"> <div style="background-color: white" class ='square'></div> </td>
+                <%}%>
+
+                <%for(int i = 0; i < 7-x-1; i++){%>
+                <%if(atarray[c] == 0){%>
+                <td class="std"> <div style="background-color: #e3e3e3" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%if(atarray[c] == 1){%>
+                <td class="std"> <div style="background-color: #ffd6d0" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%if(atarray[c] == 2){%>
+                <td class="std"> <div style="background-color: #c6e8da" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%c++;}%> 
+
+                <td class="std"> <div style="background-color: #bedae5" class ='square'><%=c+1%></div> </td>
+                <%c++;%>
+            <tr>
+                <%for(int i = 0; i < dim-7+2; i++){%>
+
+            <%if (count == 0){%><tr><%}%>
+                <%if(atarray[c] == 0){%>
+                <td class="std"> <div style="background-color: #e3e3e3" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%if(atarray[c] == 1){%>
+                <td class="std"> <div style="background-color: #ffd6d0" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%if(atarray[c] == 2){%>
+                <td class="std"> <div style="background-color: #c6e8da" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%if(atarray[c] == 3){%>
+                <td class="std"> <div style="background-color: #bedae5" class ='square'><%=c+1%></div> </td>
+                <%}%>
+                <%if (count == 7){%></tr><%;count = 0;}%>
+                <%count++;c++;}%> 
+        </tr>
+        <%%>
+    </table>
+    <script>
+        function toggleNotificationBox() {
+            var notificationBox = document.getElementById('notificationBox');
+            if (notificationBox.style.display === 'none' || notificationBox.style.display === '') {
+                notificationBox.style.display = 'block';
+            } else {
+                notificationBox.style.display = 'none';
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>
