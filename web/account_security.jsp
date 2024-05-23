@@ -118,19 +118,19 @@
 
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputOldPassword">Old password</label>
-                                <input class="form-control" id="inputOldPassword" type="password"
+                                <input class="form-control" id="inputOldPassword" type="password" name="inputOldPassword"
                                     placeholder="Enter your old password" value="">
                             </div>
 
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputNewPassword">New password</label>
-                                <input class="form-control" id="inputNewPassword" type="password"
+                                <input class="form-control" id="inputNewPassword" type="password" name="inputNewPassword"
                                     placeholder="Enter your new password" value="">
                             </div>
 
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputRetypePassword">Retype password</label>
-                                <input class="form-control" id="inputRetypePassword" type="password"
+                                <input class="form-control" id="inputRetypePassword" type="password" name="inputRetypePassword"
                                     placeholder="Retype your new password" value="">
                             </div>
 

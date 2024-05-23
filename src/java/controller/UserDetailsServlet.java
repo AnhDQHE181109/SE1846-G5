@@ -41,20 +41,6 @@ public class UserDetailsServlet extends HttpServlet {
         System.out.println(date);
     }
 
-    /*
-    For debugging purposes
-     */
-    public static void main(String[] args) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date date = null;
-        try {
-            date = formatter.parse("2024-05-27");
-        } catch (ParseException ex) {
-            System.out.println(ex);
-        }
-        System.out.println(date);
-    }
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
