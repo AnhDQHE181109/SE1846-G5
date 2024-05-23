@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAO.WorkerAttendanceDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
 import model.Worker;
+import model.WorkerAttendance;
 
 
 /**
@@ -74,11 +76,16 @@ public class AttendanceServlet extends HttpServlet {
         YearMonth currentYearMonth = YearMonth.from(currentDate);
         int daysInMonth = currentYearMonth.lengthOfMonth();
         session.setAttribute("dim", daysInMonth);
-        int[] daysArray = new int[daysInMonth];
+        WorkerAttendanceDAO wadao = new WorkerAttendanceDAO();
+        WorkerAttendance wa = wadao.getAttendance(worker.getUserID());
+        
+        int[] daysArray = wa.getAD();
+        /*
+        new int[daysInMonth];
         for (int i = 7 - dayOfWeekInt; i < daysInMonth; i += 7) {
             daysArray[i] = 3;
         }
-
+        */
         Date lastLoginDate = worker.getLlogin();
         System.out.println(lastLoginDate);
         if (lastLoginDate != null) {
@@ -115,7 +122,7 @@ public class AttendanceServlet extends HttpServlet {
                     }
                 }
             }
-
+            wadao.UpdateAttendance(worker.getUserID(), daysArray);
         }
 
         session.setAttribute(
@@ -137,7 +144,7 @@ public class AttendanceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();      
     }
 
     /**
