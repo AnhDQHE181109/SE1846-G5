@@ -94,7 +94,7 @@
                 target="">Profile</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page"
                 target="">Billing</a>
-            <a class="nav-link" href="account_security.jsp"
+            <a class="nav-link" href="accountSecurity"
                 target="">Security</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"
                 target="">Notifications</a>
