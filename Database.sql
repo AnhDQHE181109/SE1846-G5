@@ -139,6 +139,13 @@ CREATE TABLE NotificationAlert (
 	noti_status BIT,
 	FOREIGN KEY (userID) REFERENCES Accounts(userID)
 );
+CREATE TABLE WorkerAttendance(
+	attendanceID INT IDENTITY(0,1) PRIMARY KEY,
+	userID INT,
+	attendance_data TEXT,
+	FOREIGN KEY (userID) REFERENCES Accounts(userID)
+);
+
 
 INSERT INTO ApartmentTypes (typeID, size, base_rent)values(1, 'small', 5),(2,'medium', 10),(3, 'big', 15);
 INSERT INTO Apartments(apartmentID, typeID, occupied) values(101, 1, 1),(102, 2, 0);
