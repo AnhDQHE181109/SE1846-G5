@@ -91,6 +91,10 @@
             </div>
         </div>
 
+        <div>
+            <a href="userDetails">User Details</a>
+        </div>
+
         <script>
             function toggleNotificationBox() {
                 var notificationBox = document.getElementById('notificationBox');

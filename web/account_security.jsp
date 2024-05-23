@@ -5,7 +5,7 @@
     <meta charset="utf-8">
 
 
-    <title>Account details</title>
+    <title>Account security</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
@@ -78,69 +78,96 @@
             margin-left: 1rem;
             margin-right: 1rem;
         }
+
+        .btn-danger-soft {
+            color: #000;
+            background-color: #f1e0e3;
+            border-color: #f1e0e3;
+        }
+        
     </style>
 </head>
 
 <body>
     <div class="container-xl px-4 mt-4">
-<div></div>
+        <!-- Account page navigation-->
         <nav class="nav nav-borders">
-            <a class="nav-link"
-                href="account_details.jsp"
-                target="__blank">Profile</a>
-            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page"
-                target="__blank">Billing</a>
-            <a class="nav-link active ms-0" href="account_security.jsp"
-                target="__blank">Security</a>
-            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"
-                target="__blank">Notifications</a>
+        <a class="nav-link  ms-0" href="userDetails" target="">Profile</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="">Billing</a>
+        <a class="nav-link active" href="accountSecurity" target="">Security</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="">Notifications</a>
         </nav>
         <hr class="mt-0 mb-4">
         <div class="row">
-            <div class="col-xl-4">
-
-                <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">Profile Picture</div>
-                    <div class="card-body text-center">
-
-                        <img class="img-account-profile rounded-circle mb-2"
-                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-8">
-
+            <div class="col-lg-8">
+                <!-- Change password card-->
                 <div class="card mb-4">
-                    <div class="card-header">Password update</div>
+                    <div class="card-header">Change Password</div>
                     <div class="card-body">
                         <form>
-
+                            <!-- Form Group (current password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputOldPassword">Old password</label>
-                                <input class="form-control" id="inputOldPassword" type="password"
-                                    placeholder="Enter your old password" value="">
+                                <label class="small mb-1" for="currentPassword">Current Password</label>
+                                <input class="form-control" id="currentPassword" name="currentPassword" type="password" placeholder="Enter current password">
                             </div>
-
+                            <!-- Form Group (new password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputNewPassword">New password</label>
-                                <input class="form-control" id="inputNewPassword" type="password"
-                                    placeholder="Enter your new password" value="">
+                                <label class="small mb-1" for="newPassword">New Password</label>
+                                <input class="form-control" id="newPassword" name="newPassword" type="password" placeholder="Enter new password">
                             </div>
-
+                            <!-- Form Group (confirm password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputRetypePassword">Retype password</label>
-                                <input class="form-control" id="inputRetypePassword" type="password"
-                                    placeholder="Retype your new password" value="">
+                                <label class="small mb-1" for="confirmPassword">Confirm Password</label>
+                                <input class="form-control" id="confirmPassword" name="newPassword" type="password" placeholder="Confirm new password">
                             </div>
-
-                            <button class="btn btn-primary" type="button">Update password</button>
+                            <button class="btn btn-primary" type="submit" name="savePassword" value="savePassword">Save</button>
                         </form>
                     </div>
                 </div>
+                <!-- Security preferences card-->
+                <!-- <div class="card mb-4">
+                    <div class="card-header">Security Preferences</div>
+                    <div class="card-body">
+                        <!- - Account privacy optinos- ->
+                        <h5 class="mb-1">Account Privacy</h5>
+                        <p class="small text-muted">By setting your account to private, your profile information and posts will not be visible to users outside of your user groups.</p>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" id="radioPrivacy1" type="radio" name="radioPrivacy" checked="">
+                                <label class="form-check-label" for="radioPrivacy1">Public (posts are available to all users)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" id="radioPrivacy2" type="radio" name="radioPrivacy">
+                                <label class="form-check-label" for="radioPrivacy2">Private (posts are available to only users in your groups)</label>
+                            </div>
+                        </form>
+                        <hr class="my-4">
+                        <!- - Data sharing options- ->
+                        <h5 class="mb-1">Data Sharing</h5>
+                        <p class="small text-muted">Sharing usage data can help us to improve our products and better serve our users as they navigation through our application. When you agree to share usage data with us, crash reports and usage analytics will be automatically sent to our development team for investigation.</p>
+                        <form>
+                            <div class="form-check">
+                                <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage" checked="">
+                                <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app developers</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
+                                <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app developers</label>
+                            </div>
+                        </form>
+                    </div>
+                </div> -->
             </div>
+                
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
 
-            <div class="col-xl-4">
+    </script>
+
+     <!-- <div class="col-xl-4">
 
                 
             </div>
@@ -161,14 +188,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript">
-
-    </script>
+            </div> -->
 </body>
 
 </html>

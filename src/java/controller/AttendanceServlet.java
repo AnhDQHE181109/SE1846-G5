@@ -20,6 +20,7 @@ import java.util.*;
 import model.Worker;
 import model.WorkerAttendance;
 
+
 /**
  *
  * @author Long
@@ -129,6 +130,8 @@ public class AttendanceServlet extends HttpServlet {
         response.sendRedirect(
                 "worker.jsp");
     }
+
+
 
     /**
      * Handles the HTTP <code>POST</code> method.

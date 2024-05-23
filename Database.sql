@@ -163,6 +163,9 @@ values ('landlord', 'password', 'Land', 'Lore', '1659797976', 'landlore@example.
 INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
 values ('worker', 'password', 'Work', 'Er', '1655972401012', 'worker@example.com', 'img_link', '20240422 8:55:09 AM', 2);
 
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
+values ('mra', 'mra', 'RTX', '4090', '552358235226', 'nvidia@example.com', 'img_link', '20150619 8:55:09 AM', 1);
+
 insert into Residents(userID, apartmentID, billingdate) values (0, 101, '20240625 10:34:09 AM')
 insert into Residents(userID, apartmentID, billingdate) values (1, 102, '20240626 9:50:09 AM')
 
