@@ -57,4 +57,37 @@ public class WorkerDAO extends MyDAO {
         }
         return worker;
     }
+
+    public boolean isUserIDTaken(int userID) {
+        String sql = "SELECT COUNT(*) FROM Workers WHERE userID = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void addWorker(Worker worker) {
+        String sql = "INSERT INTO Workers (userID, base_salary, salary_multi, job, last_login) VALUES (?, ?, ?, ?, ?)";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, worker.getUserID());
+            ps.setDouble(2, worker.getBaseSalary());
+            ps.setDouble(3, worker.getSalaryMultiplier());
+            ps.setString(4, worker.getJob());
+            ps.setDate(5, new java.sql.Date(worker.getLlogin().getTime()));
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        WorkerAttendanceDAO wadao = new WorkerAttendanceDAO();
+        wadao.IntAttendance(1);
+    }
+
 }

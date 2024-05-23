@@ -59,7 +59,7 @@
             margin-bottom: 10px;
             color: #333;
         }
-        .button {
+        button {
             display: inline-block;
             padding: 10px 20px;
             margin-top: 10px;
@@ -72,7 +72,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .button:hover {
+        button:hover {
             background-color: #0056b3;
         }
     </style>
@@ -132,6 +132,9 @@
                     <% } %>
                 </div>
                 </form>
+            </div>
+            <div class="actions">
+                    <button onclick="location.href='addworker.jsp'">Add Worker</button>
             </div>
         </body>
     </html>
