@@ -80,17 +80,17 @@ public class UserDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        
         Account account = (Account) request.getSession().getAttribute("account");
         if (account != null) {
             request.setAttribute("account", account);
             System.out.println(account);
-
+            
             request.getRequestDispatcher("account_details.jsp").forward(request, response);
         } else {
             out.println("<h1>Invalid data!");
         }
-
+        
     }
 
     /**
@@ -106,18 +106,18 @@ public class UserDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
+        
         Account account = (Account) request.getSession().getAttribute("account");
-
+        
         String inputUsername = request.getParameter("inputUsername").trim();
         String inputFirstName = request.getParameter("inputFirstName").trim();
         String inputLastName = request.getParameter("inputLastName").trim();
         String inputEmailAddress = request.getParameter("inputEmailAddress").trim();
         String inputPhone = request.getParameter("inputPhone").trim();
         String inputBirthday = request.getParameter("inputBirthday").trim();
-
+        
         String button = request.getParameter("saveChanges").trim();
-
+        
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = null;
         try {
@@ -127,48 +127,53 @@ public class UserDetailsServlet extends HttpServlet {
         }
         Account tempAccount = new Account(inputUsername, inputFirstName, inputLastName,
                 inputPhone, inputEmailAddress, new java.sql.Date(date.getTime()));
-
+        
         UserDetailsDAO userDetailsOps = new UserDetailsDAO();
-
+        
         if (account != null) {
             if (button != null) {
-                if (inputUsername != null && inputFirstName != null && inputLastName != null
-                        && inputEmailAddress != null && inputPhone != null && inputBirthday != null) {
-                    if (userDetailsOps.isDuplicateUsername(inputUsername)) {
+                if (!inputUsername.isBlank() && !inputFirstName.isBlank() && !inputLastName.isBlank()
+                        && !inputEmailAddress.isBlank() && !inputPhone.isBlank() && !inputBirthday.isBlank()) {
+                    if (userDetailsOps.isDuplicateUsername(inputUsername, account.getUsername())) {
                         out.print("<script>alert('This username is unavailable!')</script>");
                         request.setAttribute("account", tempAccount);
                         request.getRequestDispatcher("account_details.jsp").include(request, response);
                         return;
                     }
-
-                    if (userDetailsOps.getAccountByUsernameForComparison(inputUsername).equals(tempAccount)) {
+                    
+                    if (userDetailsOps.checkIfUnchangedInfo(userDetailsOps.getAccountByUsernameForComparison(inputUsername), tempAccount))  {
                         out.print("<script>alert('Nothing was changed!')</script>");
                         request.setAttribute("account", tempAccount);
                         request.getRequestDispatcher("account_details.jsp").include(request, response);
                     } else {
+                        
+//                        System.out.println("From DB: " + userDetailsOps.getAccountByUsernameForComparison(inputUsername));
+//                        System.out.println("From WI: " + tempAccount);
+//                        System.out.println("Equals? " + userDetailsOps.getAccountByUsernameForComparison(inputUsername).equals(tempAccount));
+                        
                         account.setFirstname(inputFirstName);
                         account.setLastname(inputLastName);
                         account.setEmail(inputEmailAddress);
                         account.setPhoneNumber(inputPhone);
-
+                        
                         account.setBirthDate(new java.sql.Date(date.getTime()));
-
+                        
                         userDetailsOps.updateAccountInfo(account, inputUsername);
-
+                        
                         request.setAttribute("account", account);
-
+                        
                         out.print("<script>alert('Successfully updated your info!')</script>");
                         request.getRequestDispatcher("account_details.jsp").include(request, response);
                         //request.getRequestDispatcher("account_details.jsp").forward(request, response);
                     }
-
+                    
                 } else {
                     out.print("<script>alert('None of the fields can be empty!')</script>");
                     request.setAttribute("account", tempAccount);
                     request.getRequestDispatcher("account_details.jsp").include(request, response);
                     return;
                 }
-
+                
             }
         } else {
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Action forbidden");
@@ -183,10 +188,15 @@ public class UserDetailsServlet extends HttpServlet {
 //
 //        String inputBirthday = request.getParameter("inputBirthday").trim();
 //        System.out.println(inputBirthday);
+//        String inputUsername = request.getParameter("inputUsername").trim();
+//        System.out.println("Username blank? " + inputUsername.isBlank());
+//        System.out.println("Username empty? " + inputUsername.isEmpty());
+//        System.out.println("Username null? " + inputUsername.equals(null));
 //        
 //        out.print("<script>alert('aaaa')</script>");
 //        request.getRequestDispatcher("account_details.jsp").include(request, response);
 //    }
+    
     /**
      * Returns a short description of the servlet.
      *
