@@ -84,7 +84,7 @@
             background-color: #f1e0e3;
             border-color: #f1e0e3;
         }
-        }
+        
     </style>
 </head>
 
