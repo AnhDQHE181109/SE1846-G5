@@ -91,8 +91,6 @@
                         descriptions = ['Default apartment description. Please select an apartment type.'];
                         break;
                 }
-
-                // Add images and descriptions to the container
                 var imageContainer = document.getElementById("imageContainer");
                 var descriptionContainer = document.getElementById("descriptionContainer");
 

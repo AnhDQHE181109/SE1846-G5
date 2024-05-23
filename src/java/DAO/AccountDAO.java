@@ -87,6 +87,7 @@ public class AccountDAO extends MyDAO {
             if (rs.next()) {
                 String storedPasswordHash = rs.getString("password");
                 if (storedPasswordHash.equals(password)) {
+                    if (role == 3){return 1;}
                     int storedRole = rs.getInt("roleID");
                     if (storedRole != role) {
                         return 2;

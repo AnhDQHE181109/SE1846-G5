@@ -5,6 +5,7 @@
 package controller;
 
 import DAO.UserDetailsDAO;
+import DAO.UserDetailsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -25,6 +26,20 @@ import model.*;
  * @author ASUS
  */
 public class UserDetailsServlet extends HttpServlet {
+
+    /*
+    For debugging purposes
+     */
+    public static void main(String[] args) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = formatter.parse("2024-05-27");
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        System.out.println(date);
+    }
 
     /*
     For debugging purposes
@@ -80,12 +95,12 @@ public class UserDetailsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         Account account = (Account) request.getSession().getAttribute("account");
         if (account != null) {
             request.setAttribute("account", account);
             System.out.println(account);
-            
+
             request.getRequestDispatcher("account_details.jsp").forward(request, response);
         } else {
             out.println("<h1>Invalid data!");
