@@ -8,6 +8,7 @@ package DAO;
  *
  * @author Long
  */
+import java.sql.PreparedStatement;
 import model.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,21 +74,24 @@ public class WorkerDAO extends MyDAO {
         return false;
     }
 
-    public void addWorker(Worker worker) {
-        String sql = "INSERT INTO Workers (userID, base_salary, salary_multi, job, last_login) VALUES (?, ?, ?, ?, ?)";
+    // Method to add a worker
+    public boolean addWorker(Worker worker) {
+        String sql = "INSERT INTO Workers (workerID, userID, base_salary, salary_multi, job, last_login) VALUES (?, ?, ?, ?, ?, ?)";
         try {
-            ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, worker.getWorkerID());
             ps.setInt(1, worker.getUserID());
-            ps.setDouble(2, worker.getBaseSalary());
-            ps.setDouble(3, worker.getSalaryMultiplier());
-            ps.setString(4, worker.getJob());
-            ps.setDate(5, new java.sql.Date(worker.getLlogin().getTime()));
-            ps.executeUpdate();
+            ps.setDouble(1, worker.getBaseSalary());
+            ps.setDouble(1, worker.getSalaryMultiplier());
+            ps.setString(1, worker.getJob());
+            ps.setDate(1, (java.sql.Date) worker.getLlogin());
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
+            // Handle the exception here (e.g., log it, throw a custom exception)
         }
-        WorkerAttendanceDAO wadao = new WorkerAttendanceDAO();
-        wadao.IntAttendance(1);
+        return false;
     }
 
 }

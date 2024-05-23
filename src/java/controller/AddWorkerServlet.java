@@ -76,88 +76,42 @@ public class AddWorkerServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int userID;
-        try {
-            userID = Integer.parseInt(request.getParameter("userID"));
-            if (userID < 0) {
-                request.setAttribute("errorMessage", "User ID must be a positive number.");
-                request.getRequestDispatcher("addWorker.jsp").forward(request, response);
-                return;
-            }
-        } catch (NumberFormatException e) {
-            request.setAttribute("errorMessage", "Invalid User ID format.");
-            request.getRequestDispatcher("addWorker.jsp").forward(request, response);
-            return;
-        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        double baseSalary;
-        try {
-            baseSalary = Double.parseDouble(request.getParameter("baseSalary"));
-        } catch (NumberFormatException e) {
-            request.setAttribute("errorMessage", "Invalid Base Salary format.");
-            request.getRequestDispatcher("addWorker.jsp").forward(request, response);
-            return;
-        }
-
-        double salaryMultiplier;
-        try {
-            salaryMultiplier = Double.parseDouble(request.getParameter("salaryMultiplier"));
-        } catch (NumberFormatException e) {
-            request.setAttribute("errorMessage", "Invalid Salary Multiplier format.");
-            request.getRequestDispatcher("addWorker.jsp").forward(request, response);
-            return;
-        }
-
+        int workerID = Integer.parseInt(request.getParameter("workerID"));
+        int userID = Integer.parseInt(request.getParameter("userID"));
+        double baseSalary = Double.parseDouble(request.getParameter("baseSalary"));
+        double salaryMultiplier = Double.parseDouble(request.getParameter("salaryMultiplier"));
         String job = request.getParameter("job");
+        Date lastLoginDay = Date.valueOf(request.getParameter("lastLoginDay")); // Get last login day from the form
 
-        Date llogin;
-        try {
-            llogin = Date.valueOf(request.getParameter("llogin"));
-        } catch (IllegalArgumentException e) {
-            request.setAttribute("errorMessage", "Invalid Last Login Date format.");
-            request.getRequestDispatcher("addWorker.jsp").forward(request, response);
-            return;
-        }
-
+        // Create a new worker
+        Worker worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job, lastLoginDay);
         WorkerDAO workerDAO = new WorkerDAO();
-        if (workerDAO.isUserIDTaken(userID)) {
-            request.setAttribute("errorMessage", "User ID is already taken.");
-            request.getRequestDispatcher("addworker.jsp").forward(request, response);
-            return;
-        }
+        workerDAO.addWorker(worker);
 
+        // Create an account for the worker
         String username = request.getParameter("username");
-        AccountDAO accountDAO = new AccountDAO();
-        if (accountDAO.isUsernameTaken(username)) {
-            request.setAttribute("errorMessage", "Username is already taken.");
-            request.getRequestDispatcher("addworker.jsp").forward(request, response);
-            return;
-        }
-
         String password = request.getParameter("password");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
+        String profilePictureLink = request.getParameter("profilePictureLink");
         Date birthdate = Date.valueOf(request.getParameter("birthdate"));
-        int roleID = 2; // Assuming 2 is the roleID for workers
+        int rollID = Integer.parseInt(request.getParameter("rollID"));
 
-        Worker worker = new Worker(0, userID, baseSalary, salaryMultiplier, job, llogin);
-        workerDAO.addWorker(worker);
+        // Add the worker's account to the database
+        AccountDAO accountDAO = new AccountDAO();
+        accountDAO.addWorkerAccount(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
 
-        Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, null, birthdate, roleID);
-        accountDAO.addAccount(account);
-
+        // Redirect to a success page
         response.sendRedirect("landlord.jsp");
     }
 
-        @Override
-        public String getServletInfo
-        
-            () {
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
-
     }
+
+}
