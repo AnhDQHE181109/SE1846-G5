@@ -120,6 +120,7 @@ public class AccountDAO extends MyDAO {
     }
 
     // Method to add a worker account
+
     public boolean addWorkerAccount(String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
         String sql = "INSERT INTO Accounts (username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
