@@ -22,8 +22,8 @@ public class AccountSecurityDAO extends MyDAO {
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, username);
-            ps.setString(2, newPassword);
+            ps.setString(1, newPassword);
+            ps.setString(2, username);
 
             ResultSet rs = ps.executeQuery();
 
