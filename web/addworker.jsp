@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,132 +5,107 @@
     <title>Add Worker</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
         }
         .container {
-            max-width: 600px;
-            margin: 40px auto;
+            max-width: 400px;
+            margin: 50px auto;
             padding: 20px;
             background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            font-size: 24px;
+        h2 {
+            text-align: center;
             margin-bottom: 20px;
-            color: #007BFF;
+            color: #333;
         }
         form {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-gap: 10px;
         }
         label {
-            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
         }
-        input, select {
+        input[type="text"],
+        input[type="password"],
+        input[type="date"] {
+            width: calc(100% - 22px);
             padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        button {
-            padding: 10px 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
             font-size: 16px;
-            color: #fff;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            outline: none;
         }
-        button:hover {
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
             background-color: #0056b3;
         }
-        .password-container {
-            position: relative;
-            width: fit-content;
-        }
-        .password-container input {
-            padding-right: 30px;
-        }
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
     </style>
-    <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("password");
-            var toggleIcon = document.getElementById("toggleIcon");
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleIcon.textContent = "🙈"; // Change to an icon representing hidden state
-            } else {
-                passwordField.type = "password";
-                toggleIcon.textContent = "👁️"; // Change to an icon representing visible state
-            }
-        }
-    </script>
 </head>
 <body>
-    <h1>Add Worker</h1>
-    <form action="AddWorkerServlet" method="post">
-        <label for="workerID">Worker ID:</label>
-        <input type="number" id="workerID" name="workerID" required><br>
-        
-        <label for="userID">User ID:</label>
-        <input type="number" id="userID" name="userID" required><br>
-        
-        <label for="baseSalary">Base Salary:</label>
-        <input type="number" step="0.01" id="baseSalary" name="baseSalary" required><br>
-        
-        <label for="salaryMultiplier">Salary Multiplier:</label>
-        <input type="number" step="0.01" id="salaryMultiplier" name="salaryMultiplier" required><br>
-        
-        <label for="job">Job:</label>
-        <input type="text" id="job" name="job" required><br>
-        
-        <label for="llogin">Last Login:</label>
-        <input type="date" id="llogin" name="llogin" required><br>
-        
-        <h2>Account Information</h2>
-        
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        
-        <div class="password-container">
+    <div class="container">
+        <h2>Add Worker</h2>
+        <form action="AddWorkerServlet" method="post">
+            <label for="workerID">Worker ID:</label>
+            <input type="text" name="workerID" id="workerID">
+            
+            <label for="userID">User ID:</label>
+            <input type="text" name="userID" id="userID">
+            
+            <label for="baseSalary">Base Salary:</label>
+            <input type="text" name="baseSalary" id="baseSalary">
+            
+            <label for="salaryMultiplier">Salary Multiplier:</label>
+            <input type="text" name="salaryMultiplier" id="salaryMultiplier">
+            
+            <label for="job">Job:</label>
+            <input type="text" name="job" id="job">
+            
+            <label for="lastLoginDay">Last Login Day:</label>
+            <input type="date" name="lastLoginDay" id="lastLoginDay">
+            
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username">
+            
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <span id="toggleIcon" class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
-        </div><br>
-        
-        <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname" required><br>
-        
-        <label for="lastname">Last Name:</label>
-        <input type="text" id="lastname" name="lastname" required><br>
-        
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
-        
-        <label for="birthdate">Birth Date:</label>
-        <input type="date" id="birthdate" name="birthdate" required><br>
-        
-        <button type="submit">Add Worker</button>
-    </form>
-    
-    <c:if test="${not empty errorMessage}">
-        <p style="color:red;">${errorMessage}</p>
-    </c:if>
+            <input type="password" name="password" id="password">
+            
+            <label for="firstname">First Name:</label>
+            <input type="text" name="firstname" id="firstname">
+            
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" id="lastname">
+            
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber">
+            
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+            
+            <label for="profilePictureLink">Profile Picture Link:</label>
+            <input type="text" name="profilePictureLink" id="profilePictureLink">
+            
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" name="birthdate" id="birthdate">
+            
+            <label for="rollID">Role ID:</label>
+            <input type="text" name="rollID" id="rollID">
+            
+            <input type="submit" value="Add Worker">
+        </form>
+    </div>
 </body>
 </html>

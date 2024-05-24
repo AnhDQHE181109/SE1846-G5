@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Long
  */
 public class Worker {
+
     private int workerID;
     private int userID;
     private double baseSalary;
@@ -35,7 +36,7 @@ public class Worker {
         return llogin;
     }
 
-    public Worker(){
+    public Worker() {
     }
 
     public int getWorkerID() {
