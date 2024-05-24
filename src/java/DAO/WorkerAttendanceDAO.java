@@ -8,14 +8,22 @@ package DAO;
  *
  * @author Long
  */
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.*;
 
 public class WorkerAttendanceDAO extends MyDAO {
+
+    public static void main(String[] args) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        System.out.println(formatter.format(date));
+    }
 
     public void addAttendance(WorkerAttendance attendance) {
         String sql = "INSERT INTO WorkerAttendance (userID, attendance_data) VALUES (?, ?)";
@@ -95,6 +103,7 @@ public class WorkerAttendanceDAO extends MyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void UpdateAttendance(int userID, int[] aar) {
@@ -108,6 +117,20 @@ public class WorkerAttendanceDAO extends MyDAO {
             ps.setString(1, atd);
             ps.setInt(2, userID);
             ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateLastLogin(int userID) {
+        String sql = "UPDATE Workers SET last_login = ? WHERE userID = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            Date utilDate = new Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            ps.setInt(2, userID);
+            ps.setDate(1, sqlDate);
+            rs = ps.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
