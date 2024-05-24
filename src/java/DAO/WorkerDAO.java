@@ -89,7 +89,7 @@ public class WorkerDAO extends MyDAO {
     public boolean addWorker(int userID, double baseSalary, double salaryMultiplier, String job, Date lastLoginDay) {
         String sql = "INSERT INTO Workers (userID, base_salary, salary_multi, job, last_login) VALUES (?, ?, ?, ?, ?)";
         try {
-             ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
             ps.setDouble(2, baseSalary);
             ps.setDouble(3, salaryMultiplier);
