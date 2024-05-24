@@ -78,11 +78,8 @@ public class AddWorkerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        double baseSalary = Double.parseDouble(request.getParameter("baseSalary"));
-        double salaryMultiplier = Double.parseDouble(request.getParameter("salaryMultiplier"));
-        String job = request.getParameter("job");
-        Date lastLoginDay = Date.valueOf(request.getParameter("lastLoginDay"));
 
+        // Create an account for the worker
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String firstname = request.getParameter("firstname");
@@ -92,6 +89,7 @@ public class AddWorkerServlet extends HttpServlet {
         String profilePictureLink = request.getParameter("profilePictureLink");
         Date birthdate = Date.valueOf(request.getParameter("birthdate"));
         int rollID = Integer.parseInt(request.getParameter("rollID"));
+
         
         AccountDAO accountDAO = new AccountDAO();
         accountDAO.addWorkerAccount(username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
@@ -101,6 +99,8 @@ public class AddWorkerServlet extends HttpServlet {
         workerDAO.addWorker(account.getUserID(), baseSalary, salaryMultiplier, job, lastLoginDay);
         WorkerAttendanceDAO wadao = new WorkerAttendanceDAO();
         wadao.IntAttendance(account.getUserID());
+
+
         response.sendRedirect("landlord.jsp");
     }
 

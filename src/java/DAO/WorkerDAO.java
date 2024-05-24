@@ -76,6 +76,7 @@ public class WorkerDAO extends MyDAO {
 
     // Method to add a worker
 
+
     /**
      *
      * @param workerID
@@ -94,13 +95,14 @@ public class WorkerDAO extends MyDAO {
             ps.setDouble(3, salaryMultiplier);
             ps.setString(4, job);
             ps.setDate(5, (java.sql.Date) lastLoginDay);
+
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            // Handle the exception here (e.g., log it, throw a custom exception)
+
         }
-        
+
         return false;
     }
 
