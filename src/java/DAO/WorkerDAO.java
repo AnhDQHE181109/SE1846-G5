@@ -13,6 +13,8 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import model.Worker;
+import model.Account;
 
 public class WorkerDAO extends MyDAO {
 
@@ -59,24 +61,6 @@ public class WorkerDAO extends MyDAO {
         return worker;
     }
 
-    public boolean isUserIDTaken(int userID) {
-        String sql = "SELECT COUNT(*) FROM Workers WHERE userID = ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, userID);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    // Method to add a worker
-
-
     /**
      *
      * @param workerID
@@ -105,5 +89,50 @@ public class WorkerDAO extends MyDAO {
 
         return false;
     }
+    public List<Worker> getAllWorkers() {
+        List<Worker> workers = new ArrayList<>();
+        String sql = "SELECT w.workerID, w.userID, w.base_salary, w.salary_multi, w.job, w.last_login, " +
+                     "a.username, a.firstname, a.lastname, a.phoneNumber, a.email, a.profilePictureLink, a.birthDate, a.rollID " +
+                     "FROM Workers w JOIN Accounts a ON w.userID = a.userID";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int workerID = rs.getInt("workerID");
+                int userID = rs.getInt("userID");
+                double baseSalary = rs.getDouble("base_salary");
+                double salaryMultiplier = rs.getDouble("salary_multi");
+                String job = rs.getString("job");
+                java.sql.Date llogin = rs.getDate("last_login");
+
+                String username = rs.getString("username");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String phoneNumber = rs.getString("phoneNumber");
+                String email = rs.getString("email");
+                String profilePictureLink = rs.getString("profilePictureLink");
+                java.sql.Date birthDate = rs.getDate("birthDate");
+                int rollID = rs.getInt("rollID");
+
+                Account account = new Account(userID, username, firstname, lastname, phoneNumber, email, profilePictureLink, birthDate, rollID);
+                Worker worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job, llogin, account);
+                workers.add(worker);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return workers;
+    }
+
 
 }
