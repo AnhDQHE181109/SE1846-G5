@@ -4,12 +4,14 @@
  */
 package controller;
 
+import DAO.AccountSecurityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account;
 
 /**
  *
@@ -34,7 +36,7 @@ public class AccountSecurityServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AccountSecurityServlet</title>");            
+            out.println("<title>Servlet AccountSecurityServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AccountSecurityServlet at " + request.getContextPath() + "</h1>");
@@ -55,7 +57,18 @@ public class AccountSecurityServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        Account account = (Account) request.getSession().getAttribute("account");
+        if (account != null) {
+            request.setAttribute("account", account);
+            //System.out.println(account);
+
+            request.getRequestDispatcher("account_security.jsp").forward(request, response);
+        } else {
+            out.println("<h1>Invalid data!");
+        }
     }
 
     /**
@@ -69,17 +82,52 @@ public class AccountSecurityServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        Account account = (Account) request.getSession().getAttribute("account");
+
+        String currentPassword = request.getParameter("currentPassword").trim();
+        String newPassword = request.getParameter("newPassword").trim();
+        String confirmPassword = request.getParameter("confirmPassword").trim();
+
+        String button = request.getParameter("savePassword").trim();
+
+        AccountSecurityDAO accountSecurityOps = new AccountSecurityDAO();
+
+        if (account != null) {
+            if (button != null) {
+                if (!currentPassword.isBlank() && !newPassword.isBlank() && !confirmPassword.isBlank()) {
+                    if (currentPassword.equalsIgnoreCase(account.getPassword())) {
+                        if (newPassword.equalsIgnoreCase(confirmPassword)) {
+                            accountSecurityOps.updatePassword(account.getUsername(), newPassword);
+                            out.print("<script>alert('Successfully changed your password!')</script>");
+                            request.setAttribute("account", account);
+                            request.getRequestDispatcher("account_security.jsp").include(request, response);
+                            return;
+                        } else {
+                            out.print("<script>alert('Please retype your new password!')</script>");
+                            request.setAttribute("account", account);
+                            request.getRequestDispatcher("account_security.jsp").include(request, response);
+                            return;
+                        }
+                    } else {
+                        out.print("<script>alert('Your current password is incorrect!')</script>");
+                        request.setAttribute("account", account);
+                        request.getRequestDispatcher("account_security.jsp").include(request, response);
+                        return;
+                    }
+                } else {
+                    out.print("<script>alert('None of the fields can be empty!')</script>");
+                    request.setAttribute("account", account);
+                    request.getRequestDispatcher("account_security.jsp").include(request, response);
+                    return;
+                }
+            }
+        } else {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Action forbidden");
+        }
+
+    }
 
 }

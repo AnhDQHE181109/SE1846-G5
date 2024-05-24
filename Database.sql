@@ -163,9 +163,14 @@ values ('landlord', 'password', 'Land', 'Lore', '1659797976', 'landlore@example.
 INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
 values ('worker', 'password', 'Work', 'Er', '1655972401012', 'worker@example.com', 'img_link', '20240422 8:55:09 AM', 2);
 
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
+values ('mra', 'mra', 'RTX', '4090', '552358235226', 'nvidia@example.com', 'img_link', '20190619 8:55:09 AM', 1);
+
 insert into Residents(userID, apartmentID, billingdate) values (0, 101, '20240625 10:34:09 AM')
 insert into Residents(userID, apartmentID, billingdate) values (1, 102, '20240626 9:50:09 AM')
 
 insert into NotificationAlert(userID, notidate, noti_message,noti_status) values (0, '20240523 10:34:09 AM', 'ALLAHU AKBAR', 1)
 
 INSERT INTO Workers(userID, base_salary, salary_multi, job, last_login) values(3, 100, 1, 'Plumber', '5/23/2024');
+
+INSERT INTO WorkerAttendance(userID, attendance_data) values (3, '0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 2 0 0 3 0 0 0 0 0');
