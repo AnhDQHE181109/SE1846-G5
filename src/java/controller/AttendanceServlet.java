@@ -123,6 +123,7 @@ public class AttendanceServlet extends HttpServlet {
                 }
             }
             wadao.UpdateAttendance(worker.getUserID(), daysArray);
+            wadao.updateLastLogin(worker.getUserID());
         }
 
         session.setAttribute(
