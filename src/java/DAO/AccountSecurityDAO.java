@@ -37,5 +37,29 @@ public class AccountSecurityDAO extends MyDAO {
             System.out.println(e);
         }
     }
+    
+//    public void updatePassword(String username, String newPassword) {
+//
+//        String sql = "update Accounts\n"
+//                + "set password = ?\n"
+//                + "where username = ?";
+//
+//        try {
+//            PreparedStatement ps = connection.prepareStatement(sql);
+//            ps.setString(1, username);
+//            ps.setString(2, newPassword);
+//
+//            ResultSet rs = ps.executeQuery();
+//
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (ps != null) {
+//                ps.close();
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 
 }
