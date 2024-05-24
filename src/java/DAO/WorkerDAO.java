@@ -75,22 +75,34 @@ public class WorkerDAO extends MyDAO {
     }
 
     // Method to add a worker
-    public boolean addWorker(Worker worker) {
-        String sql = "INSERT INTO Workers (workerID, userID, base_salary, salary_multi, job, last_login) VALUES (?, ?, ?, ?, ?, ?)";
+
+
+    /**
+     *
+     * @param workerID
+     * @param baseSalary
+     * @param salaryMultiplier
+     * @param job
+     * @param lastLoginDay
+     * @return
+     */
+    public boolean addWorker(int userID, double baseSalary, double salaryMultiplier, String job, Date lastLoginDay) {
+        String sql = "INSERT INTO Workers (userID, base_salary, salary_multi, job, last_login) VALUES (?, ?, ?, ?, ?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, worker.getWorkerID());
-            ps.setInt(1, worker.getUserID());
-            ps.setDouble(1, worker.getBaseSalary());
-            ps.setDouble(1, worker.getSalaryMultiplier());
-            ps.setString(1, worker.getJob());
-            ps.setDate(1, (java.sql.Date) worker.getLlogin());
+             ps = con.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ps.setDouble(2, baseSalary);
+            ps.setDouble(3, salaryMultiplier);
+            ps.setString(4, job);
+            ps.setDate(5, (java.sql.Date) lastLoginDay);
+
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            // Handle the exception here (e.g., log it, throw a custom exception)
+
         }
+
         return false;
     }
 
