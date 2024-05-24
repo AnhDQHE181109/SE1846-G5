@@ -5,6 +5,7 @@
 package controller;
 
 import DAO.AccountDAO;
+import DAO.WorkerAttendanceDAO;
 import DAO.WorkerDAO;
 import model.Account;
 import model.Worker;
@@ -78,18 +79,6 @@ public class AddWorkerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int workerID = Integer.parseInt(request.getParameter("workerID"));
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        double baseSalary = Double.parseDouble(request.getParameter("baseSalary"));
-        double salaryMultiplier = Double.parseDouble(request.getParameter("salaryMultiplier"));
-        String job = request.getParameter("job");
-        Date lastLoginDay = Date.valueOf(request.getParameter("lastLoginDay")); // Get last login day from the form
-
-        // Create a new worker
-        Worker worker = new Worker(workerID, userID, baseSalary, salaryMultiplier, job, lastLoginDay);
-        WorkerDAO workerDAO = new WorkerDAO();
-        workerDAO.addWorker(worker);
-
         // Create an account for the worker
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -101,11 +90,17 @@ public class AddWorkerServlet extends HttpServlet {
         Date birthdate = Date.valueOf(request.getParameter("birthdate"));
         int rollID = Integer.parseInt(request.getParameter("rollID"));
 
-        // Add the worker's account to the database
+        
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.addWorkerAccount(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
+        accountDAO.addWorkerAccount(username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
+        Account account = accountDAO.getUser(username);
+        
+        WorkerDAO workerDAO = new WorkerDAO();
+        workerDAO.addWorker(account.getUserID(), baseSalary, salaryMultiplier, job, lastLoginDay);
+        WorkerAttendanceDAO wadao = new WorkerAttendanceDAO();
+        wadao.IntAttendance(account.getUserID());
 
-        // Redirect to a success page
+
         response.sendRedirect("landlord.jsp");
     }
 
