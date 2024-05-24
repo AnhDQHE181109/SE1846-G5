@@ -101,6 +101,7 @@ public class AccountSecurityServlet extends HttpServlet {
                     if (currentPassword.equalsIgnoreCase(account.getPassword())) {
                         if (newPassword.equalsIgnoreCase(confirmPassword)) {
                             accountSecurityOps.updatePassword(account.getUsername(), newPassword);
+                            account.setPassword(newPassword);
                             out.print("<script>alert('Successfully changed your password!')</script>");
                             request.setAttribute("account", account);
                             request.getRequestDispatcher("account_security.jsp").include(request, response);
