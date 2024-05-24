@@ -59,12 +59,6 @@
     <div class="container">
         <h2>Add Worker</h2>
         <form action="AddWorkerServlet" method="post">
-            <label for="workerID">Worker ID:</label>
-            <input type="text" name="workerID" id="workerID">
-            
-            <label for="userID">User ID:</label>
-            <input type="text" name="userID" id="userID">
-            
             <label for="baseSalary">Base Salary:</label>
             <input type="text" name="baseSalary" id="baseSalary">
             
