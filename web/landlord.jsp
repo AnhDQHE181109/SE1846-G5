@@ -121,21 +121,24 @@
             <div class="container">
                 <h1>Available Apartment Types</h1>
                 <form action="ViewApartmentDetails" method="get"> 
-                <div class="apartment-list">
-                    <% for (ApartmentType apartmentType : apartmentTypes) { %>
-                    <div class="apartment-item">
-                        <img src="images/type<%= apartmentType.getTypeID() %>_1.jpg" alt="Apartment Type <%= apartmentType.getTypeID() %>">
-                        <h2>Type <%= apartmentType.getTypeID() %> - <%= apartmentType.getSize() %></h2>
-                        <p>Base Rent: $<%= apartmentType.getBaseRent() %> per month</p>
-                        <button type="submit" name="typeID" value="<%= apartmentType.getTypeID() %>">View</button>
+                    <div class="apartment-list">
+                        <% for (ApartmentType apartmentType : apartmentTypes) { %>
+                        <div class="apartment-item">
+                            <img src="images/type<%= apartmentType.getTypeID() %>_1.jpg" alt="Apartment Type <%= apartmentType.getTypeID() %>">
+                            <h2>Type <%= apartmentType.getTypeID() %> - <%= apartmentType.getSize() %></h2>
+                            <p>Base Rent: $<%= apartmentType.getBaseRent() %> per month</p>
+                            <button type="submit" name="typeID" value="<%= apartmentType.getTypeID() %>">View</button>
+                        </div>
+                        <% } %>
                     </div>
-                    <% } %>
-                </div>
                 </form>
             </div>
             <div class="actions">
-                    <button onclick="location.href='addworker.jsp'">Add Worker</button>
+                <button onclick="location.href = 'addworker.jsp'">Add Worker</button>
             </div>
+            <form action="ViewWorkerServlet" method="get">
+                <input type="submit" value="View Workers">
+            </form>
         </body>
     </html>
 
