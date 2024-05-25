@@ -102,7 +102,12 @@
         <hr class="mt-0 mb-4">
         <%
         Account account = (Account) request.getAttribute("account");
+        String readOnly = "", buttonType = "";
         if (account != null) {
+            if (account.getRollID() == 2) {
+                readOnly = "readonly";
+                buttonType = "hidden";
+            }
         %>
             <div class="row">
                 <div class="col-xl-4">
@@ -131,7 +136,7 @@
                                     <label class="small mb-1" for="inputUsername">Username (how your name will appear to
                                         other users on the site)</label>
                                     <input class="form-control" id="inputUsername" type="text" name="inputUsername"
-                                        placeholder="Enter your username" value="<%=account.getUsername() %>">
+                                        placeholder="Enter your username" value="<%=account.getUsername() %>" <%=readOnly %>>
                                 </div>
     
                                 <div class="row gx-3 mb-3">
@@ -139,20 +144,20 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputFirstName">First name</label>
                                         <input class="form-control" id="inputFirstName" type="text" name="inputFirstName"
-                                            placeholder="Enter your first name" value="<%=account.getFirstname() %>">
+                                            placeholder="Enter your first name" value="<%=account.getFirstname() %>" <%=readOnly %>>
                                     </div>
     
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Last name</label>
                                         <input class="form-control" id="inputLastName" type="text" name="inputLastName"
-                                            placeholder="Enter your last name" value="<%=account.getLastname() %>">
+                                            placeholder="Enter your last name" value="<%=account.getLastname() %>" <%=readOnly %>>
                                     </div>
                                 </div>
     
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputEmailAddress">Email address</label>
                                     <input class="form-control" id="inputEmailAddress" type="email" name="inputEmailAddress"
-                                        placeholder="Enter your email address" value="<%=account.getEmail() %>">
+                                        placeholder="Enter your email address" value="<%=account.getEmail() %>" <%=readOnly %>>
                                 </div>
     
                                 <div class="row gx-3 mb-3">
@@ -160,17 +165,17 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPhone">Phone number</label>
                                         <input class="form-control" id="inputPhone" type="tel" name="inputPhone"
-                                            placeholder="Enter your phone number" value="<%=account.getPhoneNumber() %>">
+                                            placeholder="Enter your phone number" value="<%=account.getPhoneNumber() %>" <%=readOnly %>>
                                     </div>
     
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputBirthday">Birthday</label>
                                         <input class="form-control" id="inputBirthday" type="date" name="inputBirthday"
-                                            placeholder="Enter your birthday" value="<%=account.getBirthDate() %>">
+                                            placeholder="Enter your birthday" value="<%=account.getBirthDate() %>" <%=readOnly %>>
                                     </div>
                                 </div>
     
-                                <button class="btn btn-primary" type="submit" name="saveChanges" value="saveChanges">Save changes</button>
+                                <button class="btn btn-primary" type="submit" name="saveChanges" value="saveChanges" <%=buttonType %>>Save changes</button>
                             </form>
                         </div>
                     </div>
