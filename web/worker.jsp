@@ -124,6 +124,10 @@
             </div>
         </div>
 
+        <div>
+            <a href="userDetails">User details</a>
+        </div>
+
         <table>
             <tr>
                 <th>Monday</th>
