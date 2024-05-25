@@ -35,6 +35,15 @@ public class Worker {
     public Date getLlogin() {
         return llogin;
     }
+    
+    public Worker(int workerID, int userID, double baseSalary, double salaryMultiplier, String job, Date llogin) {
+        this.workerID = workerID;
+        this.userID = userID;
+        this.baseSalary = baseSalary;
+        this.salaryMultiplier = salaryMultiplier;
+        this.job = job;
+        this.llogin = llogin;
+    }
 
     public Worker() {
     }
