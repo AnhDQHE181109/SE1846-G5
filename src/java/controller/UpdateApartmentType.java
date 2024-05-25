@@ -69,15 +69,45 @@ public class UpdateApartmentType extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int typeID = Integer.parseInt(request.getParameter("typeID"));
+        String typeIDStr = request.getParameter("typeID");
         String size = request.getParameter("size");
-        double baseRent = Double.parseDouble(request.getParameter("baseRent"));
+        String baseRentStr = request.getParameter("baseRent");
 
-        ApartmentType apartmentType = new ApartmentType(typeID, size, baseRent);
-        ApartmentTypeDAO apartmentTypeDAO = new ApartmentTypeDAO();
-        apartmentTypeDAO.updateApartmentType(apartmentType);
+        int typeID = 0;
+        double baseRent = 0;
+        boolean hasError = false;
 
-        response.sendRedirect("landlord.jsp?typeID=" + typeID);
+        if (typeIDStr == null || typeIDStr.isEmpty()) {
+            request.setAttribute("typeIDError", "Type ID is required.");
+            hasError = true;
+        } else {
+            typeID = Integer.parseInt(typeIDStr);
+        }
+
+        if (size == null || size.isEmpty()) {
+            request.setAttribute("sizeError", "Size is required.");
+            hasError = true;
+        }
+
+        if (baseRentStr == null || baseRentStr.isEmpty()) {
+            request.setAttribute("baseRentError", "Base rent is required.");
+            hasError = true;
+        } else {
+            baseRent = Double.parseDouble(baseRentStr);
+            if (baseRent <= 0) {
+                request.setAttribute("baseRentError", "Base rent must be greater than 0.");
+                hasError = true;
+            }
+        }
+
+        if (hasError) {
+            request.getRequestDispatcher("landlord.jsp").forward(request, response);
+        } else {
+            ApartmentType apartmentType = new ApartmentType(typeID, size, baseRent);
+            ApartmentTypeDAO apartmentTypeDAO = new ApartmentTypeDAO();
+            apartmentTypeDAO.updateApartmentType(apartmentType);
+            response.sendRedirect("landlord.jsp?typeID=" + typeID);
+        }
     }
 
     /** 
