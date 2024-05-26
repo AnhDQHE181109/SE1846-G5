@@ -110,6 +110,7 @@
             ApartmentTypeDAO dao = new ApartmentTypeDAO();
             List<ApartmentType> apartmentTypes = dao.getApartmentTypes();
         %>
+        <a href="scheduleManager">Workers' schedule management</a>
         <!DOCTYPE html>
     <html>
         <head>
