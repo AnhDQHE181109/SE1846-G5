@@ -129,7 +129,7 @@
         <div>
             <a href="userDetails">User details</a>
         </div>
-        <div> <h2>Absense = <%=abs%> days</h2></div>
+        <div> <h2>Absence = <%=abs%> days</h2></div>
         <div> <h2>Salary Multiplier = <%=salary_multi%>%</h2></div>
         <table>
             <tr>

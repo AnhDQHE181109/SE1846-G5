@@ -118,16 +118,15 @@ CREATE TABLE Workers (
 
 -- Create Service_Requests table
 CREATE TABLE Service_Requests (
-    requestID INT PRIMARY KEY,
+    requestID INT IDENTITY(0,1) PRIMARY KEY,
     residentID INT,
     workerID INT,
-	requestdate DATE,
-	assigndate DATE,
-	finishdate DATE,
+	request_date DATE,
+	assign_date DATE,
+	finish_date DATE,
+	title TEXT,
     description TEXT,
-	senddate DATE,
-	recievedate DATE,
-	finsishdate DATE,
+	type TEXT,
     FOREIGN KEY (residentID) REFERENCES Residents(residentID),
     FOREIGN KEY (workerID) REFERENCES Workers(workerID)
 );
