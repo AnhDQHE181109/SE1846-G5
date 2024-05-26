@@ -90,9 +90,10 @@
                 %>
             </div>
         </div>
-<div>hello </div>
+        <div>hello </div>
         <div>
-            <a href="userDetails">User Details</a>
+            <a href="userDetails">User Details</a> <br>
+            <a href="requestservice.jsp">Service Request</a>
         </div>
 
         <script>
@@ -105,6 +106,6 @@
                 }
             }
         </script>
-        
+
     </body>
 </html>
