@@ -5,6 +5,7 @@
 
 package controller;
 
+import DAO.ServiceRequestDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -68,7 +71,14 @@ public class ServiceRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        String type = request.getParameter("type");
+        String description = request.getParameter("desc");
+        String title = request.getParameter("title");
+        
+        ServiceRequestDAO rsdao = new ServiceRequestDAO(); 
+        rsdao.addInitialRequest(account.getUserID(), description, title, type);
     }
 
     /** 
