@@ -111,11 +111,13 @@ public class AttendanceServlet extends HttpServlet {
                 int lastLoginDay = lastLoginCalendar.get(Calendar.DAY_OF_MONTH);
                 int currentDay = currentDate.getDayOfMonth();
                 if (lastLoginDay == currentDay) {
-                    daysArray[currentDay - 1] = 2;
+                    if (daysArray[currentDay - 1] != 3) {
+                    daysArray[currentDay - 1] = 2;}
                 } else if (lastLoginDay == currentDay - 1) {
-                    daysArray[currentDay - 1] = 2;
+                    if (daysArray[currentDay - 1] != 3){
+                    daysArray[currentDay - 1] = 2;}
                 } else {
-                    for (int i = lastLoginDay - 1; i <= currentDay - 1; i++) {
+                    for (int i = lastLoginDay; i <= currentDay - 1; i++) {
                         if (daysArray[i] != 3) {
                             daysArray[i] = 1;
                         }

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Long
@@ -13,15 +15,72 @@ public class ServiceRequest {
     private int residentID;
     private int workerID;
     private String description;
+    private Date requestdate;
+    private Date assigndate;
+    private Date finishdate;
+    private String title;
+    private String type;
+    
+    public ServiceRequest() {
+    }
 
-    public ServiceRequest(int requestID, int residentID, int workerID, String description) {
+    public String getType() {
+        return type;
+    }
+
+    public ServiceRequest(int requestID, int residentID, int workerID, String description, Date requestdate, Date assigndate, Date finishdate, String title, String type) {
         this.requestID = requestID;
         this.residentID = residentID;
         this.workerID = workerID;
         this.description = description;
+        this.requestdate = requestdate;
+        this.assigndate = assigndate;
+        this.finishdate = finishdate;
+        this.title = title;
+        this.type = type;
     }
 
-    // Getters and setters
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    
+    
+    public void setRequestdate(Date requestdate) {
+        this.requestdate = requestdate;
+    }
+
+    public void setAssigndate(Date assigndate) {
+        this.assigndate = assigndate;
+    }
+
+    public void setFinishdate(Date finishdate) {
+        this.finishdate = finishdate;
+    }
+
+    public Date getRequestdate() {
+        return requestdate;
+    }
+
+    public Date getAssigndate() {
+        return assigndate;
+    }
+
+    public Date getFinishdate() {
+        return finishdate;
+    }
+
+    
 
     public int getRequestID() {
         return requestID;

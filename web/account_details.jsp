@@ -87,28 +87,30 @@
 
 <body>
     <div class="container-xl px-4 mt-4">
+        <%
+        Account account = (Account) request.getAttribute("account");
+        String readOnly = "", hidden = "";
+        if (account != null) {
+            if (account.getRollID() == 2) {
+                readOnly = "readonly";
+                hidden = "hidden";
+            }
+        %>
 
-        <nav class="nav nav-borders">
+        <nav class="nav nav-borders col-11">
             <a class="nav-link active ms-0"
                 href="userDetails"
                 target="">Profile</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page"
-                target="">Billing</a>
+                target="" <%=hidden %>>Billing</a>
             <a class="nav-link" href="accountSecurity"
                 target="">Security</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"
                 target="">Notifications</a>
         </nav>
+        
         <hr class="mt-0 mb-4">
-        <%
-        Account account = (Account) request.getAttribute("account");
-        String readOnly = "", buttonType = "";
-        if (account != null) {
-            if (account.getRollID() == 2) {
-                readOnly = "readonly";
-                buttonType = "hidden";
-            }
-        %>
+        
             <div class="row">
                 <div class="col-xl-4">
     
@@ -175,7 +177,7 @@
                                     </div>
                                 </div>
     
-                                <button class="btn btn-primary" type="submit" name="saveChanges" value="saveChanges" <%=buttonType %>>Save changes</button>
+                                <button class="btn btn-primary" type="submit" name="saveChanges" value="saveChanges" <%=hidden %>>Save changes</button>
                             </form>
                         </div>
                     </div>

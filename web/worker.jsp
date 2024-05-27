@@ -31,13 +31,15 @@
         response.sendRedirect("login.jsp");
         return;
     }
-
+    
     int x = (int) session.getAttribute("x");
     int dim = (int) session.getAttribute("dim");
     int count = 1;
     int c = 0;
     int[] atarray = (int[]) session.getAttribute("atarray");
-    
+    int abs = 0;
+    for(int i = 0; i < dim; i++){if (atarray[i] == 1){abs++;}}
+    float salary_multi = 100 - abs;
 %>
 <html>
     <head>
@@ -127,7 +129,8 @@
         <div>
             <a href="userDetails">User details</a>
         </div>
-
+        <div> <h2>Absence = <%=abs%> days</h2></div>
+        <div> <h2>Salary Multiplier = <%=salary_multi%>%</h2></div>
         <table>
             <tr>
                 <th>Monday</th>
