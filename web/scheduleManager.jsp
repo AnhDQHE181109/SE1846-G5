@@ -79,6 +79,12 @@ response.setDateHeader("Expires", 0);
     </style>
 </head>
 <body>
+    <%
+        Account account = (Account) session.getAttribute("account");
+        if (account != null) {
+            if (account.getRollID() == 3) {
+        %>
+
     <h2 style="text-align:center"><%=dateHeader %></h2>
     <table>
         <tr>
@@ -178,6 +184,16 @@ response.setDateHeader("Expires", 0);
    
     <%
         }
-       } %>   
+       } %>  
+       
+    <%
+            } else { %>
+                <script>location.href="login.jsp"</script>
+    <%      }
+        } else { %>
+            <script>location.href="login.jsp"</script>
+    <%
+    }
+    %>
 </body>
 </html>
