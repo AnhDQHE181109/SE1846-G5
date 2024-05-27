@@ -94,18 +94,23 @@
 
 <body>
     <div class="container-xl px-4 mt-4">
+        <%
+        Account account = (Account) request.getAttribute("account");
+        String hidden = "";
+        if (account != null) {
+            if (account.getRollID() == 2) {
+                hidden = "hidden";
+            }
+        %>
         <!-- Account page navigation-->
         <nav class="nav nav-borders">
         <a class="nav-link  ms-0" href="userDetails" target="">Profile</a>
-        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="">Billing</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="" <%=hidden %>>Billing</a>
         <a class="nav-link active" href="accountSecurity" target="">Security</a>
         <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="">Notifications</a>
         </nav>
         <hr class="mt-0 mb-4">
-        <%
-        Account account = (Account) request.getAttribute("account");
-        if (account != null) {
-        %>
+        
         <div class="row">
             <div class="col-lg-8">
                 <!-- Change password card-->

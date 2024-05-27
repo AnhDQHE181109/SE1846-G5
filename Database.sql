@@ -173,3 +173,9 @@ insert into NotificationAlert(userID, notidate, noti_message,noti_status) values
 INSERT INTO Workers(userID, base_salary, salary_multi, job, last_login) values(3, 100, 1, 'Plumber', '5/23/2024');
 
 INSERT INTO WorkerAttendance(userID, attendance_data) values (3, '0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 2 0 0 3 0 0 0 0 0');
+
+insert into Service_Requests(requestID, residentID, workerID, requestdate, assigndate, finishdate, description, senddate, recievedate, finsishdate)
+values (0, 0, 0, '2024-05-22', '2024-05-22', '2024-05-23', 'Fix resident''s pipelines', '2024-05-22', '2024-05-22', '2024-05-24')
+
+insert into Service_Requests(requestID, residentID, workerID, requestdate, assigndate, finishdate, description, senddate, recievedate, finsishdate)
+values (1, 1, 0, '2024-05-23', '2024-05-23', '2024-05-24', 'Fix resident 2''s pipelines', '2024-05-23', '2024-05-23', '2024-05-24')
