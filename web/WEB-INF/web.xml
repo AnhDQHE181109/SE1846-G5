@@ -15,8 +15,8 @@
     <servlet>
         <servlet-name>SendNotificationServlet</servlet-name>
         <servlet-class>controller.SendNotificationServlet</servlet-class>
-</servlet>
-<servlet>
+    </servlet>
+    <servlet>
         <servlet-name>ScheduleManagementServlet</servlet-name>
         <servlet-class>controller.ScheduleManagementServlet</servlet-class>
     </servlet>
@@ -67,7 +67,8 @@
     <servlet-mapping>
         <servlet-name>SendNotificationServlet</servlet-name>
         <url-pattern>/SendNotificationServlet</url-pattern>
-<servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ScheduleManagementServlet</servlet-name>
         <url-pattern>/scheduleManager</url-pattern>
     </servlet-mapping>
