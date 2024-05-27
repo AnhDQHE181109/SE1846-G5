@@ -41,6 +41,10 @@
             font-size: 16px;
             box-sizing: border-box;
         }
+        .form-group .error {
+            color: red;
+            font-size: 14px;
+        }
         .button {
             display: inline-block;
             padding: 10px 20px;
@@ -58,6 +62,30 @@
             background-color: #0056b3;
         }
     </style>
+    <script>
+        function validateForm() {
+            let isValid = true;
+            let size = document.getElementById("size").value;
+            let baseRent = document.getElementById("baseRent").value;
+            let sizeError = document.getElementById("sizeError");
+            let baseRentError = document.getElementById("baseRentError");
+
+            sizeError.textContent = "";
+            baseRentError.textContent = "";
+
+            if (size.trim() === "") {
+                sizeError.textContent = "Size is required.";
+                isValid = false;
+            }
+
+            if (baseRent.trim() === "" || parseFloat(baseRent) <= 0) {
+                baseRentError.textContent = baseRent.trim() === "" ? "Base rent is required." : "Base rent must be greater than 0.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -68,15 +96,17 @@
             ApartmentType apartmentType = apartmentTypeDAO.getApartmentTypeByID(typeID);
             if (apartmentType != null) {
         %>
-        <form action="UpdateApartmentType" method="post">
+        <form action="UpdateApartmentType" method="post" onsubmit="return validateForm();">
             <input type="hidden" name="typeID" value="<%= apartmentType.getTypeID() %>">
             <div class="form-group">
                 <label for="size">Size:</label>
                 <input type="text" id="size" name="size" value="<%= apartmentType.getSize() %>" required>
+                <div id="sizeError" class="error"><%= request.getAttribute("sizeError") != null ? request.getAttribute("sizeError") : "" %></div>
             </div>
             <div class="form-group">
                 <label for="baseRent">Base Rent:</label>
                 <input type="number" step="0.01" id="baseRent" name="baseRent" value="<%= apartmentType.getBaseRent() %>" required>
+                <div id="baseRentError" class="error"><%= request.getAttribute("baseRentError") != null ? request.getAttribute("baseRentError") : "" %></div>
             </div>
             <button type="submit" class="button">Update</button>
         </form>
