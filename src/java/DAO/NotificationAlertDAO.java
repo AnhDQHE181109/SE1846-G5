@@ -76,7 +76,9 @@ public class NotificationAlertDAO extends MyDAO {
             Date currentDate = new Date();
             ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
-            ps.setDate(2, (java.sql.Date) currentDate);
+            Date utilDate = new Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            ps.setDate(2, sqlDate);
             ps.setString(3, message);
             ps.executeUpdate();
         } catch (Exception e) {

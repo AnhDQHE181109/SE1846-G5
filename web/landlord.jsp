@@ -103,45 +103,46 @@
                 out.println("<a href='LogoutServlet'>Logout</a>");
             } else {
                 response.sendRedirect("login.jsp");
+                return;
             }
+            List <Account> alist = (List<Account>) session.getAttribute("alist");
         %>
         <a href="updateapartmenttype.jsp" class="button">Update Apartment Types</a> 
         <%
             ApartmentTypeDAO dao = new ApartmentTypeDAO();
             List<ApartmentType> apartmentTypes = dao.getApartmentTypes();
         %>
-        <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Apartment Types</title>
-
-        </head>
-        <body>
-            <div class="container">
-                <h1>Available Apartment Types</h1>
-                <form action="ViewApartmentDetails" method="get"> 
-                    <div class="apartment-list">
-                        <% for (ApartmentType apartmentType : apartmentTypes) { %>
-                        <div class="apartment-item">
-                            <img src="images/type<%= apartmentType.getTypeID() %>_1.jpg" alt="Apartment Type <%= apartmentType.getTypeID() %>">
-                            <h2>Type <%= apartmentType.getTypeID() %> - <%= apartmentType.getSize() %></h2>
-                            <p>Base Rent: $<%= apartmentType.getBaseRent() %> per month</p>
-                            <button type="submit" name="typeID" value="<%= apartmentType.getTypeID() %>">View</button>
-                        </div>
-                        <% } %>
-                    </div>
-                </form>
+        <!DOCTYPE html>      
+    <div class="container">
+        <h1>Available Apartment Types</h1>
+        <form action="ViewApartmentDetails" method="get"> 
+            <div class="apartment-list">
+                <% for (ApartmentType apartmentType : apartmentTypes) { %>
+                <div class="apartment-item">
+                    <img src="images/type<%= apartmentType.getTypeID() %>_1.jpg" alt="Apartment Type <%= apartmentType.getTypeID() %>">
+                    <h2>Type <%= apartmentType.getTypeID() %> - <%= apartmentType.getSize() %></h2>
+                    <p>Base Rent: $<%= apartmentType.getBaseRent() %> per month</p>
+                    <button type="submit" name="typeID" value="<%= apartmentType.getTypeID() %>">View</button>
+                </div>
+                <% } %>
             </div>
-            <div class="actions">
-                <button onclick="location.href = 'addworker.jsp'">Add Worker</button>
-            </div>
-            <form action="ViewWorkerServlet" method="get">
-                <input type="submit" value="View Workers">
-            </form>
-        </body>
-    </html>
+        </form>
+    </div>
+    <div class="actions">
+        <button onclick="location.href = 'addworker.jsp'">Add Worker</button>
+    </div>
+    <form action="ViewWorkerServlet" method="get">
+        <input type="submit" value="View Workers">
+    </form>       
 
+    <form action = "SendNotificationServlet" method = "post">
+        <select name="su">
+        <%for(Account x: alist) {%>
+        <option value = "<%=x.getUserID()%>"><%= x.getFirstname() + " " + x.getLastname()%></option>
+        <%}%>
+        </select>
+        <input type = "text" name = "message">
+        <button type = submit>Submit</button>
+    </form>
 </body>
-
 </html>
