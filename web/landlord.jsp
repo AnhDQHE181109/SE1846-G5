@@ -103,13 +103,16 @@
                 out.println("<a href='LogoutServlet'>Logout</a>");
             } else {
                 response.sendRedirect("login.jsp");
+                return;
             }
+            List <Account> alist = (List<Account>) session.getAttribute("alist");
         %>
         <a href="updateapartmenttype.jsp" class="button">Update Apartment Types</a> 
         <%
             ApartmentTypeDAO dao = new ApartmentTypeDAO();
             List<ApartmentType> apartmentTypes = dao.getApartmentTypes();
         %>
+
         <a href="scheduleManager">Workers' schedule management</a>
         <!DOCTYPE html>
     <html>
@@ -137,12 +140,23 @@
             <div class="actions">
                 <button onclick="location.href = 'addworker.jsp'">Add Worker</button>
             </div>
-            <form action="ViewWorkerServlet" method="get">
-                <input type="submit" value="View Workers">
-            </form>
-        </body>
-    </html>
+        </form>
+    </div>
+    <div class="actions">
+        <button onclick="location.href = 'addworker.jsp'">Add Worker</button>
+    </div>
+    <form action="ViewWorkerServlet" method="get">
+        <input type="submit" value="View Workers">
+    </form>       
 
+    <form action = "SendNotificationServlet" method = "post">
+        <select name="su">
+        <%for(Account x: alist) {%>
+        <option value = "<%=x.getUserID()%>"><%= x.getFirstname() + " " + x.getLastname()%></option>
+        <%}%>
+        </select>
+        <input type = "text" name = "message">
+        <button type = submit>Submit</button>
+    </form>
 </body>
-
 </html>

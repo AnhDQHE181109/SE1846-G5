@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import DAO.AccountDAO;
-import jakarta.servlet.RequestDispatcher;
+import DAO.NotificationAlertDAO;
+import DAO.ResidentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,47 +15,43 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
-
+import model.*;
 
 /**
  *
  * @author Long
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="LoadLandlordInfoServlet", urlPatterns={"/LoadLandlordInfoServlet"})
+public class LoadLandlordInfoServlet extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Servlet LoadLandlordInfoServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadLandlordInfoServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -61,13 +59,19 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ResidentDAO rdao = new ResidentDAO();
+        AccountDAO adao = new AccountDAO();
+        session.setAttribute("alist", adao.getAccounts());
+        Account account = (Account) session.getAttribute("account");
+        NotificationAlertDAO notidao = new NotificationAlertDAO();
+        session.setAttribute("notilist", notidao.getNotificationAlerts(account.getUserID()));
+        response.sendRedirect("landlord.jsp");
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -75,34 +79,12 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        int role = Integer.parseInt(request.getParameter("role"));
-        AccountDAO adao = new AccountDAO();
-        if (adao.validateUser(username, password, role) == 1) {
-            Cookie loginCookie = new Cookie("user", username);
-            loginCookie.setMaxAge(30 * 60);
-            response.addCookie(loginCookie);
-            HttpSession session = request.getSession();
-            session.setAttribute("account", adao.getUser(username));
-            switch (role){
-                case 1:{response.sendRedirect(request.getContextPath() + "/LoadResidentInfoServlet");break;}
-                case 2:{response.sendRedirect(request.getContextPath() + "/LoadWorkerInfoServlet");break;}
-                case 3:{response.sendRedirect(request.getContextPath() + "/LoadLandlordInfoServlet");break;}
-                default:{response.sendRedirect("login.jsp");break;}
-            }
-        } else if (adao.validateUser(username, password, role) == 3){
-            response.sendRedirect("login.jsp?error_account=true");
-        } else if (adao.validateUser(username, password, role) == 2){
-            response.sendRedirect("login.jsp?error_role=true");
-        }
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

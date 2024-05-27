@@ -76,9 +76,14 @@ public class ServiceRequestServlet extends HttpServlet {
         String type = request.getParameter("type");
         String description = request.getParameter("desc");
         String title = request.getParameter("title");
+        if (type.compareTo("Other") == 0){
+        type = request.getParameter("othertype");
+        }
         
         ServiceRequestDAO rsdao = new ServiceRequestDAO(); 
         rsdao.addInitialRequest(account.getUserID(), description, title, type);
+        response.sendRedirect(
+                "resident.jsp");
     }
 
     /** 

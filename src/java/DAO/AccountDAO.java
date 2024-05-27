@@ -41,9 +41,9 @@ public class AccountDAO extends MyDAO {
                 String email = rs.getString("email");
                 String profilePictureLink = rs.getString("profile_picture_link");
                 java.sql.Date birthdate = rs.getDate("birthdate");
-                int rollID = rs.getInt("rollID");
+                int roleID = rs.getInt("roleID");
 
-                Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, rollID);
+                Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID);
                 accountList.add(account);
             }
         } catch (Exception e) {
