@@ -66,6 +66,7 @@
                 out.println("<a href='LogoutServlet'>Logout</a>");
             } else {
                 response.sendRedirect("login.jsp");
+                return;
             }
         %>
 

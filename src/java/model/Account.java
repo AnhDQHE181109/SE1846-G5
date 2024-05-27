@@ -22,6 +22,8 @@ public class Account {
     private String profilePictureLink;
     private Date birthDate;
     private int rollID;
+    
+    private Account account;
 
     public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthDate, int rollID) {
         this.userID = userID;

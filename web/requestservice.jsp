@@ -25,7 +25,7 @@
                 <option value="Other"> Other</option>
             </select>
             <div style="display:none" id="otherInput">
-            Please specify: <input style="margin:10px;" type="text" id="otherText" name="type">
+            Please specify: <input style="margin:10px;" type="text" id="otherText" name="othertype">
             </div>
             <br>
             Title: <input style="margin:10px;" name="title" type="text" maxlength="50"><br>
