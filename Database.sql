@@ -174,8 +174,14 @@ INSERT INTO Workers(userID, base_salary, salary_multi, job, last_login) values(3
 
 INSERT INTO WorkerAttendance(userID, attendance_data) values (3, '0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 2 0 0 3 0 0 0 0 0');
 
-insert into Service_Requests(requestID, residentID, workerID, requestdate, assigndate, finishdate, description, senddate, recievedate, finsishdate)
-values (0, 0, 0, '2024-05-22', '2024-05-22', '2024-05-23', 'Fix resident''s pipelines', '2024-05-22', '2024-05-22', '2024-05-24')
+--insert into Service_Requests(requestID, residentID, workerID, requestdate, assigndate, finishdate, description, senddate, recievedate, finsishdate)
+--values (0, 0, 0, '2024-05-22', '2024-05-22', '2024-05-23', 'Fix resident''s pipelines', '2024-05-22', '2024-05-22', '2024-05-24')
 
-insert into Service_Requests(requestID, residentID, workerID, requestdate, assigndate, finishdate, description, senddate, recievedate, finsishdate)
-values (1, 1, 0, '2024-05-23', '2024-05-23', '2024-05-24', 'Fix resident 2''s pipelines', '2024-05-23', '2024-05-23', '2024-05-24')
+--insert into Service_Requests(requestID, residentID, workerID, requestdate, assigndate, finishdate, description, senddate, recievedate, finsishdate)
+--values (1, 1, 0, '2024-05-23', '2024-05-23', '2024-05-24', 'Fix resident 2''s pipelines', '2024-05-23', '2024-05-23', '2024-05-24')
+
+insert into Service_Requests(residentID, workerID, request_date, assign_date, finish_date, title, description, type)
+values (0, 0, '2024-05-22', '2024-05-22', '2024-05-24', 'Fix resident''s pipelines', 'Go up there and fix it', 'Maintenance')
+
+insert into Service_Requests(residentID, workerID, request_date, assign_date, finish_date, title, description, type)
+values (1, 0, '2024-05-23', '2024-05-23', '2024-05-24', 'Fix resident 2''s pipelines', 'Go up there and fix it', 'Maintenance')
