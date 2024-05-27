@@ -136,6 +136,9 @@
                     </div>
                 </form>
             </div>
+            <div class="actions">
+                <button onclick="location.href = 'addworker.jsp'">Add Worker</button>
+            </div>
         </form>
     </div>
     <div class="actions">

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
+import model.Account;
 import model.WorkersWorkInDay;
 
 /**
@@ -77,6 +78,7 @@ public class ScheduleManagementServlet extends HttpServlet {
 
         String checkDate = request.getParameter("checkDate");
 
+        Account account = (Account) request.getSession().getAttribute("account");
         ScheduleManagementDAO smDAO = new ScheduleManagementDAO();
 
         Calendar calendar = new GregorianCalendar();
@@ -105,13 +107,24 @@ public class ScheduleManagementServlet extends HttpServlet {
             request.setAttribute("checkDate", new java.sql.Date(date.getTime()));
         }
 
-        request.setAttribute("daysOfWork", daysOfWork);
-        request.setAttribute("dayOfWeek", dayOfWeek);
-        request.setAttribute("daysInMonth", daysInMonth);
-        request.setAttribute("month", month);
-        request.setAttribute("year", year);
-        request.setAttribute("dateHeader", dateHeader);
-        request.getRequestDispatcher("scheduleManager.jsp").forward(request, response);
+        if (account != null) {
+            if (account.getRollID() == 3) {
+                request.setAttribute("daysOfWork", daysOfWork);
+                request.setAttribute("dayOfWeek", dayOfWeek);
+                request.setAttribute("daysInMonth", daysInMonth);
+                request.setAttribute("month", month);
+                request.setAttribute("year", year);
+                request.setAttribute("dateHeader", dateHeader);
+                request.getRequestDispatcher("scheduleManager.jsp").forward(request, response);
+
+                return;
+            } else {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Action forbidden");
+                return;
+            }
+        }
+
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     /**

@@ -28,9 +28,9 @@ public class ScheduleManagementDAO extends MyDAO {
 
     public Boolean isWorkAvailableOn(Date queryDate) {
 
-        String sql = "select firstname, lastname, phone_number, profile_picture_link, assigndate, description\n"
+        String sql = "select firstname, lastname, phone_number, profile_picture_link, assign_date, title\n"
                 + "from Accounts acc, Workers wo, Service_Requests sr\n"
-                + "where acc.userID = wo.userID and wo.workerID = sr.workerID and assigndate = ?";
+                + "where acc.userID = wo.userID and wo.workerID = sr.workerID and assign_date = ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -59,9 +59,9 @@ public class ScheduleManagementDAO extends MyDAO {
 
         List<WorkersWorkInDay> list = new ArrayList<>();
 
-        String sql = "select firstname, lastname, phone_number, profile_picture_link, assigndate, description\n"
+        String sql = "select firstname, lastname, phone_number, profile_picture_link, assign_date, title\n"
                 + "from Accounts acc, Workers wo, Service_Requests sr\n"
-                + "where acc.userID = wo.userID and wo.workerID = sr.workerID and assigndate = ?";
+                + "where acc.userID = wo.userID and wo.workerID = sr.workerID and assign_date = ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -74,11 +74,11 @@ public class ScheduleManagementDAO extends MyDAO {
                 String lastName = rs.getString("lastname");
                 String phoneNum = rs.getString("phone_number");
                 String profilePictureLink = rs.getString("profile_picture_link");
-                Date assignDate = rs.getDate("assigndate");
-                String description = rs.getString("description");
+                Date assignDate = rs.getDate("assign_date");
+                String title = rs.getString("title");
 
                 WorkersWorkInDay wwid = new WorkersWorkInDay(firstName, lastName, phoneNum,
-                        profilePictureLink, assignDate, description);
+                        profilePictureLink, assignDate, title);
 
                 list.add(wwid);
             }
@@ -100,7 +100,7 @@ public class ScheduleManagementDAO extends MyDAO {
 
         List<Integer> list = new ArrayList<>();
 
-        String sql = "select assigndate\n"
+        String sql = "select assign_date\n"
                 + "from Service_Requests";
 
         try {
@@ -109,7 +109,7 @@ public class ScheduleManagementDAO extends MyDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                java.sql.Date inDate = rs.getDate("assigndate");
+                java.sql.Date inDate = rs.getDate("assign_date");
                 int day = inDate.getDate();
 
                 list.add(day);
