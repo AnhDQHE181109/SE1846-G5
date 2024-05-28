@@ -142,9 +142,7 @@ public class Account {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }    
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+
     @Override
     public String toString() {
         return "Account{" + "userID=" + userID + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", phoneNumber=" + phoneNumber + ", email=" + email + ", profilePictureLink=" + profilePictureLink + ", birthDate=" + birthDate + ", rollID=" + rollID + '}';

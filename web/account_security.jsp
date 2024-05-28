@@ -176,7 +176,7 @@
         <%
         } else {
         %>
-            <h1>Invalid data!</h1>
+            <script>location.href="login.jsp"</script>
         <%
         }
         %>

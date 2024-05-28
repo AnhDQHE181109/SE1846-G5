@@ -89,7 +89,7 @@ public class UserDetailsServlet extends HttpServlet {
 
             request.getRequestDispatcher("account_details.jsp").forward(request, response);
         } else {
-            out.println("<h1>Invalid data!");
+            out.println("<script>location.href=\"login.jsp\"</script>");
         }
         
     }
