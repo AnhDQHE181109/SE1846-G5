@@ -17,14 +17,16 @@ public class WorkersWorkInDay {
     private String phoneNumber;
     private String profilePictureLink;
     private Date assignDate;
+    private String title;
     private String description;
 
-    public WorkersWorkInDay(String firstName, String lastName, String phoneNumber, String profilePictureLink, Date assignDate, String description) {
+    public WorkersWorkInDay(String firstName, String lastName, String phoneNumber, String profilePictureLink, Date assignDate, String title, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.profilePictureLink = profilePictureLink;
         this.assignDate = assignDate;
+        this.title = title;
         this.description = description;
     }
 
@@ -66,6 +68,14 @@ public class WorkersWorkInDay {
 
     public void setAssignDate(Date assignDate) {
         this.assignDate = assignDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {

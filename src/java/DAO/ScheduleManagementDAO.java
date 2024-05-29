@@ -28,7 +28,7 @@ public class ScheduleManagementDAO extends MyDAO {
 
     public Boolean isWorkAvailableOn(Date queryDate) {
 
-        String sql = "select firstname, lastname, phone_number, profile_picture_link, assign_date, title\n"
+        String sql = "select firstname, lastname, phone_number, profile_picture_link, assign_date, title, description\n"
                 + "from Accounts acc, Workers wo, Service_Requests sr\n"
                 + "where acc.userID = wo.userID and wo.workerID = sr.workerID and assign_date = ?";
 
@@ -59,7 +59,7 @@ public class ScheduleManagementDAO extends MyDAO {
 
         List<WorkersWorkInDay> list = new ArrayList<>();
 
-        String sql = "select firstname, lastname, phone_number, profile_picture_link, assign_date, title\n"
+        String sql = "select firstname, lastname, phone_number, profile_picture_link, assign_date, title, description\n"
                 + "from Accounts acc, Workers wo, Service_Requests sr\n"
                 + "where acc.userID = wo.userID and wo.workerID = sr.workerID and assign_date = ?";
 
@@ -76,9 +76,10 @@ public class ScheduleManagementDAO extends MyDAO {
                 String profilePictureLink = rs.getString("profile_picture_link");
                 Date assignDate = rs.getDate("assign_date");
                 String title = rs.getString("title");
+                String description = rs.getString("description");
 
                 WorkersWorkInDay wwid = new WorkersWorkInDay(firstName, lastName, phoneNum,
-                        profilePictureLink, assignDate, title);
+                        profilePictureLink, assignDate, title, description);
 
                 list.add(wwid);
             }
