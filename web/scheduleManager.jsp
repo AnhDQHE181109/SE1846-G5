@@ -166,8 +166,9 @@ response.setDateHeader("Expires", 0);
             <th>First name</th>
             <th>Last name</th>
             <th>Contact number</th>
-            <th>Description</th>
-            <th>Job assigned date</th>
+            <th>Task title</th>
+            <th>Task description</th>
+            <th>Task assigned date</th>
         </tr>
 
         <% for (WorkersWorkInDay worker : workersList) { %>
@@ -176,6 +177,7 @@ response.setDateHeader("Expires", 0);
             <td><%=worker.getFirstName() %></td>
             <td><%=worker.getLastName() %></td>
             <td><%=worker.getPhoneNumber() %></td>
+            <td><%=worker.getTitle() %></td>
             <td><%=worker.getDescription() %></td>
             <td><%=worker.getAssignDate() %></td>
         </tr>
