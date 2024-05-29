@@ -76,13 +76,18 @@
                 <%
                     if (notilist != null && !notilist.isEmpty()) {
                         for (NotificationAlert notification : notilist) {
-
+                        if(notification.isNotiStatus()){
                 %>
-                <div class="notification-item">
+                <div class="notification-item" style="background-color:#f0f0f0">
                     <%= notification.toString() %>
                 </div>
                 <%
-                        }
+                    }else{%>
+                <div class="notification-item">
+                    <%= notification.toString() %>
+                </div>
+                <%}              
+                }
                     } else {
                 %>
                 <div class="notification-item">No notifications</div>
