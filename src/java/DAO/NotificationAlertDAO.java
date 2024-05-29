@@ -35,7 +35,7 @@ public class NotificationAlertDAO extends MyDAO {
         return notificationAlertList;
     }
     public List<NotificationAlert> getNotificationAlerts(int userID) {
-        String sql = "SELECT * FROM NotificationAlert where userID = ?";
+        String sql = "SELECT * FROM NotificationAlert where userID = ? ORDER BY notidate DESC";
         List<NotificationAlert> notificationAlertList = new ArrayList<>();
         try {
             ps = con.prepareStatement(sql);
