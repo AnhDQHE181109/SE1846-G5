@@ -20,7 +20,6 @@ import java.util.*;
 import model.Worker;
 import model.WorkerAttendance;
 
-
 /**
  *
  * @author Long
@@ -78,14 +77,14 @@ public class AttendanceServlet extends HttpServlet {
         session.setAttribute("dim", daysInMonth);
         WorkerAttendanceDAO wadao = new WorkerAttendanceDAO();
         WorkerAttendance wa = wadao.getAttendance(worker.getUserID());
-        
+
         int[] daysArray = wa.getAD();
         /*
         new int[daysInMonth];
         for (int i = 7 - dayOfWeekInt; i < daysInMonth; i += 7) {
             daysArray[i] = 3;
         }
-        */
+         */
         Date lastLoginDate = worker.getLlogin();
         System.out.println(lastLoginDate);
         if (lastLoginDate != null) {
@@ -112,14 +111,19 @@ public class AttendanceServlet extends HttpServlet {
                 int currentDay = currentDate.getDayOfMonth();
                 if (lastLoginDay == currentDay) {
                     if (daysArray[currentDay - 1] != 3) {
-                    daysArray[currentDay - 1] = 2;}
+                        daysArray[currentDay - 1] = 2;
+                    }
                 } else if (lastLoginDay == currentDay - 1) {
-                    if (daysArray[currentDay - 1] != 3){
-                    daysArray[currentDay - 1] = 2;}
+                    if (daysArray[currentDay - 1] != 3) {
+                        daysArray[currentDay - 1] = 2;
+                    }
                 } else {
                     for (int i = lastLoginDay; i <= currentDay - 1; i++) {
                         if (daysArray[i] != 3) {
                             daysArray[i] = 1;
+                        }
+                        if (daysArray[currentDay - 1] != 3) {
+                            daysArray[currentDay - 1] = 2;
                         }
                     }
                 }
@@ -134,8 +138,6 @@ public class AttendanceServlet extends HttpServlet {
                 "worker.jsp");
     }
 
-
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -147,7 +149,7 @@ public class AttendanceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();      
+        HttpSession session = request.getSession();
     }
 
     /**
