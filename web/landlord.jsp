@@ -176,7 +176,7 @@
             color: #333;
         }
         .container {
-            margin-left: 500px;
+            margin-left: 300px;
             margin-top: 100px;
             padding: 20px;
             max-width: 1200px;
@@ -252,7 +252,7 @@
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-table"></i>Management<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
-                    <a href="#" class="sub-item">View workers</a>
+                    <a href="scheduleManager.jsp" class="sub-item">View workers</a>
                     <a href="addworker.jsp" class="sub-item">Add workers</a>
                     <a href="updateapartmenttype.jsp" class="sub-item">Update apart</a>
                 </div>
