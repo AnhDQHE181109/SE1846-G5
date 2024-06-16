@@ -83,13 +83,6 @@ public class SignUpServlet extends HttpServlet {
         String email = request.getParameter("email");
         String birthdate = request.getParameter("birthdate");
         
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(firstname);
-        System.out.println(lastname);
-        System.out.println(phoneNumber);
-        System.out.println(email);
-        System.out.println(birthdate);
 
         boolean hasErrors = false;
         AccountDAO adao = new AccountDAO();
