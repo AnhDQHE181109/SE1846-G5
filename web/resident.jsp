@@ -256,7 +256,7 @@
                 <a class="sub-btn"><i class="fas fa-table"></i>Services<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                     <a href="requestservice.jsp" class="sub-item">Request</a>
-                    <a href="addworker.jsp" class="sub-item">Add workers</a>
+                    <a href="billing.jsp" class="sub-item">Bill</a>
                     <a href="updateapartmenttype.jsp" class="sub-item">Update apart</a>
                 </div>
             </div>
