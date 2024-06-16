@@ -24,7 +24,7 @@
         body {
             min-height: 100vh;
             background: white;
-            color: white;
+            color: black;
             background-size: cover;
             background-position: center;
         }
@@ -36,30 +36,22 @@
             height: 100vh;
             position: fixed;
             top: 0;
-            left: -250px;
+            left: 0;
             overflow-y: auto;
-            transition: 0.6s ease;
-            transition-property: left;
         }
 
         .side-bar::-webkit-scrollbar {
             width: 0px;
         }
 
-
-
-        .side-bar.active {
-            left: 0;
-        }
-
         h1 {
-
             text-align: center;
             font-weight: 500;
             font-size: 25px;
             padding-bottom: 13px;
             font-family: sans-serif;
             letter-spacing: 2px;
+            color: #fff;
         }
 
         .side-bar .menu {
@@ -110,31 +102,14 @@
             transform: rotate(90deg);
         }
 
-        .close-btn {
-            position: absolute;
-            color: #fff;
-
-            font-size: 23px;
-            right: 0px;
-            margin: 15px;
-            cursor: pointer;
-        }
-
-        .menu-btn {
-            position: absolute;
-            color: rgb(0, 0, 0);
-            font-size: 35px;
-            margin: 25px;
-            cursor: pointer;
-        }
-
         .main {
             color: black;
             height: 100vh;
+            padding: 50px;
+            margin-left: 250px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px;
         }
 
         .main h1 {
@@ -175,9 +150,8 @@
             margin-bottom: 10px;
             color: #333;
         }
+
         .container {
-            margin-left: 300px;
-            margin-top: 100px;
             padding: 20px;
             max-width: 1200px;
             background-color: #fff;
@@ -228,23 +202,9 @@
 
 <body>
 
-    <div class="menu-btn">
-        <i class="fas fa-bars"></i>
-    </div>
-
-
     <div class="side-bar">
-
         <header>
-
-
-
-            <div class="close-btn">
-
-                <i class="fas fa-times"></i>
-            </div>
-            <img src=""
-                alt="">
+            <img src="" alt="">
             <h1>Welcome</h1>
         </header>
         <div class="menu">
@@ -286,6 +246,7 @@
             <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
         </div>
     </div>
+    
     <section class="main">
         <div class="container">
             <h1>Available Apartment Types</h1>
@@ -314,17 +275,6 @@
             $('.sub-btn').click(function () {
                 $(this).next('.sub-menu').slideToggle();
                 $(this).find('.dropdown').toggleClass('rotate');
-            });
-
-            //jquery for expand and collapse the sidebar
-            $('.menu-btn').click(function () {
-                $('.side-bar').addClass('active');
-                $('.menu-btn').css("visibility", "hidden");
-            });
-
-            $('.close-btn').click(function () {
-                $('.side-bar').removeClass('active');
-                $('.menu-btn').css("visibility", "visible");
             });
         });
     </script>

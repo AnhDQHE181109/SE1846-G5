@@ -22,7 +22,7 @@
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
-        %>  
+    %>  
     <style media="screen">
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
@@ -48,24 +48,15 @@
             height: 100vh;
             position: fixed;
             top: 0;
-            left: -250px;
+            left: 0;
             overflow-y: auto;
-            transition: 0.6s ease;
-            transition-property: left;
         }
 
         .side-bar::-webkit-scrollbar {
             width: 0px;
         }
 
-
-
-        .side-bar.active {
-            left: 0;
-        }
-
         h1 {
-
             text-align: center;
             font-weight: 500;
             font-size: 25px;
@@ -122,24 +113,6 @@
             transform: rotate(90deg);
         }
 
-        .close-btn {
-            position: absolute;
-            color: #fff;
-
-            font-size: 23px;
-            right: 0px;
-            margin: 15px;
-            cursor: pointer;
-        }
-
-        .menu-btn {
-            position: absolute;
-            color: rgb(0, 0, 0);
-            font-size: 35px;
-            margin: 25px;
-            cursor: pointer;
-        }
-
         .main {
             color: black;
             height: 100vh;
@@ -147,6 +120,7 @@
             justify-content: center;
             align-items: center;
             padding: 50px;
+            margin-left: 250px;
         }
 
         .main h1 {
@@ -187,6 +161,7 @@
             margin-bottom: 10px;
             color: #333;
         }
+
         .container {
             margin-left: 500px;
             margin-top: 100px;
@@ -233,6 +208,7 @@
         header {
             background: #33363a;
         }
+
         .bell-icon {
             cursor: pointer;
             font-size: 24px;
@@ -240,6 +216,7 @@
             right: 10px;
             top: 10px;
         }
+
         .notification-box {
             display: none;
             border: 1px solid #ccc;
@@ -253,10 +230,12 @@
             overflow-y: auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .notification-item {
             border-bottom: 1px solid #ddd;
             padding: 5px;
         }
+
         .notification-item:last-child {
             border-bottom: none;
         }
@@ -266,26 +245,10 @@
 </head>
 
 <body>
-
-    <div class="menu-btn">
-        <i class="fas fa-bars"></i>
-    </div>
-
-
     <div class="side-bar">
-
         <header>
-
-
-
-            <div class="close-btn">
-
-                <i class="fas fa-times"></i>
-            </div>
-            <img src=""
-                alt="">
+            <img src="" alt="">
             <h1>Welcome</h1>
-           
         </header>
         <div class="menu">
             <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
@@ -302,7 +265,8 @@
                 <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                     <a href="userDetails" class="sub-item">Account details</a>
-                    <a href="#" class="sub-item">        <%
+                    <a href="#" class="sub-item">
+                        <%
                         String username = null;
                         Cookie[] cookies = request.getCookies();
                         if (cookies != null) {
@@ -319,7 +283,8 @@
                             response.sendRedirect("login.jsp");
                             return;
                         }
-                    %></a>
+                        %>
+                    </a>
                 </div>
             </div>
             <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
@@ -360,17 +325,6 @@
             $('.sub-btn').click(function () {
                 $(this).next('.sub-menu').slideToggle();
                 $(this).find('.dropdown').toggleClass('rotate');
-            });
-
-            //jquery for expand and collapse the sidebar
-            $('.menu-btn').click(function () {
-                $('.side-bar').addClass('active');
-                $('.menu-btn').css("visibility", "hidden");
-            });
-
-            $('.close-btn').click(function () {
-                $('.side-bar').removeClass('active');
-                $('.menu-btn').css("visibility", "visible");
             });
         });
         function toggleNotificationBox() {

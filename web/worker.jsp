@@ -57,24 +57,15 @@
             height: 100vh;
             position: fixed;
             top: 0;
-            left: -250px;
+            left: 0;
             overflow-y: auto;
-            transition: 0.6s ease;
-            transition-property: left;
         }
 
         .side-bar::-webkit-scrollbar {
             width: 0px;
         }
 
-
-
-        .side-bar.active {
-            left: 0;
-        }
-
         h1 {
-
             text-align: center;
             font-weight: 500;
             font-size: 25px;
@@ -131,31 +122,14 @@
             transform: rotate(90deg);
         }
 
-        .close-btn {
-            position: absolute;
-            color: #fff;
-
-            font-size: 23px;
-            right: 0px;
-            margin: 15px;
-            cursor: pointer;
-        }
-
-        .menu-btn {
-            position: absolute;
-            color: rgb(0, 0, 0);
-            font-size: 35px;
-            margin: 25px;
-            cursor: pointer;
-        }
-
         .main {
             color: black;
             height: 100vh;
+            padding: 50px;
+            margin-left: 250px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px;
         }
 
         @media (max-width: 900px) {
@@ -176,6 +150,7 @@
         header {
             background: #33363a;
         }
+
         .bell-icon {
             cursor: pointer;
             font-size: 24px;
@@ -183,6 +158,7 @@
             right: 10px;
             top: 10px;
         }
+
         .square {
             height: 50px;
             width: 50px;
@@ -197,6 +173,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .notification-box {
             display: none;
             border: 1px solid #ccc;
@@ -210,19 +187,23 @@
             overflow-y: auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .notification-item {
             border-bottom: 1px solid #ddd;
             padding: 5px;
         }
+
         .notification-item:last-child {
             border-bottom: none;
         }
+
         table {
             width: 80%;
             border-collapse: collapse;
             text-align: center;
         }
-        tr{
+
+        tr {
             padding: 0px 30px;
         }
     </style>
@@ -231,26 +212,10 @@
 </head>
 
 <body>
-
-    <div class="menu-btn">
-        <i class="fas fa-bars"></i>
-    </div>
-
-
     <div class="side-bar">
-
         <header>
-
-
-
-            <div class="close-btn">
-
-                <i class="fas fa-times"></i>
-            </div>
-            <img src=""
-                alt="">
+            <img src="" alt="">
             <h1>Welcome</h1>
-           
         </header>
         <div class="menu">
             <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
@@ -267,24 +232,26 @@
                 <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                     <a href="userDetails" class="sub-item">Account details</a>
-                    <a href="#" class="sub-item">        <%
-                        String username = null;
-                        Cookie[] cookies = request.getCookies();
-                        if (cookies != null) {
-                            for (Cookie cookie : cookies) {
-                                if (cookie.getName().equals("user")) {
-                                    username = cookie.getValue();
-                                    break;
+                    <a href="#" class="sub-item">
+                        <%
+                            String username = null;
+                            Cookie[] cookies = request.getCookies();
+                            if (cookies != null) {
+                                for (Cookie cookie : cookies) {
+                                    if (cookie.getName().equals("user")) {
+                                        username = cookie.getValue();
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        if (username != null) {
-                            out.println("<a href='LogoutServlet'>Logout</a>");
-                        } else {
-                            response.sendRedirect("login.jsp");
-                            return;
-                        }
-                    %></a>
+                            if (username != null) {
+                                out.println("<a href='LogoutServlet'>Logout</a>");
+                            } else {
+                                response.sendRedirect("login.jsp");
+                                return;
+                            }
+                        %>
+                    </a>
                 </div>
             </div>
             <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
@@ -297,18 +264,20 @@
                 <%
                     if (notilist != null && !notilist.isEmpty()) {
                         for (NotificationAlert notification : notilist) {
-                        if(notification.isNotiStatus()){
+                            if(notification.isNotiStatus()){
                 %>
                 <div class="notification-item" style="background-color:#f0f0f0">
                     <%= notification.toString() %>
                 </div>
                 <%
-                    }else{%>
+                            } else {
+                %>
                 <div class="notification-item">
                     <%= notification.toString() %>
                 </div>
-                <%}              
-                }
+                <%
+                            }
+                        }
                     } else {
                 %>
                 <div class="notification-item">No notifications</div>
@@ -317,8 +286,12 @@
                 %>
             </div>
         </div>
-        <div> <h2>Absence = <%=abs%> days</h2></div>
-        <div> <h2>Salary Multiplier = <%=salary_multi%>%</h2></div>
+        <div>
+            <h2>Absence = <%=abs%> days</h2>
+        </div>
+        <div>
+            <h2>Salary Multiplier = <%=salary_multi%>%</h2>
+        </div>
         <table>
             <tr>
                 <th>Monday</th>
@@ -330,46 +303,60 @@
                 <th>Sunday</th>
             </tr>
             <tr class="container">
-
-                <%for(int i = 0; i < x; i++){%>
-                <td class="std"> <div style="background-color: white" class ='square'></div> </td>
-                <%}%>
-
-                <%for(int i = 0; i < 7-x-1; i++){%>
-                <%if(atarray[c] == 0){%>
-                <td class="std"> <div style="background-color: #e3e3e3" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%if(atarray[c] == 1){%>
-                <td class="std"> <div style="background-color: #ffd6d0" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%if(atarray[c] == 2){%>
-                <td class="std"> <div style="background-color: #c6e8da" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%c++;}%> 
-
-                <td class="std"> <div style="background-color: #bedae5" class ='square'><%=c+1%></div> </td>
-                <%c++;%>
+                <% for(int i = 0; i < x; i++){ %>
+                <td class="std">
+                    <div style="background-color: white" class='square'></div>
+                </td>
+                <% } %>
+                <% for(int i = 0; i < 7-x-1; i++){ %>
+                <% if(atarray[c] == 0){ %>
+                <td class="std">
+                    <div style="background-color: #e3e3e3" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% if(atarray[c] == 1){ %>
+                <td class="std">
+                    <div style="background-color: #ffd6d0" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% if(atarray[c] == 2){ %>
+                <td class="std">
+                    <div style="background-color: #c6e8da" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% c++; } %>
+                <td class="std">
+                    <div style="background-color: #bedae5" class='square'><%=c+1%></div>
+                </td>
+                <% c++; %>
+            </tr>
             <tr>
-                <%for(int i = 0; i < dim-7+2; i++){%>
-
-            <%if (count == 0){%><tr><%}%>
-                <%if(atarray[c] == 0){%>
-                <td class="std"> <div style="background-color: #e3e3e3" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%if(atarray[c] == 1){%>
-                <td class="std"> <div style="background-color: #ffd6d0" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%if(atarray[c] == 2){%>
-                <td class="std"> <div style="background-color: #c6e8da" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%if(atarray[c] == 3){%>
-                <td class="std"> <div style="background-color: #bedae5" class ='square'><%=c+1%></div> </td>
-                <%}%>
-                <%if (count == 7){%></tr><%;count = 0;}%>
-                <%count++;c++;}%> 
-        </tr>
-        <%%>
-    </table>
+                <% for(int i = 0; i < dim-7+2; i++){ %>
+                <% if (count == 0){ %><tr><% } %>
+                <% if(atarray[c] == 0){ %>
+                <td class="std">
+                    <div style="background-color: #e3e3e3" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% if(atarray[c] == 1){ %>
+                <td class="std">
+                    <div style="background-color: #ffd6d0" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% if(atarray[c] == 2){ %>
+                <td class="std">
+                    <div style="background-color: #c6e8da" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% if(atarray[c] == 3){ %>
+                <td class="std">
+                    <div style="background-color: #bedae5" class='square'><%=c+1%></div>
+                </td>
+                <% } %>
+                <% if (count == 7){ %></tr><% count = 0; } %>
+                <% count++; c++; } %>
+            </tr>
+        </table>
     </section>
 
     <script type="text/javascript">
@@ -379,26 +366,16 @@
                 $(this).next('.sub-menu').slideToggle();
                 $(this).find('.dropdown').toggleClass('rotate');
             });
-
-            //jquery for expand and collapse the sidebar
-            $('.menu-btn').click(function () {
-                $('.side-bar').addClass('active');
-                $('.menu-btn').css("visibility", "hidden");
-            });
-
-            $('.close-btn').click(function () {
-                $('.side-bar').removeClass('active');
-                $('.menu-btn').css("visibility", "visible");
-            });
         });
+
         function toggleNotificationBox() {
-                var notificationBox = document.getElementById('notificationBox');
-                if (notificationBox.style.display === 'none' || notificationBox.style.display === '') {
-                    notificationBox.style.display = 'block';
-                } else {
-                    notificationBox.style.display = 'none';
-                }
+            var notificationBox = document.getElementById('notificationBox');
+            if (notificationBox.style.display === 'none' || notificationBox.style.display === '') {
+                notificationBox.style.display = 'block';
+            } else {
+                notificationBox.style.display = 'none';
             }
+        }
     </script>
 
 </body>
