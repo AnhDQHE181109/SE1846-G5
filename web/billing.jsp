@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landlord Dashboard</title>
+    <title>Billing Page</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
@@ -265,6 +265,7 @@
                 %>
             </div>
         </div>
+        <h1>Hello World!</h1>
     </section>
 
     <script type="text/javascript">

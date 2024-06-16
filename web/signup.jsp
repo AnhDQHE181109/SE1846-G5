@@ -255,6 +255,5 @@
                 <button type="submit" class="btn">Sign up</button>
             </form>
         </div>
-        <script src="js/app.js"></script>
     </body>
 </html>
