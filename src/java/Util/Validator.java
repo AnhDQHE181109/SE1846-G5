@@ -16,8 +16,8 @@ public class Validator {
 
             password = password.trim(); // Trim the password
 
-            // Check if the password is more than 12 characters
-            if (password.length() <= 12) {
+            // Check if the password is more than 8 characters
+            if (password.length() <= 8) {
                 return false;
             }
 

@@ -12,6 +12,7 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import Util.*;
 
 public class AccountDAO extends MyDAO {
 
@@ -42,8 +43,8 @@ public class AccountDAO extends MyDAO {
                 String profilePictureLink = rs.getString("profile_picture_link");
                 java.sql.Date birthdate = rs.getDate("birthdate");
                 int roleID = rs.getInt("roleID");
-
-                Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID);
+                String salt = rs.getString("salt");
+                Account account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID, salt);
                 accountList.add(account);
             }
         } catch (Exception e) {
@@ -55,6 +56,7 @@ public class AccountDAO extends MyDAO {
     public Account getUser(String username) {
         String sql = "SELECT * FROM Accounts where username = ?";
         Account account = null;
+
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, username);
@@ -69,8 +71,8 @@ public class AccountDAO extends MyDAO {
                 String profilePictureLink = rs.getString("profile_picture_link");
                 java.sql.Date birthdate = rs.getDate("birthdate");
                 int roleID = rs.getInt("roleID");
-
-                account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID);
+                String salt = rs.getString("salt");
+                account = new Account(userID, username, password, firstname, lastname, phoneNumber, email, profilePictureLink, birthdate, roleID, salt);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,15 +88,22 @@ public class AccountDAO extends MyDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 String storedPasswordHash = rs.getString("password");
-                if (storedPasswordHash.equals(password)) {
+                String storedPasswordSalt = rs.getString("salt");
+                String hashedPassword = "";
+                try {
+                    hashedPassword = EncryptionHelper.hashPassword(password, storedPasswordSalt);
+                } catch (Exception e) {
+                }
+                if (hashedPassword.equals(storedPasswordHash)) {
                     if (role == 3) {
                         return 1;
                     }
+                    //if account role = 3, landlord account return 1: login successfu;
                     int storedRole = rs.getInt("roleID");
                     if (storedRole != role) {
-                        return 2;
+                        return 2; //return 2, right account infomation but wrong role
                     } else {
-                        return 1;
+                        return 1; //login successful
                     }
                 }
             }
@@ -119,10 +128,23 @@ public class AccountDAO extends MyDAO {
         return false;
     }
 
-    // Method to add a worker account
+    public boolean isEmailTaken(String email) {
+        String sql = "SELECT COUNT(*) FROM Accounts WHERE email = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
-    public boolean addWorkerAccount(String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
-        String sql = "INSERT INTO Accounts (username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean addAccount(String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID, String salt) {
+        String sql = "INSERT INTO Accounts (username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, username);
@@ -134,6 +156,36 @@ public class AccountDAO extends MyDAO {
             ps.setString(7, profilePictureLink);
             ps.setDate(8, (java.sql.Date) birthdate);
             ps.setInt(9, rollID);
+            ps.setString(10, salt);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    // Method to add a worker account
+
+    public boolean addWorkerAccount(String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthdate, int rollID) {
+        String sql = "INSERT INTO Accounts (username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String salt = EncryptionHelper.generateSalt();
+        String hashedPassword = "";
+        try {
+            hashedPassword = EncryptionHelper.hashPassword(password, salt);
+        } catch (Exception e) {
+        }
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, hashedPassword);
+            ps.setString(3, firstname);
+            ps.setString(4, lastname);
+            ps.setString(5, phoneNumber);
+            ps.setString(6, email);
+            ps.setString(7, profilePictureLink);
+            ps.setDate(8, (java.sql.Date) birthdate);
+            ps.setInt(9, rollID);
+            ps.setString(10, salt);
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (Exception e) {

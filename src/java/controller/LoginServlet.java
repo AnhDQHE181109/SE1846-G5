@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         int role = Integer.parseInt(request.getParameter("role"));
         AccountDAO adao = new AccountDAO();
-        if (adao.validateUser(username, password, role) == 1) {
+        if (adao.validateUser(username, password, role) == 1) { //return 1 login successful
             Cookie loginCookie = new Cookie("user", username);
             loginCookie.setMaxAge(30 * 60);
             response.addCookie(loginCookie);
@@ -93,9 +93,9 @@ public class LoginServlet extends HttpServlet {
                 case 3:{response.sendRedirect(request.getContextPath() + "/LoadLandlordInfoServlet");break;}
                 default:{response.sendRedirect("login.jsp");break;}
             }
-        } else if (adao.validateUser(username, password, role) == 3){
+        } else if (adao.validateUser(username, password, role) == 3){ //return 3 username or password is incorrect
             response.sendRedirect("login.jsp?error_account=true");
-        } else if (adao.validateUser(username, password, role) == 2){
+        } else if (adao.validateUser(username, password, role) == 2){ //return 2 right account information but wronng role
             response.sendRedirect("login.jsp?error_role=true");
         }
     }
