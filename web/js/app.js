@@ -10,10 +10,12 @@ next.onclick = function(){
     active = active + 1 <= lengthItems ? active + 1 : 0;
     reloadSlider();
 }
+
 prev.onclick = function(){
     active = active - 1 >= 0 ? active - 1 : lengthItems;
     reloadSlider();
-}
+};
+
 let refreshInterval = setInterval(()=> {next.click()}, 3000);
 function reloadSlider(){
     slider.style.left = -items[active].offsetLeft + 'px';
