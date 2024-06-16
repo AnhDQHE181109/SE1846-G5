@@ -49,7 +49,7 @@ CREATE TABLE Roles (
 CREATE TABLE Accounts (
     userID INT IDENTITY(0,1) PRIMARY KEY,
     username VARCHAR(50) UNIQUE,
-    password VARCHAR(50),
+    password TEXT,
     firstname VARCHAR(50),
     lastname VARCHAR(50),
     phone_number VARCHAR(15),
@@ -57,6 +57,7 @@ CREATE TABLE Accounts (
     profile_picture_link VARCHAR(255),
     birthdate DATE,
     roleID INT,
+	salt TEXT,
     FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 );
 
@@ -145,25 +146,25 @@ CREATE TABLE WorkerAttendance(
 	FOREIGN KEY (userID) REFERENCES Accounts(userID)
 );
 
+INSERT INTO Roles(roleID, role_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
 
 INSERT INTO ApartmentTypes (typeID, size, base_rent)values(1, 'small', 5),(2,'medium', 10),(3, 'big', 15);
 INSERT INTO Apartments(apartmentID, typeID, occupied) values(101, 1, 1),(102, 2, 0);
 
-INSERT INTO Roles(roleID, role_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
-INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
-values ('resident', 'password', 'Resident', '1', '165325536556', 'mail@example.com', 'img_link', '20240523 10:34:09 AM', 1);
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) 
+values ('resident', 'EDu66osgcOX/YeGaYI+JfiaX2n7/vYp+nR1wlxGWeM8kuWxKyVe2DfoH63IxDoZBBOqdZSKY0i+YBqyb91aNGg==', 'Resident', '1', '165325536556', 'mail@example.com', 'img_link', '20240523 10:34:09 AM', 1, 'sygiMeK1LpmQfiW1yOlOEA==');
 
-INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
-values ('resident2', 'password', 'Resident', '2', '16965777756', 'resident2@example.com', 'img_link', '20240527 12:30:09 AM', 1);
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) 
+values ('resident2', 'fjHhLQKMeP2cXOpCFCAxnePXbaV1ZoK9/Dn2IcptyM5hPYO+YLj3yDJU7IT9yVhyo0++8dZLMGOj8LKZfroc7A==', 'Resident', '2', '16965777756', 'resident2@example.com', 'img_link', '20240527 12:30:09 AM', 1, '/dgFDnHjVl9n8yxcUZ2xAw==');
 
-INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
-values ('landlord', 'password', 'Land', 'Lore', '1659797976', 'landlore@example.com', 'img_link', '20240422 7:56:09 AM', 3);
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) 
+values ('landlord', 'l9+/1Vffh/I9UK20+B9ku//6rxgTRxJmheVmZ07Bq+QHwy9Ha9YtvwfWte0XsciUIpKBrCb4ttE7HauaiAt6tQ==', 'Land', 'Lore', '1659797976', 'landlore@example.com', 'img_link', '20240422 7:56:09 AM', 3, 'JCXQhzsLzTg90vojY3De2w==');
 
-INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
-values ('worker', 'password', 'Work', 'Er', '1655972401012', 'worker@example.com', 'img_link', '20240422 8:55:09 AM', 2);
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) 
+values ('worker', 'IcHD7PgeDyzNeu3lrt1AANuPXAITfMSadHPYVOaYNr6iEtDYZ7wOC/GW2/ScC4A8C0hXRqiYf02CJ9QAvHSTYQ==', 'Work', 'Er', '1655972401012', 'worker@example.com', 'img_link', '20240422 8:55:09 AM', 2, '8FiR3HdEn0azjZmfoe6vUw==');
 
-INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID) 
-values ('mra', 'mra', 'RTX', '4090', '552358235226', 'nvidia@example.com', 'img_link', '20190619 8:55:09 AM', 1);
+INSERT INTO Accounts(username, password, firstname, lastname, phone_number, email, profile_picture_link, birthdate, roleID, salt) 
+values ('mra', 'dgacAR/m8eD8K24OkEvjmlaNuhGKurRTq+iov/sKWGvBRsrDvX8P22zQNopCed6C9uKyEKBSJoI9jTUYGVvSDw==', 'RTX', '4090', '552358235226', 'nvidia@example.com', 'img_link', '20190619 8:55:09 AM', 1, 'eFrts2W0PIsky+cwTTyVOA==');
 
 insert into Residents(userID, apartmentID, billingdate) values (0, 101, '20240625 10:34:09 AM')
 insert into Residents(userID, apartmentID, billingdate) values (1, 102, '20240626 9:50:09 AM')

@@ -22,9 +22,32 @@ public class Account {
     private String profilePictureLink;
     private Date birthDate;
     private int rollID;
+    private String salt;
     
     private Account account;
 
+    public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthDate, int rollID, String salt) {
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.profilePictureLink = profilePictureLink;
+        this.birthDate = birthDate;
+        this.rollID = rollID;
+        this.salt = salt;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    
     public Account(int userID, String username, String password, String firstname, String lastname, String phoneNumber, String email, String profilePictureLink, Date birthDate, int rollID) {
         this.userID = userID;
         this.username = username;

@@ -181,9 +181,9 @@
                 top: 0;
                 width: 100%;
                 height: 100%;
-                
-            }
 
+            }
+            .error { color: red; }
         </style>
         <header class="header sticky">
             <ul>
@@ -199,62 +199,62 @@
         <div class="wrapper">
             <form action="SignUpServlet" method="post">
                 <h1>Sign Up</h1>
-                <%if("true".equals(request.getParameter("error_usernametaken"))){%>
-                <p style='color:red;'>Username has already been taken!</p>
-                <%}%>
-                <%if("true".equals(request.getParameter("error_username"))){%>
-                <p style='color:red;'>Username has already been taken!</p>
-                <%}%>
+                <% if ("true".equals(request.getAttribute("error_usernametaken"))) { %>
+                <p class="error">Username has already been taken!</p>
+                <% } %>
+                <% if ("true".equals(request.getAttribute("error_username"))) { %>
+                <p class="error">Username is required!</p>
+                <% } %>
                 <div class="input-box">
-                    <input type="text" id="username" name="username" value="${username != null ? username : ''}" placeholder='Username' required>
+                    <input type="text" id="username" name="username" value="${username != null ? username : ''}" placeholder="Username" required>
                     <i class='bx bxs-user'></i>
                 </div>
-                <%if("true".equals(request.getParameter("error_pasword"))){%>
-                <p style='color:red;'>Password must be at least 12 characters long and contain at least 1 digit and 1 uppercase character!</p>
-                <%}%>
+                <% if ("true".equals(request.getAttribute("error_password"))) { %>
+                <p class="error">Password must be at least 8 characters long, contain at least 1 digit, 1 uppercase character, and have no spaces!</p>
+                <% } %>
                 <div class="input-box">
                     <input type="password" id="password" name="password" placeholder="Password" value="${password != null ? password : ''}" required>
-                    <i class='bx bxs-lock-alt' ></i>
+                    <i class='bx bxs-lock-alt'></i>
                 </div>
-                <%if("true".equals(request.getParameter("error_firstname"))){%>
-                <p style='color:red;'>Invalid first name. Only alphabetic characters allowed!</p>
-                <%}%>
+                <% if ("true".equals(request.getAttribute("error_firstname"))) { %>
+                <p class="error">Invalid first name. Only alphabetic characters allowed!</p>
+                <% } %>
                 <div class="input-box">
                     <input type="text" id="firstname" name="firstname" placeholder="First name" value="${firstname != null ? firstname : ''}" required>
                 </div>
-                <%if("true".equals(request.getParameter("error_lastname"))){%>
-                <p style='color:red;'>Invalid last name. Only alphabetic characters allowed!</p>
-                <%}%>
+                <% if ("true".equals(request.getAttribute("error_lastname"))) { %>
+                <p class="error">Invalid last name. Only alphabetic characters allowed!</p>
+                <% } %>
                 <div class="input-box">
                     <input type="text" id="lastname" name="lastname" placeholder="Last name" value="${lastname != null ? lastname : ''}" required>
                 </div>
+                <% if ("true".equals(request.getAttribute("error_phone_number"))) { %>
+                <p class="error">Phone number is required and must contain only digits!</p>
+                <% } %>
                 <div class="input-box">
                     <input type="tel" id="phone_number" name="phone_number" placeholder="Phone number" value="${phone_number != null ? phone_number : ''}" required>
                 </div>
-                <%if("true".equals(request.getParameter("error_emailtaken"))){%>
-                <p style='color:red;'>Email has already been used for another account!</p>
-                <%}%>
-                <%if("true".equals(request.getParameter("error_email"))){%>
-                <p style='color:red;'>Please enter a valid email</p>
-                <%}%>
+                <% if ("true".equals(request.getAttribute("error_email"))) { %>
+                <p class="error">Please enter a valid email address!</p>
+                <% } %>
+                <% if ("true".equals(request.getAttribute("error_emailtaken"))) { %>
+                <p class="error">Email already registered to another account!</p>
+                <% } %>
                 <div class="input-box">
-                    <input type="email" id="email" placeholder="Email" name="email" value="${email != null ? email : ''}" required>
+                    <input type="email" id="email" name="email" placeholder="Email" value="${email != null ? email : ''}" required>
                 </div>
-                <%if("true".equals(request.getParameter("error_date"))){%>
-                <p style='color:red;'>Please enter a valid date!</p>
-                <%}%>
-                <div>
-                    <span class="datepicker-toggle">
-                        <span class="datepicker-toggle-button"></span>
-                        <input <input type="date" id="birthdate" name="birthdate" value="${birthdate != null ? birthdate : ''}" required class="datepicker-input">
-                    </span>
+                <% if ("true".equals(request.getAttribute("error_date"))) { %>
+                <p class="error">You must be at least 18 years old!</p>
+                <% } %>
+                <div class="input-box">
+                    <input type="date" id="birthdate" name="birthdate" value="${birthdate != null ? birthdate : ''}" required>
                 </div>
                 <div class="remember-forgot">
-                    <a href="#">Forgot Password</a>
+                    <label><input type="checkbox"> Remember Me</label>
+                    <a href="#" style="color: white">Forgot Password</a>
                 </div>
                 <button type="submit" class="btn">Sign up</button>
             </form>
         </div>
-        <script src="js/app.js"></script>
     </body>
 </html>
