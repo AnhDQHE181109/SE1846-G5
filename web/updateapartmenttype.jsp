@@ -65,9 +65,34 @@
         .button:hover {
             background-color: #0056b3;
         }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007BFF;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            background-color: #0056b3;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="dashboard.jsp">Dashboard</a>
+        <a href="requestservice.jsp">Request Service</a>
+        <a href="addworker.jsp">Add Workers</a>
+        <a href="updateapartmenttype.jsp">Update Apartment Type</a>
+        <a href="userDetails">Account Details</a>
+        <a href="LogoutServlet">Logout</a>
+    </div>
     <div class="container">
         <h1>Select Apartment Type to Update</h1>
         <div class="image-grid">
