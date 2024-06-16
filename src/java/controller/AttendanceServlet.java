@@ -105,20 +105,21 @@ public class AttendanceServlet extends HttpServlet {
                         daysArray[i] = 1;
                     }
                 }
-                daysArray[currentDay - 1] = 2;
+                if (daysArray[currentDay - 1] != 3) {daysArray[currentDay - 1] = 2;}
             } else {
                 int lastLoginDay = lastLoginCalendar.get(Calendar.DAY_OF_MONTH);
                 int currentDay = currentDate.getDayOfMonth();
+                //the worker login again on the same day
                 if (lastLoginDay == currentDay) {
                     if (daysArray[currentDay - 1] != 3) {
                         daysArray[currentDay - 1] = 2;
                     }
-                } else if (lastLoginDay == currentDay - 1) {
+                } else if (lastLoginDay == currentDay - 1) { //the worker last login is yesterday
                     if (daysArray[currentDay - 1] != 3) {
                         daysArray[currentDay - 1] = 2;
                     }
                 } else {
-                    for (int i = lastLoginDay; i <= currentDay - 1; i++) {
+                    for (int i = lastLoginDay; i <= currentDay - 1; i++) { //the worker
                         if (daysArray[i] != 3) {
                             daysArray[i] = 1;
                         }
