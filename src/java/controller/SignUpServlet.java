@@ -137,8 +137,8 @@ public class SignUpServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("birthdate", birthdate);
             request.getRequestDispatcher("/signup.jsp").forward(request, response);
-        }
-
+        }else
+        {}
     }
 
     /**
