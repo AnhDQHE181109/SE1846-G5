@@ -6,94 +6,208 @@
     <meta charset="UTF-8">
     <title>Update Apartment Type</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
         }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            text-align: center;
+
+        body {
+            min-height: 100vh;
+            background: white;
+            color: white;
+            background-size: cover;
+            background-position: center;
         }
+
+        .side-bar {
+            background: #1b1a1b;
+            backdrop-filter: blur(15px);
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+
+        .side-bar::-webkit-scrollbar {
+            width: 0px;
+        }
+
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #007BFF;
-        }
-        .image-grid {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .image-item {
-            flex: 1;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: border 0.3s ease;
             text-align: center;
+            font-weight: 500;
+            font-size: 25px;
+            padding-bottom: 13px;
+            font-family: sans-serif;
+            letter-spacing: 2px;
         }
-        .image-item img {
-            max-width: 100%;
-            height: auto;
+
+        .side-bar .menu {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .side-bar .menu .item {
+            position: relative;
             cursor: pointer;
         }
-        .image-item.selected {
-            border: 2px solid #007BFF;
+
+        .side-bar .menu .item a {
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            padding: 5px 30px;
+            line-height: 60px;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
+
+        .side-bar .menu .item a:hover {
+            background: #33363a;
+            transition: 0.3s ease;
+        }
+
+        .side-bar .menu .item i {
+            margin-right: 15px;
+        }
+
+        .side-bar .menu .item a .dropdown {
+            position: absolute;
+            right: 0;
             margin: 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: 0.3s ease;
         }
-        .button:hover {
-            background-color: #0056b3;
+
+        .side-bar .menu .item .sub-menu {
+            background: #262627;
+            display: none;
         }
-        .navbar {
+
+        .side-bar .menu .item .sub-menu a {
+            padding-left: 80px;
+        }
+
+        .rotate {
+            transform: rotate(90deg);
+        }
+
+        .main {
+            color: black;
+            height: 100vh;
+            padding: 50px;
+            margin-left: 250px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-color: #007BFF;
-            padding: 10px 20px;
         }
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 16px;
-            font-size: 16px;
+
+        @media (max-width: 900px) {
+            .main h1 {
+                font-size: 40px;
+                line-height: 60px;
+            }
         }
-        .navbar a:hover {
-            background-color: #0056b3;
-            border-radius: 4px;
+
+        img {
+            width: 100px;
+            margin: 15px;
+            border-radius: 50%;
+            margin-left: 70px;
+            border: 3px solid #b4b8b9;
+        }
+
+        header {
+            background: #33363a;
+        }
+
+        .bell-icon {
+            cursor: pointer;
+            font-size: 24px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .square {
+            height: 50px;
+            width: 50px;
+            max-width: 100%;
+            background-color: #555;
+            text-align: center;
+            color: black;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 5px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .notification-box {
+            display: none;
+            border: 1px solid #ccc;
+            background: #fff;
+            padding: 10px;
+            position: absolute;
+            right: 10px;
+            top: 40px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification-item {
+            border-bottom: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
-    <div class="navbar">
-        <a href="dashboard.jsp">Dashboard</a>
-        <a href="requestservice.jsp">Request Service</a>
-        <a href="addworker.jsp">Add Workers</a>
-        <a href="updateapartmenttype.jsp">Update Apartment Type</a>
-        <a href="userDetails">Account Details</a>
-        <a href="LogoutServlet">Logout</a>
+    <!-- Sidebar menu -->
+    <div class="side-bar">
+        <header>
+            <div class="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+            <h1>Welcome</h1>
+        </header>
+        <div class="menu">
+            <div class="item"><a href="dashboard.jsp"><i class="fas fa-desktop"></i>Dashboard</a></div>
+            <div class="item">
+                <a class="sub-btn"><i class="fas fa-table"></i>Management<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="scheduleManager.jsp" class="sub-item">View Workers</a>
+                    <a href="addworker.jsp" class="sub-item">Add Workers</a>
+                    <a href="updateapartmenttype.jsp" class="sub-item">Update Apartment</a>
+                </div>
+            </div>
+            <div class="item"><a href="#"><i class="fas fa-th"></i>Forms</a></div>
+            <div class="item">
+                <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="#" class="sub-item">Account Details</a>
+                    <a href="LogoutServlet" class="sub-item">Logout</a>
+                </div>
+            </div>
+            <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
+        </div>
     </div>
-    <div class="container">
+
+    <!-- Toggle button for sidebar -->
+    <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Content area -->
+    <div class="main">
         <h1>Select Apartment Type to Update</h1>
         <div class="image-grid">
             <div class="image-item" data-type-id="1">
@@ -114,19 +228,34 @@
             <button type="submit" class="button">Update</button>
         </form>
     </div>
+
+    <!-- JavaScript for sidebar and form interaction -->
     <script>
-        document.querySelectorAll('.image-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.image-item').forEach(el => el.classList.remove('selected'));
-                this.classList.add('selected');
-                document.getElementById('typeID').value = this.getAttribute('data-type-id');
+        $(document).ready(function () {
+            // Toggle sidebar
+            $('.menu-btn').click(function () {
+                $('.side-bar').toggleClass('active');
             });
-        });
-        document.getElementById('updateForm').addEventListener('submit', function(event) {
-            if (!document.getElementById('typeID').value) {
-                event.preventDefault();
-                alert('Please select an apartment type.');
-            }
+
+            // Close sidebar on close button click
+            $('.close-btn').click(function () {
+                $('.side-bar').removeClass('active');
+            });
+
+            // Highlight selected image-item and set typeID for form submission
+            $('.image-item').click(function () {
+                $('.image-item').removeClass('selected');
+                $(this).addClass('selected');
+                $('#typeID').val($(this).attr('data-type-id'));
+            });
+
+            // Form validation to ensure a type is selected before submission
+            $('#updateForm').submit(function (event) {
+                if ($('#typeID').val() === '') {
+                    alert('Please select an apartment type.');
+                    event.preventDefault();
+                }
+            });
         });
     </script>
 </body>
