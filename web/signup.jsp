@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Form</title>
+        <title>Register Form</title>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
     <%
@@ -168,6 +168,21 @@
             .register-link p a:hover{
                 text-decoration: underline;
             }
+            .datepicker-toggle {
+                display: inline-block;
+                position: relative;
+                width: 18px;
+                height: 19px;
+            }
+            .datepicker-toggle-button {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('data:image/svg+xml;base64,...');
+            }
+
         </style>
         <header class="header sticky">
             <ul>
@@ -177,38 +192,67 @@
                 <li class="navbar_list"><a href="#">About us</a></li>
             </ul>
             <ul class="navbar_header">
-                <li class="navbar_list"><a href="signup.jsp">Sign up</a></li>
+                <li class="navbar_list"><a href="login.jsp">Login</a></li>
             </ul>
         </header>
         <div class="wrapper">
-            <form action="LoginServlet" method="post">
-                <h1>Login</h1>
-                <%if("true".equals(request.getParameter("error_account"))){%>
-                <p style='color:red;'>Invalid username or password</p>
+            <form action="SignUpServlet" method="post">
+                <h1>Sign Up</h1>
+                <%if("true".equals(request.getParameter("error_usernametaken"))){%>
+                <p style='color:red;'>Username has already been taken!</p>
                 <%}%>
-                <%if("true".equals(request.getParameter("error_role"))){%>
-                <p style='color:red;'>Wrong role</p>
+                <%if("true".equals(request.getParameter("error_username"))){%>
+                <p style='color:red;'>Username has already been taken!</p>
                 <%}%>
                 <div class="input-box">
-                    <input name ="username" type="text" placeholder="Username" required>
+                    <input type="text" id="username" name="username" value="${username != null ? username : ''}" placeholder='Username' required>
                     <i class='bx bxs-user'></i>
                 </div>
+                <%if("true".equals(request.getParameter("error_pasword"))){%>
+                <p style='color:red;'>Password must be at least 12 characters long and contain at least 1 digit and 1 uppercase character!</p>
+                <%}%>
                 <div class="input-box">
-                    <input name="password" type="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" value="${password != null ? password : ''}" required>
                     <i class='bx bxs-lock-alt' ></i>
                 </div>
+                <%if("true".equals(request.getParameter("error_firstname"))){%>
+                <p style='color:red;'>Invalid first name. Only alphabetic characters allowed!</p>
+                <%}%>
                 <div class="input-box">
-                    <select name="role">
-                        <option value="1">I'm a Resident</option>
-                        <option value="2">I'm an Employee</option>
-                        <option value="3">I'm the Landlord</option>
-                    </select>
+                    <input type="text" id="firstname" name="firstname" placeholder="First name" value="${firstname != null ? firstname : ''}" required>
+                </div>
+                <%if("true".equals(request.getParameter("error_lastname"))){%>
+                <p style='color:red;'>Invalid last name. Only alphabetic characters allowed!</p>
+                <%}%>
+                <div class="input-box">
+                    <input type="text" id="lastname" name="lastname" placeholder="Last name" value="${lastname != null ? lastname : ''}" required>
+                </div>
+                <div class="input-box">
+                    <input type="tel" id="phone_number" name="phone_number" placeholder="Phone number" value="${phone_number != null ? phone_number : ''}" required>
+                </div>
+                <%if("true".equals(request.getParameter("error_emailtaken"))){%>
+                <p style='color:red;'>Email has already been used for another account!</p>
+                <%}%>
+                <%if("true".equals(request.getParameter("error_email"))){%>
+                <p style='color:red;'>Please enter a valid email</p>
+                <%}%>
+                <div class="input-box">
+                    <input type="email" id="email" placeholder="Email" name="email" value="${email != null ? email : ''}" required>
+                </div>
+                <%if("true".equals(request.getParameter("error_date"))){%>
+                <p style='color:red;'>Please enter a valid date!</p>
+                <%}%>
+                <div>
+                    <span class="datepicker-toggle">
+                        <span class="datepicker-toggle-button"></span>
+                        <input <input type="date" id="birthdate" name="birthdate" value="${birthdate != null ? birthdate : ''}" required class="datepicker-input">
+                    </span>
                 </div>
                 <div class="remember-forgot">
                     <label><input type="checkbox">Remember Me</label>
                     <a href="#">Forgot Password</a>
                 </div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Sign up</button>
             </form>
         </div>
         <script src="js/app.js"></script>
