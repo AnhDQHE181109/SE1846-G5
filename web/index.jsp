@@ -386,7 +386,7 @@
             </ul>
             <ul class="navbar_header">
                 <li class="navbar_list"><a href="login.jsp">Login</a></li>
-                <li class="navbar_list"><a href="#">Log out</a></li>
+                <li class="navbar_list"><a href="signup.jsp">Sign up</a></li>
             </ul>
         </header>
         <div class="slider">
