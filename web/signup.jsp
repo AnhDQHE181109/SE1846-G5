@@ -83,6 +83,7 @@
                 background-position: center;
             }
             .wrapper{
+                margin-top: 100px;
                 width: 420px;
                 border: 2px solid rgba(255, 255, 255, .2);
                 backdrop-filter: blur(9px);
@@ -249,7 +250,6 @@
                     </span>
                 </div>
                 <div class="remember-forgot">
-                    <label><input type="checkbox">Remember Me</label>
                     <a href="#">Forgot Password</a>
                 </div>
                 <button type="submit" class="btn">Sign up</button>
