@@ -4,75 +4,23 @@
  */
 package controller;
 
-import DAO.AccountDAO;
+import Util.EncryptionHelper;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.Period;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Util.*;
-import java.time.LocalDate;
-import java.time.Period;
+import DAO.AccountDAO;
+import Util.Validator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- *
- * @author Long
- */
 @WebServlet(name = "SignUpServlet", urlPatterns = {"/SignUpServlet"})
 public class SignUpServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignUpServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignUpServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
@@ -82,14 +30,6 @@ public class SignUpServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phone_number");
         String email = request.getParameter("email");
         String birthdate = request.getParameter("birthdate");
-        
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(firstname);
-        System.out.println(lastname);
-        System.out.println(phoneNumber);
-        System.out.println(email);
-        System.out.println(birthdate);
 
         boolean hasErrors = false;
         AccountDAO adao = new AccountDAO();
@@ -104,28 +44,27 @@ public class SignUpServlet extends HttpServlet {
         }
         if (!Validator.validatePassword(password)) {
             hasErrors = true;
-            request.setAttribute("password", "true");
+            request.setAttribute("error_password", "true");
         }
-
         if (firstname == null || firstname.isEmpty() || !firstname.matches("^[a-zA-Z]+$")) {
             hasErrors = true;
             request.setAttribute("error_firstname", "true");
         }
-
-        // Last name validation
         if (lastname == null || lastname.isEmpty() || !lastname.matches("^[a-zA-Z]+$")) {
             hasErrors = true;
             request.setAttribute("error_lastname", "true");
         }
-
         if (email == null || email.isEmpty() || !email.matches("^[A-Za-z][A-Za-z0-9+_.-]*@(.+)$")) {
             hasErrors = true;
             request.setAttribute("error_email", "true");
         }
-
+        if (adao.isEmailTaken(email)) {
+            hasErrors = true;
+            request.setAttribute("error_emailtaken", "true");
+        }
         if (birthdate == null || birthdate.isEmpty()) {
             hasErrors = true;
-            request.setAttribute("birthdateError", "Birthdate is required.");
+            request.setAttribute("error_birthdate", "true");
         } else {
             LocalDate birthdateDate = LocalDate.parse(birthdate);
             if (Period.between(birthdateDate, LocalDate.now()).getYears() < 18) {
@@ -133,8 +72,6 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("error_date", "true");
             }
         }
-        
-        
         if (hasErrors) {
             request.setAttribute("username", username);
             request.setAttribute("password", password);
@@ -143,19 +80,30 @@ public class SignUpServlet extends HttpServlet {
             request.setAttribute("phone_number", phoneNumber);
             request.setAttribute("email", email);
             request.setAttribute("birthdate", birthdate);
-            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
+        } else {
+            String salt = EncryptionHelper.generateSalt();
+            String hashedPassword = "";
+            
+            Date birthDate = null;
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                birthDate = dateFormat.parse(birthdate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                hashedPassword = EncryptionHelper.hashPassword(password, salt);
+            } catch (Exception e) {
+            }
+            
+            java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
+            adao.addAccount(username, hashedPassword, firstname, lastname, phoneNumber, email, "img_link", sqlBirthDate, 1, salt);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
