@@ -60,6 +60,7 @@ public class AccountSecurityServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        
         Account account = (Account) request.getSession().getAttribute("account");
         if (account != null) {
             request.setAttribute("account", account);
