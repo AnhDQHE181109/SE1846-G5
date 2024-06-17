@@ -184,7 +184,7 @@
             <form action="LoginServlet" method="post">
                 <h1>Login</h1>
                 <%if("true".equals(request.getParameter("error_account"))){%>
-                <p style='color:red;'>Invalid username or password</p>
+                <p style='color:red;' name="invalidLoginMessage">Invalid username or password</p>
                 <%}%>
                 <%if("true".equals(request.getParameter("error_role"))){%>
                 <p style='color:red;'>Wrong role</p>
@@ -208,7 +208,7 @@
                     <label><input type="checkbox">Remember Me</label>
                     <a href="#">Forgot Password</a>
                 </div>
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn" name="loginButton">Login</button>
             </form>
         </div>
         <script src="js/app.js"></script>
