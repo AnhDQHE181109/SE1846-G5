@@ -95,6 +95,7 @@ CREATE TABLE Bills (
     FOREIGN KEY (residentID) REFERENCES Residents(residentID)
 );
 
+
 -- Create Billdetails table
 CREATE TABLE Billdetails (
     billdetailID INT PRIMARY KEY,
@@ -105,6 +106,7 @@ CREATE TABLE Billdetails (
     service_bill DECIMAL(10, 2),
     FOREIGN KEY (billID) REFERENCES Bills(billID)
 );
+
 
 -- Create Workers table
 CREATE TABLE Workers (
@@ -145,6 +147,8 @@ CREATE TABLE WorkerAttendance(
 	attendance_data TEXT,
 	FOREIGN KEY (userID) REFERENCES Accounts(userID)
 );
+
+
 
 INSERT INTO Roles(roleID, role_name) values (1, 'Resident'), (2, 'Worker'),(3, 'Landlord');
 
@@ -189,3 +193,32 @@ values (1, 0, '2024-05-23', '2024-05-23', '2024-05-24', 'Fix resident 2''s pipel
 
 insert into Service_Requests(residentID, workerID, request_date, assign_date, finish_date, title, description, type)
 values (1, 0, '2024-05-22', '2024-05-22', '2024-05-24', 'Fix resident 3''s pipelines', 'Go up there and make it right', 'Maintenance')
+
+INSERT INTO Bills (billID, residentID, status, total, billdate) 
+VALUES (123, 1, 'Unpaid', 2311.23, '2024-10-22');
+
+-- Create a trigger to update the total in Bills table
+CREATE TRIGGER UpdateBillTotal
+ON Billdetails
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Update total for the inserted or updated rows
+    UPDATE Bills
+    SET total = (
+        SELECT COALESCE(SUM(water_bill + electricity_bill + service_bill), 0)
+        FROM Billdetails
+        WHERE Billdetails.billID = Bills.billID
+    )
+    WHERE Bills.billID IN (
+        SELECT DISTINCT billID FROM Inserted
+        UNION
+        SELECT DISTINCT billID FROM Deleted
+    );
+END;
+
+INSERT INTO Bills (billID, residentID, status, total, billdate) 
+VALUES (132, 0, 'Unpaid', 0, '2024-10-22');
+
+INSERT INTO Billdetails (billdetailID, billID, base_rent, water_bill, electricity_bill, service_bill)
+VALUES (1, 123 , 500.00, 50.00, 30.00, 20.00);
