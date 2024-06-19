@@ -20,6 +20,10 @@
         <servlet-name>ScheduleManagementServlet</servlet-name>
         <servlet-class>controller.ScheduleManagementServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>paymentDetailsServlet</servlet-name>
+        <servlet-class>controller.paymentDetailsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserDetailsServlet</servlet-name>
         <url-pattern>/userDetails</url-pattern>
@@ -71,5 +75,9 @@
     <servlet-mapping>
         <servlet-name>ScheduleManagementServlet</servlet-name>
         <url-pattern>/scheduleManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>paymentDetailsServlet</servlet-name>
+        <url-pattern>/paymentDetailsServlet</url-pattern>
     </servlet-mapping>
 </web-app>

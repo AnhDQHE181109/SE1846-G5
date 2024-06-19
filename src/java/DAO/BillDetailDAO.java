@@ -11,6 +11,7 @@ package DAO;
 import model.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BillDetailDAO extends MyDAO {
 
@@ -35,5 +36,41 @@ public class BillDetailDAO extends MyDAO {
             e.printStackTrace();
         }
         return billDetailList;
+    }
+    
+    
+     public double getTotalBill(int billdetailID) {
+        String sql = "SELECT SUM(base_rent + water_bill + electricity_bill + service_bill) AS total FROM Billdetails WHERE billdetailID = ?";
+        double total = 0;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, billdetailID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask the user for the bill ID
+        int billID = 1;
+
+        // Create an instance of BillDetailDAO
+        BillDetailDAO billDetailDAO = new BillDetailDAO();
+
+        // Get the total amount for the given bill ID
+        double totalAmount = billDetailDAO.getTotalBill(billID);
+
+        // Print out the total amount
+        System.out.println("Total amount of bills for bill ID " + billID + " is: $" + totalAmount);
+
+        // Close the scanner
+        scanner.close();
     }
 }
