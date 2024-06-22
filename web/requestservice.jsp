@@ -3,8 +3,14 @@
     Created on : May 26, 2024, 5:26:13 PM
     Author     : Long
 --%>
-
+<%@ page import="java.util.List" %>
+<%@ page import="model.ServiceRequest" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    List<ServiceRequest> rslist = (List<ServiceRequest>) session.getAttribute("rslist");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -119,8 +125,7 @@
         }
 
         .container {
-            margin-left: 500px;
-            margin-top: 100px;
+            margin-top: 20px;
             padding: 20px;
             max-width: 1200px;
             background-color: #fff;
@@ -151,8 +156,8 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 50%;
-            margin: 0 auto;
+            width: 100%;
+            margin-bottom: 20px;
         }
 
         form h2 {
@@ -226,6 +231,35 @@
         .notification-item:last-child {
             border-bottom: none;
         }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .light-gray {
+            background-color: lightgray;
+        }
+
+        .dark-gray {
+            background-color: darkgray;
+        }
+
+        .light-green {
+            background-color: lightgreen;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
@@ -298,6 +332,51 @@
                 <input id="des" name="desc" type="text">
                 <button type="submit">Submit</button>
             </form>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            if (rslist != null) {
+                                for (ServiceRequest sr : rslist) {
+                                    String rowClass = "";
+                                    String date = "";
+                                    String status = "";
+                                    if (sr.getAssigndate() == null) {
+                                        rowClass = "light-gray";
+                                        date = sdf.format(sr.getRequestdate());
+                                        status = "Not assigned";
+                                    } else if (sr.getFinishdate() == null) {
+                                        rowClass = "dark-gray";
+                                        date = sdf.format(sr.getAssigndate());
+                                        status = "Assigned to a worker";
+                                    } else {
+                                        rowClass = "light-green";
+                                        date = sdf.format(sr.getFinishdate());
+                                        status = "Finished";
+                                    }
+                        %>
+                        <tr class="<%= rowClass %>">
+                            <td><%= date %></td>
+                            <td><%= sr.getTitle() %></td>
+                            <td><%= sr.getDescription() %></td>
+                            <td><%= status %></td>
+                        </tr>
+                        <%
+                                }
+                            }
+                        %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
