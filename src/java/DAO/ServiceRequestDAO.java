@@ -16,6 +16,15 @@ import java.util.List;
 
 public class ServiceRequestDAO extends MyDAO {
 
+    public ServiceRequest getService(int srid, List<ServiceRequest> list) {
+        for (ServiceRequest sr : list) {
+            if (sr.getRequestID() == srid){
+            return sr;
+            }
+        }
+        return new ServiceRequest();
+    }
+
     public List<ServiceRequest> getServiceRequests() {
         String sql = "SELECT * FROM Service_Requests";
         List<ServiceRequest> serviceRequestList = new ArrayList<>();
