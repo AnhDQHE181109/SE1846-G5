@@ -54,4 +54,5 @@ public class ResidentDAO extends MyDAO {
         }
         return resident;
     }
+    
 }
