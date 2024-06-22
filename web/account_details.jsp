@@ -101,11 +101,11 @@
             <a class="nav-link active ms-0"
                 href="userDetails"
                 target="">Profile</a>
-            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page"
+            <a class="nav-link" href=""
                 target="" <%=hidden %>>Billing</a>
             <a class="nav-link" href="accountSecurity"
                 target="">Security</a>
-            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"
+            <a class="nav-link" href=""
                 target="">Notifications</a>
         </nav>
         

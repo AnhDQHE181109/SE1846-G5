@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 public class ServiceRequestDAO extends MyDAO {
 
     public List<ServiceRequest> getServiceRequests() {
@@ -78,5 +77,31 @@ public class ServiceRequestDAO extends MyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<ServiceRequest> getResidentServiceRequests(int rid) {
+        String sql = "SELECT * FROM Service_Requests where residentID = ?";
+        List<ServiceRequest> serviceRequestList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, rid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int requestID = rs.getInt("requestID");
+                int residentID = rs.getInt("residentID");
+                int workerID = rs.getInt("workerID");
+                String description = rs.getString("description");
+                Date requestdate = rs.getDate("request_date");
+                Date assigndate = rs.getDate("assign_date");
+                Date finishdate = rs.getDate("finish_date");
+                String title = rs.getString("title");
+                String type = rs.getString("type");
+                ServiceRequest serviceRequest = new ServiceRequest(requestID, residentID, workerID, description, requestdate, assigndate, finishdate, title, type);
+                serviceRequestList.add(serviceRequest);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return serviceRequestList;
     }
 }
