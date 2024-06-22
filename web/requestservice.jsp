@@ -21,7 +21,7 @@
                 <option value="Security">Security</option>
                 <option value="Other">Other</option>
             </select>
-            <div id="otherInput">
+            <div id="otherInput" style="display:none">
                 <label for="otherText">Please specify:</label>
                 <input type="text" id="otherText" name="othertype">
             </div>
