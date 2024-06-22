@@ -7,6 +7,7 @@ package controller;
 
 import DAO.NotificationAlertDAO;
 import DAO.ResidentDAO;
+import DAO.ServiceRequestDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -63,6 +64,9 @@ public class LoadResidentInfoServlet extends HttpServlet {
         session.setAttribute("resident", rdao.getResident(account.getUserID()));
         NotificationAlertDAO notidao = new NotificationAlertDAO();
         session.setAttribute("notilist", notidao.getNotificationAlerts(account.getUserID()));
+        ServiceRequestDAO  srdao = new ServiceRequestDAO();
+        session.setAttribute("rslist", srdao.getResidentServiceRequests(rdao.getResident(account.getUserID()).getResidentID()));
+        System.out.println(srdao.getResidentServiceRequests(rdao.getResident(account.getUserID()).getResidentID()).get(0).getTitle());
         response.sendRedirect("resident.jsp");
     } 
 

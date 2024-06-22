@@ -105,9 +105,9 @@
         <!-- Account page navigation-->
         <nav class="nav nav-borders">
         <a class="nav-link  ms-0" href="userDetails" target="">Profile</a>
-        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="" <%=hidden %>>Billing</a>
+        <a class="nav-link" href="" target="" <%=hidden %>>Billing</a>
         <a class="nav-link active" href="accountSecurity" target="">Security</a>
-        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="">Notifications</a>
+        <a class="nav-link" href=""  target="">Notifications</a>
         </nav>
         <hr class="mt-0 mb-4">
         
