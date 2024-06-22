@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ page import="model.NotificationAlert" %>
+<%@ page import="model.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
@@ -176,13 +177,35 @@
         }
 
         table {
-            width: 80%;
-            border-collapse: collapse;
+         width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .table-container {
+            width: calc(100% - 270px);
+            /* Calculate the width of the table container (100% - sidebar width - additional space) */
+            margin-left: 10px;
+            /* Add some space between the sidebar and the table */
+            margin-right: 10px;
+            /* Add some space on the right side of the table */
+            float: right;
+        }
+
+        .table-container th {
             text-align: center;
         }
 
-        tr {
-            padding: 0px 30px;
+        .table-container td {
+            text-align: center;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -196,7 +219,7 @@
             <h1>Welcome</h1>
         </header>
         <div class="menu">
-            <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
+            <div class="item"><a href="landlordDashboard"><i class="fas fa-desktop"></i>Dashboard</a></div>
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-table"></i>Services<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
@@ -235,7 +258,45 @@
             <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
         </div>
     </div>
+
+    <% List<WorkerWithStatus> workersList = (List<WorkerWithStatus>) request.getAttribute("workersList"); %>
     <section class="main">
+        <h1>Workers in the system:</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Base salary</th>
+                        <th>Salary multiplier</th>
+                        <th>Job</th>
+                        <th>Last login</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    if (workersList != null) {
+                        if (!workersList.isEmpty()) {
+                            for(WorkerWithStatus worker : workersList) {
+                    %>
+                    <tr>
+                        <td><%=worker.getFirstname() %></td>
+                        <td><%=worker.getLastname() %></td>
+                        <td><%=worker.getBaseSalary() %></td>
+                        <td><%=worker.getSalaryMultiplier() %></td>
+                        <td><%=worker.getJob() %></td>
+                        <td><%=worker.getLastLogin() %></td>
+                        <td><%=worker.getStatus() %></td>
+                    </tr>
+                    <% }
+                 }
+                 } %>
+                </tbody>
+            </table>
+        </div>
+        
         <div>
             <span class="bell-icon" onclick="toggleNotificationBox()">🔔</span>
             <div id="notificationBox" class="notification-box">
