@@ -5,6 +5,7 @@
 
 package controller;
 
+import DAO.NotificationAlertDAO;
 import DAO.ServiceRequestDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,11 +80,11 @@ public class ServiceRequestServlet extends HttpServlet {
         if (type.compareTo("Other") == 0){
         type = request.getParameter("othertype");
         }
-        
+        NotificationAlertDAO notidao = new NotificationAlertDAO();
+        notidao.send(account.getUserID(), "Your " + title + " request has been sent");
         ServiceRequestDAO rsdao = new ServiceRequestDAO(); 
         rsdao.addInitialRequest(account.getUserID(), description, title, type);
-        response.sendRedirect(
-                "resident.jsp");
+        response.sendRedirect(request.getContextPath() + "/LoadResidentInfoServlet");
     }
 
     /** 
