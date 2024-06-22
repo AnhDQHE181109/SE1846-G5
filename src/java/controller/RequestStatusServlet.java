@@ -76,7 +76,6 @@ public class RequestStatusServlet extends HttpServlet {
         NotificationAlertDAO notidao = new NotificationAlertDAO();
         List<ServiceRequest> alist = (List<ServiceRequest>)session.getAttribute("alist");
         ResidentDAO redao = new ResidentDAO();
-        
         response.sendRedirect("resident_request.jsp");
     }
 
