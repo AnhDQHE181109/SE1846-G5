@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAO.NotificationAlertDAO;
 import DAO.ServiceRequestDAO;
 import DAO.WorkerDAO;
 import java.io.IOException;
@@ -14,7 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Account;
+import model.ServiceRequest;
 
 /**
  *
@@ -69,6 +72,9 @@ public class RequestStatusServlet extends HttpServlet {
         WorkerDAO wdao = new WorkerDAO();
         session.setAttribute("ualist", srdao.getUnAssignedServiceRequests());
         session.setAttribute("alist", srdao.getAssignedServiceRequests(wdao.getWorker(account.getUserID()).getWorkerID()));
+        NotificationAlertDAO notidao = new NotificationAlertDAO();
+        List<ServiceRequest> alist = (List<ServiceRequest>)session.getAttribute("alist");
+       
         response.sendRedirect("resident_request.jsp");
     }
 
