@@ -104,4 +104,69 @@ public class ServiceRequestDAO extends MyDAO {
         }
         return serviceRequestList;
     }
+
+    public List<ServiceRequest> getUnAssignedServiceRequests() {
+        String sql = "SELECT * FROM Service_Requests where assign_date IS NULL";
+        List<ServiceRequest> serviceRequestList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int requestID = rs.getInt("requestID");
+                int residentID = rs.getInt("residentID");
+                int workerID = rs.getInt("workerID");
+                String description = rs.getString("description");
+                Date requestdate = rs.getDate("request_date");
+                Date assigndate = rs.getDate("assign_date");
+                Date finishdate = rs.getDate("finish_date");
+                String title = rs.getString("title");
+                String type = rs.getString("type");
+                ServiceRequest serviceRequest = new ServiceRequest(requestID, residentID, workerID, description, requestdate, assigndate, finishdate, title, type);
+                serviceRequestList.add(serviceRequest);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return serviceRequestList;
+    }
+
+    public List<ServiceRequest> getAssignedServiceRequests(int wID) {
+        String sql = "SELECT * FROM Service_Requests where workerID = ?";
+        List<ServiceRequest> serviceRequestList = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, wID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int requestID = rs.getInt("requestID");
+                int residentID = rs.getInt("residentID");
+                int workerID = rs.getInt("workerID");
+                String description = rs.getString("description");
+                Date requestdate = rs.getDate("request_date");
+                Date assigndate = rs.getDate("assign_date");
+                Date finishdate = rs.getDate("finish_date");
+                String title = rs.getString("title");
+                String type = rs.getString("type");
+                ServiceRequest serviceRequest = new ServiceRequest(requestID, residentID, workerID, description, requestdate, assigndate, finishdate, title, type);
+                serviceRequestList.add(serviceRequest);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return serviceRequestList;
+    }
+
+    public void finishService(int rID) {
+        String sql = "UPDATE Service_Requests set finish_date = ? where requestid = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            Date utilDate = new Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            ps.setDate(1, sqlDate);
+            ps.setInt(2, rID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

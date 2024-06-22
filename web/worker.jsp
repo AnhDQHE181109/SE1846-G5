@@ -30,6 +30,7 @@
     int[] atarray = (int[]) session.getAttribute("atarray");
     int abs = 0;
     for(int i = 0; i < dim; i++){if (atarray[i] == 1){abs++;}}
+    if (abs <= 4){abs = 0;}else{abs -= 4;}
     float salary_multi = 100 - abs;
     %>  
     <style media="screen">
@@ -222,9 +223,7 @@
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-table"></i>Services<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
-                    <a href="requestservice.jsp" class="sub-item">Request</a>
-                    <a href="addworker.jsp" class="sub-item">Add workers</a>
-                    <a href="updateapartmenttype.jsp" class="sub-item">Update apart</a>
+                    <a href="resident_request.jsp" class="sub-item">Resident Request</a>
                 </div>
             </div>
             <div class="item"><a href="#"><i class="fas fa-th"></i>Forms</a></div>
