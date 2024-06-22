@@ -114,6 +114,7 @@ CREATE TABLE Workers (
     salary_multi DECIMAL(5, 2),
     job VARCHAR(50),
 	last_login DATE,
+	status varchar(50),
     FOREIGN KEY (userID) REFERENCES Accounts(userID)
 );
 
@@ -171,7 +172,7 @@ insert into Residents(userID, apartmentID, billingdate) values (1, 102, '2024062
 
 insert into NotificationAlert(userID, notidate, noti_message,noti_status) values (0, '20240523 10:34:09 AM', 'ALLAHU AKBAR', 1)
 
-INSERT INTO Workers(userID, base_salary, salary_multi, job, last_login) values(3, 100, 1, 'Plumber', '5/23/2024');
+INSERT INTO Workers(userID, base_salary, salary_multi, job, last_login, status) values(3, 100, 1, 'Plumber', '5/23/2024', 'Working');
 
 INSERT INTO WorkerAttendance(userID, attendance_data) values (3, '0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 0 0 0 3 0 0 0 2 0 0 3 0 0 0 0 0');
 
@@ -189,3 +190,6 @@ values (1, 0, '2024-05-23', '2024-05-23', '2024-05-24', 'Fix resident 2''s pipel
 
 insert into Service_Requests(residentID, workerID, request_date, assign_date, finish_date, title, description, type)
 values (1, 0, '2024-05-22', '2024-05-22', '2024-05-24', 'Fix resident 3''s pipelines', 'Go up there and make it right', 'Maintenance')
+
+insert into Service_Requests(residentID, workerID, request_date, assign_date, finish_date, title, description, type)
+values (0, 0, '2024-05-22', '2024-05-22', null, 'Fix resident 3''s pipelines', 'Go up there and make it right', 'Maintenance')
