@@ -90,6 +90,7 @@
                 %>
             </tbody>
         </table>
+            
         <script>
             function showOtherInput(selectElement) {
                 var otherInput = document.getElementById("otherInput");
